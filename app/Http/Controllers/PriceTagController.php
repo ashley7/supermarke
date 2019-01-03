@@ -40,6 +40,9 @@ class PriceTagController extends Controller
         $save_tags = new PriceTag($request->all());
         $save_tags->price = str_replace(",", "", $request->price);
         // $save_tags->vip_price = str_replace(",", "", $request->vip_price);
+        if (!isset($request->barcode)) {
+            $save_tags->barcode = time();        
+        }
         try {
             $save_tags->save();
             $status="Saved successfully";

@@ -45,7 +45,7 @@
                         <thead>
                             <th>#</th>
                             <th>Date</th>
-                            <th>Ticket Number</th>
+                            <th>Reciept Number</th>
                             <th>Amount</th>
                             <th>Action</th>
                         </thead>

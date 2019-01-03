@@ -13,8 +13,9 @@
 
                 <div class="card-body">
                   <span class="right">
+                    <a class="btn btn-success" href="{{route('expense.create')}}">Add Expense</a>
                     <a class="btn btn-primary" href="{{route('reports.create')}}">Generate Report</a> 
-                    <a class="btn btn-primary " href="{{route('expense.create')}}">Add Expense</a>
+                    
                   </span>
                   <h1>{{$title}}</h1>
                     @if (session('status'))

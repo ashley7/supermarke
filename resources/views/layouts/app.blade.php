@@ -57,10 +57,8 @@
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('work_shifts.index')}}">Work Shifts</a></li>
 
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('price_tag.index')}}" class="btn btn-secondary">Price tags</a></li>
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank_deposite.index')}}">Bank Deposit</a></li> -->
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank_deposite.create')}}">Add Bank Deposit</a></li> -->
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank.index')}}">Bank</a></li> -->
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank.create')}}">Add Bank</a></li> -->
+                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank_deposite.index')}}">Bank Deposit</a></li>
+                          
                           
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('expense.index')}}">Expenses</a></li>
                           <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('account.index')}}">Accounts</a></li> -->
