@@ -16,9 +16,13 @@ class CreatePriceTagsTable extends Migration
         Schema::create('price_tags', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->string('name');
             $table->string('barcode')->unique();
-            $table->string('price')->nallable();
+
+            $table->double('buying_price',10,2)->default(0);
+            $table->double('salling_price',10,2)->default(0);
+
+            $table->integer('stock_id')->unsigned();
+            $table->foreign('stock_id')->references('id')->on('stocks')->onUpdate('cascade');
         });
     }
 

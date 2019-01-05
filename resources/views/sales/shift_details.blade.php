@@ -81,7 +81,7 @@
                                     ?>
                                     @if(!empty($record_check))
                                      <tr>
-                                       <td>{{$brand->name}}</td>
+                                       <td>{{$brand->stock->category->name}} ({{$brand->stock->name}})</td>
 
                                        <td contenteditable="true" id="{{$brand->barcode}}*old_stock">{{$record_check->old_stock}}</td>
 
@@ -94,7 +94,7 @@
                                    @else
 
                                     <tr>
-                                       <td>{{$brand->name}}</td>
+                                        <td>{{$brand->stock->category->name}} ({{$brand->stock->name}})</td>
 
                                        <td contenteditable="true" id="{{$brand->barcode}}*old_stock"></td>
 

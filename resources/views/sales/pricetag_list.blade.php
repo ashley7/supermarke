@@ -18,20 +18,18 @@
 
                     <table class="table table-hover table-striped" id="example">
                         <thead>
-                            <th>#</th>
                             <th>Name</th>
-                            <th>Barcode number</th>
-                            <th>Price</th> 
+                            <th>Buying Price</th> 
+                            <th>Salling Price</th> 
                             <th>Action</th>                            
                         </thead>
 
                         <tbody>                         
                             @foreach($price_tags as $pricetags)
                               <tr>
-                                  <td>{{$pricetags->id}}</td>
-                                  <td>{{$pricetags->name}}</td>
-                                  <td>{{$pricetags->barcode}}</td>
-                                  <td>{{number_format((double)$pricetags->price)}}</td>
+                                  <td>{{$pricetags->stock->category->name}} ({{$pricetags->stock->name}})</td>
+                                  <td>{{number_format($pricetags->buying_price)}}</td>
+                                  <td>{{number_format($pricetags->salling_price)}}</td>
                                   <td>
                                     <a href="{{route('price_tag.edit',$pricetags->id)}}">Edit</a>
                                   </td>

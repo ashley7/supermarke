@@ -56,7 +56,7 @@
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('main_sale.create')}}">Record sales</a></li>
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('work_shifts.index')}}">Work Shifts</a></li>
 
-                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('price_tag.index')}}" class="btn btn-secondary">Price tags</a></li>
+                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('price_tag.create')}}" class="btn btn-secondary">Price tags</a></li>
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank_deposite.index')}}">Bank Deposit</a></li>
                           
                           

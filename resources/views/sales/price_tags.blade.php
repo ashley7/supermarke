@@ -20,17 +20,19 @@
                     <form method="POST" action="{{route('price_tag.store')}}">
                         @csrf
                         <div class="col-md-6">
-                            <label>Name</label>
-                            <input type="text" name="name" class="form-control">                            
-                            <label>Price</label>
-                            <input type="text" name="price" class="form-control number">
-                           <!--  <label>VIP Price</label>
-                            <input type="text" name="vip_price" class="form-control next_number"> -->
+                            <label>Item name</label>
+                            <select name="stock_id" id="stock_id" class="form-control">
+                                @foreach($stock as $stock_value)
+                                  <option value="{{$stock_value->id}}" style="text-transform: uppercase;">{{$stock_value->category->name}} ({{$stock_value->name}})</option>
+                                @endforeach
+                            </select>
+                            <label>Buying Price</label>
+                            <input type="text" name="buying_price" class="form-control next_number">
 
-                            <label>Scan the barcode (Optional)</label>
-                            <input type="text" name="barcode" class="form-control">
-                            
-                            <br><br>
+                            <label>salling Price</label>
+                            <input type="text" name="salling_price" class="form-control number">
+                                                     
+                            <br>
                             <button class="btn btn-primary" type="submit">Save</button>
                         </div>
                     </form>
@@ -41,5 +43,10 @@
     </div>
 </div>
 @endsection
+@push('scripts')
+  <script>
+      $("#stock_id").chosen();
+  </script>
+@endpush
 
  

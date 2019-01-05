@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\PriceTag;
+use App\Stock;
 
 class PriceTagController extends Controller
 {
@@ -26,7 +27,14 @@ class PriceTagController extends Controller
      */
     public function create()
     {
-        return view('sales.price_tags');
+        $all_stock = Stock::all();
+        $stock = array();
+        foreach ($all_stock as $stock_value) {
+            if (PriceTag::where('stock_id',$stock_value->id)->count() == 0) {
+                $stock[] = Stock::find($stock_value->id);
+            }
+        }
+        return view('sales.price_tags')->with(['stock'=>$stock]);
     }
 
     /**
@@ -38,17 +46,16 @@ class PriceTagController extends Controller
     public function store(Request $request)
     {
         $save_tags = new PriceTag($request->all());
-        $save_tags->price = str_replace(",", "", $request->price);
-        // $save_tags->vip_price = str_replace(",", "", $request->vip_price);
-        if (!isset($request->barcode)) {
-            $save_tags->barcode = time();        
-        }
+        $save_tags->barcode = time();
+        $save_tags->buying_price = str_replace(",","",$request->buying_price);
+        $save_tags->salling_price = str_replace(",","",$request->salling_price);
+
+         $status = "";
+      
         try {
             $save_tags->save();
-            $status="Saved successfully";
-        } catch (\Exception $e) {
-            $status="The product with tag ".$save_tags->barcode." Already exists, operation failed";
-        }
+            $status = "Saved successfully";
+        } catch (\Exception $e) {}
         return back()->with(['status'=>$status]);
     }
 
@@ -84,15 +91,15 @@ class PriceTagController extends Controller
      */
     public function update(Request $request, $id)
     {
+        $status = "";
         try {
             $save_tags = PriceTag::find($id);
-            $save_tags->name = $request->name;
-            $save_tags->price = str_replace(",", "", $request->price);
+            $save_tags->buying_price = str_replace(",","",$request->buying_price);
+            $save_tags->salling_price = str_replace(",","",$request->salling_price);
             $save_tags->save();
             $status="Saved successfully";
         } catch (\Exception $e) {
-            $status="The product with tag".$save_tags->barcode."Already exists, operation failed";
-        }
+         }
         return redirect()->route('price_tag.index')->with(['status'=>$status]);
     }
 

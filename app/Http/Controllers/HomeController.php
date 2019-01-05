@@ -20,15 +20,15 @@ class HomeController extends Controller
 
     public function price_tags(Request $request)
     {
-    	$pricetag = PriceTag::all()->where('barcode',$request->data)->last();
+    	$pricetag = PriceTag::all()->where('id',$request->data)->last();
     	if (empty($pricetag)) {
-    		echo "The item you selected is not in the system.";
+    		echo "The item you selected is not having price.";
     		return;
     	}else{
     		echo "
     		<table class='table'>
-    		<tr> <td> Name</td> <td> $pricetag->name</td></tr>".
-    		 "<tr> <td>Price</td> <td>UGX ".number_format((double)$pricetag->price)."</td></tr>    		 
+    		<tr> <td> Name</td> <td style='text-transform:uppercase;'>".$pricetag->stock->category->name."(".$pricetag->stock->name.")</td></tr>".
+    		 "<tr> <td>Price</td> <td>UGX ".number_format($pricetag->salling_price)."</td></tr>    		 
     		 </table>
     		";
     	}

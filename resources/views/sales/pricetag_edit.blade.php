@@ -6,30 +6,33 @@
         <div class="col-md-12">
             <div class="card">
                 <div class="card-body">
-                    <h1>Edit price tags</h1>
+                    <h1>Edit price for {{$read_tags->stock->category->name}} ({{$read_tags->stock->name}})</h1>
  
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
-                        <div class="col-md-6">
-                            <label>Name</label>
-                            <input type="text" value="{{$read_tags->name}}" id="name" class="form-control"> 
- 
-                            <label>Scan the barcode</label>
-                            <input type="text" id="barcode" value="{{$read_tags->barcode}}" class="form-control">
+                    <form method="POST" action="{{route('price_tag.update',$read_tags->id)}}">
+                        @csrf
+                        {{method_field('PATCH')}}
+                   
+                        <div class="col-md-6">                             
+                            <label>Buying Price</label>
+                            <input type="text" name="buying_price" value="{{$read_tags->buying_price}}" class="form-control next_number">
 
-                            <label>Price</label>
-                            <input type="text" id="price" value="{{$read_tags->price}}" class="form-control number">
-                            <br><br>
-                            <button class="btn btn-primary" id="saveBtn">Save</button>
-                        </div>                       
+                            <label>salling Price</label>
+                            <input type="text" name="salling_price" value="{{$read_tags->salling_price}}" class="form-control number">
+                            <br>
+                            <button class="btn btn-primary" id="saveBtn">Update</button>
+
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</div>                      
 @endsection
 
 

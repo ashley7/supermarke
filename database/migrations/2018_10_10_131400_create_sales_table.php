@@ -13,16 +13,19 @@ class CreateSalesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->integer('user_id')->unsigned();
-            $table->integer('mainsales_id')->unsigned();
-            $table->string('name');
-            $table->string('number');
-            $table->string('size');
-            $table->string('date_sold');
-            $table->double('amount',10,2);
+            $table->integer('mainsales_id')->unsigned();           
+            $table->integer('stock_id')->unsigned();
             $table->integer('workshift_id')->unsigned();
+            $table->double('amount',10,2);//salling price
+            $table->double('buying_price',10,2);
+            $table->double('discount',10,2)->default(0.00);//money off amount given to buyer
+            $table->double('size',10,2);
+            $table->string('date_sold');
+            
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
             $table->foreign('workshift_id')->references('id')->on('work_shifts')->onUpdate('cascade');
             $table->foreign('mainsales_id')->references('id')->on('main_sales')->onUpdate('cascade');
+            $table->foreign('stock_id')->references('id')->on('stocks')->onUpdate('cascade');
         });
     }
 

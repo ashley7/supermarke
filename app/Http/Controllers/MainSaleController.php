@@ -28,7 +28,7 @@ class MainSaleController extends Controller
      */
     public function create()
     {
-        $price_tags = PriceTag::orderBy('name','ASC')->get();
+        $price_tags = PriceTag::all();
         $initiate_sale = new MainSale();
         $initiate_sale->sales_number = time() + \Auth::user()->id;
         $initiate_sale->user_id = \Auth::user()->id;
@@ -53,9 +53,9 @@ class MainSaleController extends Controller
             $update_sales_shift->save();
         }
 
-        $pricetag = PriceTag::all()->where('barcode',$request->data)->last();
+        $pricetag = PriceTag::all()->where('id',$request->data)->last();
         if (empty($pricetag)) {
-            echo "The barcode does not exist in the system";
+            echo "The item price does not exist in the system";
             return;
         }else{
             SalesController::save_sale($pricetag->name,$request->class_price,$request->data,$request->size,$pricetag,$request->workshift_id,$update_sales_shift->id);    

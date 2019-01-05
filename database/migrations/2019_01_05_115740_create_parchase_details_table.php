@@ -16,10 +16,11 @@ class CreateParchaseDetailsTable extends Migration
         Schema::create('parchase_details', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->integer('parchase_id')->unsigned();
-            $table->integer('stock_id')->unsigned();
             $table->double('quantity',10,2);
             $table->double('unit_price',10,2);
+
+            $table->integer('parchase_id')->unsigned();
+            $table->integer('stock_id')->unsigned();           
 
             $table->foreign('parchase_id')->references('id')->on('parchases')->onUpdate('cascade');
             $table->foreign('stock_id')->references('id')->on('stocks')->onUpdate('cascade');
