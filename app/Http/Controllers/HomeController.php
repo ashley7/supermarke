@@ -22,7 +22,7 @@ class HomeController extends Controller
     {
     	$pricetag = PriceTag::all()->where('barcode',$request->data)->last();
     	if (empty($pricetag)) {
-    		echo "The barcode you scanned is not in the system.";
+    		echo "The item you selected is not in the system.";
     		return;
     	}else{
     		echo "

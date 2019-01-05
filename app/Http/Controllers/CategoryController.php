@@ -14,7 +14,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        //
+        $read_category = Category::all();
+        return view("sales.category_list")->with(['read_category'=>$read_category]);
     }
 
     /**
@@ -39,10 +40,8 @@ class CategoryController extends Controller
         $save_cat->name = $request->name;
         try {
             $save_cat->save();
-            echo "Saved";
-        } catch (\Exception $e) {
-            
-        }
+            echo "Saved successfully.";
+        } catch (\Exception $e) {}
     }
 
     /**
@@ -64,7 +63,8 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        //
+        $read_category = Category::find($id);
+        return view("sales.category_edit")->with(['read_category'=>$read_category]);
     }
 
     /**
@@ -76,7 +76,12 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $save_cat = Category::find($id);
+        $save_cat->name = $request->name;
+        try {
+            $save_cat->save();      
+        } catch (\Exception $e) {}
+        return redirect()->route('category.index');
     }
 
     /**

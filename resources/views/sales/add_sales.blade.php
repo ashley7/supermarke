@@ -9,7 +9,7 @@
         <a  href="{{route('price_tag.create')}}" class="btn btn-secondary">+ Price tags</a> 
         <a  href="{{route('sales.index')}}"  class="btn btn-warning" style="color: #FFF">View Sales</a>
         <a  href="{{route('stock_loss.create')}}"  class="btn btn-danger" style="color: #FFF">Record Stock loss</a>        
-        <a  href="{{route('sales_barcodes.create')}}" class="btn btn-success">Generate barcodes</a>
+        <!-- <a  href="{{route('sales_barcodes.create')}}" class="btn btn-success">Generate barcodes</a> -->
         <a  href="{{route('sales_report.create')}}" class="btn btn-info">Generate report</a>
                                            
         <br><br>
@@ -87,7 +87,6 @@
 @endsection
 
 @push('scripts')
-     <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('js/buttons.flash.min.js') }}"></script>

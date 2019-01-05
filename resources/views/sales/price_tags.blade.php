@@ -27,7 +27,7 @@
                            <!--  <label>VIP Price</label>
                             <input type="text" name="vip_price" class="form-control next_number"> -->
 
-                            <label>Scan the barcode</label>
+                            <label>Scan the barcode (Optional)</label>
                             <input type="text" name="barcode" class="form-control">
                             
                             <br><br>

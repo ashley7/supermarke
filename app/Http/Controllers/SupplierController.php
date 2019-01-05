@@ -3,10 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Stock;
-use App\Category;
+use App\Supplier;
 
-class StockController extends Controller
+class SupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +14,7 @@ class StockController extends Controller
      */
     public function index()
     {
-        $stock = Stock::all();
-        return view('sales.stock_list')->with(['stock'=>$stock,'title'=>'All the stock']);
+        
     }
 
     /**
@@ -26,7 +24,8 @@ class StockController extends Controller
      */
     public function create()
     {
-        return view('sales.stock')->with(['category'=>Category::orderBy('name','ASC')->get()]);
+        $data = ['suppliers'=>Supplier::all()];
+        return view('supplier.add_supplier')->with($data);
     }
 
     /**
@@ -37,14 +36,13 @@ class StockController extends Controller
      */
     public function store(Request $request)
     {
-        $save_stock = new Stock();
-        $save_stock->category_id = $request->category_id;
-        $save_stock->name = $request->item_name;
-        $save_stock->keeping_limit = $request->keeping_limit;
+        $save_supplier = new Supplier($request->all());
         try {
-            $save_stock->save();
-            echo "Saved Successfully";
-        } catch (\Exception $e) {}
+            $save_supplier->save();
+            echo "Saved Successfuly";
+        } catch (\Exception $e) {
+            
+        }
     }
 
     /**
@@ -66,8 +64,8 @@ class StockController extends Controller
      */
     public function edit($id)
     {
-        $data = ['read_stock'=>Stock::find($id)];
-        return view('sales.edit_stock')->with($data);
+        $read_supplier = Supplier::find($id);
+        return view('supplier.edit_supplier')->with(['read_supplier'=>$read_supplier]);
     }
 
     /**
@@ -79,15 +77,17 @@ class StockController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $save_stock = Stock::find($id);
-        $save_stock->name = $request->item_name;
-        $save_stock->keeping_limit = $request->keeping_limit;
-         try {
-            $save_stock->save();
-            echo "Updated Successfully";
+        $read_supplier = Supplier::find($id);
+        $read_supplier->phone_number = $request->phone_number;
+        $read_supplier->name = $request->name;
+        $read_supplier->address = $request->address;
+
+        try {
+            $read_supplier->save();
         } catch (\Exception $e) {}
 
-        return redirect()->route("stock.index");
+        return redirect()->route('supplier.create');
+
     }
 
     /**

@@ -33,7 +33,7 @@
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/home') }}">
-                   HOME
+                   {{ config('app.name') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -61,7 +61,11 @@
                           
                           
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('expense.index')}}">Expenses</a></li>
-                          <!-- <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('account.index')}}">Accounts</a></li> -->
+
+                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('stock.create')}}">Stock</a></li>
+
+                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('purchase_payment.index')}}">Purchase</a></li>
+                         
 
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index')}}">Users</a></li>
 

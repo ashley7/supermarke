@@ -9,8 +9,8 @@
                 		<div class="col-md-5 col-sm-5 col-lg-5 col-xs-5 include">
                 			<center>
 	                			<p style="text-transform: uppercase;">{{ config('app.name') }}</p>
-	                			<p>P.O.BOX 256 Kampala</p>
-	                			<p>Phone: 0787665544</p>
+	                			<p>Dealers in Building Materials, Plumbing and Electrical materials</p>
+	                			<p>Phone: +256 701 626 689 | +256 772 526 689</p>
                                 <h3><u>RECIEPT</u></h3>
                 			</center>
                 			

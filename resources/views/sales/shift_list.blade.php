@@ -15,6 +15,7 @@
                     
                     <table class="table table-hover table-striped" id="example">
                         <thead>
+                            <th>#</th>
                             <th>Date created</th>
                             <th>Name</th>
                             <th>Workers</th>
@@ -25,6 +26,7 @@
                         <tbody>                         
                             @foreach($work_shift as $shifts)
                               <tr>
+                                  <td>{{$shifts->id}}</td>
                                   <td>{{$shifts->created_at}}</td>
                                   <td>{{$shifts->name}}</td>
                                   <td>{{$shifts->description}}</td>                                  

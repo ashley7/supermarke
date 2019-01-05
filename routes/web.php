@@ -27,4 +27,9 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::resource('shift_stock','ShiftStockController');
 	Route::resource('stock_loss','StockLossController');
 	Route::resource('main_sale','MainSaleController');
-});
+	Route::resource('supplier','SupplierController');
+	Route::resource('purchases','ParchaseController');
+	Route::get('purchases_report','ParchaseController@purchases_report');
+	Route::post('purchasesreport','ParchaseController@purchasesreport');
+	Route::resource('purchase_payment','ParchasePaymentController');
+ });

@@ -4,43 +4,31 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
-               
+            <div class="card">              
 
                 <div class="card-body">
-                    <h1>All Stock Item Names</h1>
+                    <h5 style="text-transform: uppercase;">List of Categories</h1>
 
-                    <a href="{{route('stock.create')}}" style="float: right;" class="btn btn-primary">Create Stock</a>
+                    <a href="{{route('sales.create')}}" style="float: right;" class="btn btn-primary">Create Sales</a>
                     <br><br>
 
                     <table class="table table-hover table-striped" id="example">
-                        <thead>
-                            <th>Category</th>
-                            <th>Name</th>
-                            <th>Re-order level</th>                       
-                            <th>Stock left</th>                       
-                            <th>Action</th>                           
+                        <thead>                          
+                            <th>Name</th>                        
+                            <th>Action</th>
                         </thead>
 
                         <tbody>
-                         
-                            @foreach($stock as $stock_details)
-                              <tr>
-                                 <td style="text-transform: uppercase;">{{$stock_details->category->name}}</td>
-                                 <td style="text-transform: uppercase;">{{$stock_details->name}}</td>
-                                 <td>{{$stock_details->keeping_limit}}</td>
-                                 <td></td>
-                                 <td><a href="{{route('stock.edit',$stock_details->id)}}">Edit</a></td>
-                               </tr>
- 
-                            @endforeach
+                        @foreach($read_category as $categories)
+                          <tr>
+                            <td style="text-transform: uppercase;">{{$categories->name}}</td>                   
+                            <td><a href="{{route('category.edit',$categories->id)}}">Edit</a></td>
+                          </tr>
 
-                          
+                        @endforeach                                                          
+                                                           
                         </tbody>
-                    </table>
-                                           
-                        
- 
+                    </table>                                         
                 </div>
             </div>
         </div>
@@ -49,7 +37,6 @@
 @endsection
 
 @push('scripts')
-     <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
     <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
@@ -66,11 +53,11 @@
                     'copy',
                     {
                         extend: 'excel',
-                        messageTop: '{{$title}}'
+                     
                     },
                     {
                         extend: 'pdf',
-                        messageTop: '{{$title}}'
+                    
                     },
                     {
                         extend: 'csv',
