@@ -2,6 +2,8 @@
 
 @section('content')
 <div class="container">
+    <a href="{{route('bank.index')}}" class="btn btn-primary">View Banks</a>
+    <br><br>
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">               

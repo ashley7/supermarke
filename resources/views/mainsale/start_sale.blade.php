@@ -5,7 +5,7 @@
             <div class="card">
                 <div class="card-body">                   
                     <h1>Record sales</h1>
-                    <a class="btn btn-primary" style="float: right;" href="{{route('main_sale.edit',$initiate_sale->id)}}">Print reciept</a>
+                    <a class="btn btn-danger" style="float: right;" href="{{route('main_sale.edit',$initiate_sale->id)}}">Details</a>
                     <br><br>                 
                     <div class="row"> 
                         <div class="col-md-6">
@@ -13,45 +13,50 @@
                             <select id="data" class="form-control datavalue">
                                 <option></option>
                                 @foreach($price_tags as $pricetags)
-                                  <option value="{{$pricetags->id}}">{{$pricetags->stock->category->name}} ({{$pricetags->stock->name}})</option>
+                                  <option value="{{$pricetags->id}}" style="text-transform: uppercase;">{{$pricetags->stock->category->name}} ({{$pricetags->stock->name}})</option>
                                 @endforeach
                             </select>
                             
                             <label>Quantity</label>
                             <input type="number" id="size" required="required" value="1" step="any" class="form-control">
 
-                            <label>Discount</label>
-                            <input type="text" id="discount" class="form-control number">
+                            <label>Discounted amount</label>
+                            <input type="text" id="discount" value="0" class="form-control number">
 
                             <input type="hidden" id="mainsales_id" value="{{$initiate_sale->id}}">
 
                             <label>Shift</label>
                             <select id="workshift_id" class="form-control">
                                 @foreach($shift as $shifts)
-                                  <option value="{{$shifts->id}}">{{$shifts->name}} [{{$shifts->description}}-{{$shifts->date}}]  </option>
+                                  <option value="{{$shifts->id}}">{{$shifts->name}} [{{$shifts->description}}-{{date('Y-m-d',$shifts->date)}}]  </option>
                                 @endforeach
-                            </select>
+                            </select> 
 
-                            
+                            <label>Client details</label>
+                            <input type="text" id="client" class="form-control">
 
                            
                             <br>
-                            <button class="btn btn-primary" id="btnsave">Save</button>                           
+                            <button class="btn btn-primary" id="btnsave">Save sale record</button>                           
                         </div>
                         <div class="col-md-6">
-                            <h5 id="prices" style="color: green;"></h5>   
+                            <h5 id="prices" style="color: green;"></h5> 
+                            <span style="color: red; font-size: 30px;" id="total_amount"></span>
 
-                            <span style="color: red; font-size: 30px;" id="total_amount"></span>                        
+                            <br>
+                            <label>Add payment</label>
+                            <input type="text" id="payment_data" class="form-control next_number">
+                            <br>
+                            <button class="btn btn-primary" id="save_payment" style="float: right;">Save payment</button>               
                         </div>
                     </div>
                     <h3 id="display" style="color: green;"></h3>
-                    <input type="hidden" class="next_number">
 
                     <div class="row">
                         <div class="col-md-12">
                             <table class="table">
                                 <thead>
-                                    <th>Item</th> <th>Quantity</th> <th>Amount</th>
+                                    <th>Item</th> <th>Quantity</th> <th>Discount</th> <th>Amount</th>
                                 </thead>
                                 <tbody id="emp">                                    
                                 </tbody>
@@ -67,6 +72,24 @@
 @push('scripts')
     <script type="text/javascript">
         $("#data").chosen();
+
+        $("#save_payment").click(function() {
+            $("#save_payment").text("Processing ...");
+            $.ajax({
+                type: "POST",
+                url: "{{ route('sales_payment.store') }}",
+            data: {
+                amount: $("#payment_data").val(),
+                mainsales_id: $("#mainsales_id").val(),
+                _token: "{{Session::token()}}"
+            },
+            success: function(result){
+                $('#payment_data').val(0);
+                $("#save_payment").text(result);
+                }
+          })
+           
+        });
 
         load_table();
         //setup before functions
@@ -115,24 +138,24 @@
          $("#btnsave").click(function() {
             $("#btnsave").html("Processing ...");
             $("#btnsave").attr('disabled','disabled');
+            $('#display').text(" ");
 
             $.ajax({
                     type: "POST",
                     url: "{{ route('main_sale.store') }}",
                 data: {
-                    data: $("#data").val(),
+                    data: $("#data").val(),//this id the stock_id
                     size: $("#size").val(),                       
+                    client: $("#client").val(),                       
                     discount: $("#discount").val(),                       
                     workshift_id: $("#workshift_id").val(),                        
-                    class_price: $("#class_price").val(),
                     mainsales_id: $("#mainsales_id").val(),
                     _token: "{{Session::token()}}"
                 },
                 success: function(result){
                     $('#display').html(result);
-                    $('#data').val(" ");
                     size: $("#size").val(1);
-                    $("#data").show().focus();
+                    // $("#data").show().focus();
                     typingTimer = setTimeout(donedisplaying,5000);
                     $("#emp > tr").remove();
                     load_table();
@@ -145,8 +168,7 @@
             });
 
         function donedisplaying(){
-            $('#display').text(" ");
-            $('#prices').text(" ");
+            // $('#prices').text(" ");
          }
 
         function load_table(){
@@ -158,8 +180,12 @@
                 var sum_amount = 0;                
                     $(data).each(
                       function() {
-                          $('tbody#emp').append('<tr> <td>' + this.name+ '</td><td>'+ this.size+ '</td><td>' + this.amount+ '</td>'+' </tr>');
-                          sum_amount = sum_amount + this.amount;
+
+                        $total = (this.amount*this.size) - (this.discount);
+
+                          $('tbody#emp').append('<tr> <td>' + this.category_name+ '('+this.name+')</td><td>'+ this.size+ '</td> <td>'+this.discount+'</td>   <td>' + $total  + '</td> </tr>');
+
+                          sum_amount = sum_amount + $total;
                       });
                     $("#total_amount").html("TOTAL UGX: "+sum_amount);
                     // console.log(sum_amount)

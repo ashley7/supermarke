@@ -32,4 +32,12 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('purchases_report','ParchaseController@purchases_report');
 	Route::post('purchasesreport','ParchaseController@purchasesreport');
 	Route::resource('purchase_payment','ParchasePaymentController');
+	Route::resource('sales_payment','SalesPaymentController');
+
+	Route::get('/settings', function () {
+	    return view('settings');
+	});
+
+
+
  });

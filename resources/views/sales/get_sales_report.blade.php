@@ -11,12 +11,13 @@
                     <form method="POST" action="{{route('sales_report.store')}}">
                         @csrf
 
-                        <label>Choose the range</label>
-                        <input type="text" name="reportrange" id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                            <i class="fa fa-calendar"></i>&nbsp;
-                            <span></span> <i class="fa fa-caret-down"></i>
-                            <br>
-                        <button class="btn btn-primary">Generate</button>
+                        <label>From</label>
+                        <input type="date" name="from" class="form-control">
+
+                        <label>To</label>
+                        <input type="date" name="to" class="form-control">
+                        <br>
+                        <button class="btn btn-primary" type="submit">Generate</button>
                     </form>
                     
                      

@@ -26,6 +26,23 @@ class ParchaseController extends Controller
     }
 
 
+    public static function total_credit_purchase()
+    {
+        $purchases = Parchase::all();
+        $total_amount = $total_payments = 0;
+        foreach ($purchases as $purchase_value) {
+            foreach ($purchase_value->parchasedetails as $detail_value) {
+                $total_amount = $total_amount + ($detail_value->unit_price * $detail_value->quantity);
+            }
+            $total_payments = $total_payments + $purchase_value->parchasepayment->sum('amount');
+        }
+
+        $total_balance = $total_amount - $total_payments;
+
+        return $total_balance;
+    }
+
+
 
 
 

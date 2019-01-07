@@ -20,7 +20,10 @@ class ParchasePaymentController extends Controller
         $purchase = array();
         foreach ($purchases as $purchase_value) {
             if ($purchase_value->parchasedetails->count() == 0) {
-                Parchase::destroy($purchase_value->id);
+                try {
+                   Parchase::destroy($purchase_value->id); 
+                } catch (\Exception $e) {}
+                
             }else{
                 $purchase[] = Parchase::find($purchase_value->id);
             }

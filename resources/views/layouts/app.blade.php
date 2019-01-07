@@ -32,8 +32,8 @@
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light navbar-laravel">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/home') }}">
-                   {{ config('app.name') }}
+                <a class="navbar-brand" href="{{ url('/home') }}" style="text-transform: uppercase;">
+                   Dashboard
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -56,18 +56,19 @@
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('main_sale.create')}}">Record sales</a></li>
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('work_shifts.index')}}">Work Shifts</a></li>
 
-                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('price_tag.create')}}" class="btn btn-secondary">Price tags</a></li>
+                          
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('bank_deposite.index')}}">Bank Deposit</a></li>
                           
                           
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('expense.index')}}">Expenses</a></li>
 
-                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('stock.create')}}">Stock</a></li>
 
                           <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('purchase_payment.index')}}">Purchase</a></li>
                          
 
-                          <li><a class="nav-link" style="text-transform: uppercase;" href="{{route('user.index')}}">Users</a></li>
+                          
+
+                          <li><a class="nav-link" style="text-transform: uppercase;" href="/settings">Settings</a></li>
 
                           <li>
                               <a class="dropdown-item" href="{{ route('logout') }}"

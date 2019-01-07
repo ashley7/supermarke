@@ -44,7 +44,9 @@ class StockController extends Controller
         try {
             $save_stock->save();
             echo "Saved Successfully";
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     /**

@@ -48,8 +48,12 @@ class MainSaleController extends Controller
     public function store(Request $request)
     {
         $update_sales_shift = MainSale::find($request->mainsales_id);
+
         if (empty($update_sales_shift->workshift_id)) {
             $update_sales_shift->workshift_id = $request->workshift_id;
+            if (isset($request->client)) {
+                $update_sales_shift->client = $request->client;
+            }            
             $update_sales_shift->save();
         }
 
@@ -58,7 +62,8 @@ class MainSaleController extends Controller
             echo "The item price does not exist in the system";
             return;
         }else{
-            SalesController::save_sale($pricetag->name,$request->class_price,$request->data,$request->size,$pricetag,$request->workshift_id,$update_sales_shift->id);    
+            SalesController::save_sale($pricetag->stock_id,$request->size,$pricetag,$request->workshift_id,$update_sales_shift->id,$request->discount); 
+
         }
         
 
@@ -72,8 +77,7 @@ class MainSaleController extends Controller
      */
     public function show($id)
     {
-        $read_sales_on_reciept = Sale::where('mainsales_id',$id)->get();
-        return $read_sales_on_reciept;
+        return Sale::select('stocks.name as name','categories.name as category_name','amount','size','discount')->where('mainsales_id',$id)->join('stocks','sales.stock_id','stocks.id')->join('categories','stocks.category_id','categories.id')->get();
     }
 
     /**
@@ -85,7 +89,7 @@ class MainSaleController extends Controller
     public function edit($id)
     {
         $update_sales_shift = MainSale::find($id);
-        $data = ['update_sales_shift'=>$update_sales_shift];
+        $data = ['main_sale'=>$update_sales_shift];
         return view("mainsale.reciept")->with($data);
      }
 

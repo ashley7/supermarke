@@ -54,10 +54,10 @@ class ShiftStockController extends Controller
         }        
         
         $save_stock->workshift_id = $workshift_id;
-        $save_stock->number = $number;
+        $save_stock->stock_id = $number;
         $save_stock->user_id = \Auth::user()->id;
 
-        $record_check = ShiftStock::all()->where('number',$number)->where('workshift_id',$workshift_id);
+        $record_check = ShiftStock::all()->where('stock_id',$number)->where('workshift_id',$workshift_id);
 
         if ($record_check->count() == 0) {
             $save_stock->save();

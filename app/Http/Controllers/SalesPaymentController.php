@@ -3,9 +3,9 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Sale;
+use App\SalesPayment;
 
-class SalesReportController extends Controller
+class SalesPaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -24,7 +24,7 @@ class SalesReportController extends Controller
      */
     public function create()
     {
-        return view("sales.get_sales_report");
+        //
     }
 
     /**
@@ -35,17 +35,12 @@ class SalesReportController extends Controller
      */
     public function store(Request $request)
     {
-        $from = $request->from;
-        $to = $request->to;
-        $title="Sales From: ".$from." To: ".$to;
-
-        $sales = Sale::whereBetween('created_at', [$from,$to])->get();
-
-        $sales_count = Sale::whereBetween('created_at', [$from,$to])->get();  
-
-        $data = ['sales'=>$sales,'counts'=>$sales_count,'title'=>$title];
-
-        return view("sales.sales_report")->with($data);
+        $save_payment = new SalesPayment($request->all());
+        try {
+            $save_payment->amount = str_replace(",", "", $request->amount);
+            $save_payment->save();
+            echo "Saved successfully";
+        } catch (\Exception $e) {}
     }
 
     /**

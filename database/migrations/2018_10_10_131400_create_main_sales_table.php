@@ -17,6 +17,7 @@ class CreateMainSalesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('sales_number')->unique();
+            $table->string('client')->default("Client");
             $table->integer('user_id')->unsigned();
             $table->integer('period_recorded')->unsigned();
             $table->integer('workshift_id')->unsigned()->nullable();

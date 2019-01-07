@@ -42,7 +42,7 @@
                            <h3 id="total_amount" style="color: green;"></h3>
                            <br>
                            <label>Amount Paid</label>
-                           <input type="text" id="amount_paid" class="form-control number">
+                           <input type="text" id="amount_paid" class="form-control next_number">
                            <br>
                            <button id="save_payments" class="btn btn-primary">Save</button>
                         </div>

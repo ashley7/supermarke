@@ -15,37 +15,67 @@
 
                     <table class="table table-hover table-striped" id="example">
                         <thead>
-                            <th>#</th>
+                            <th>Reciept Number</th>
                             <th>Date</th>
-                            <th>Ticket Number</th>
-                            <th>Amount</th>
+                            <th>Client</th>
+                            <th>Cost Paid</th>
+                            <th>Amount Paid</th>
+                            <th>Balance</th>
                             <th>Action</th>
                         </thead>
 
                         <tbody>
-                            <?php $sum = 0; ?>
+                            <?php 
+                               $sum = 0; $total_balance = 0;
+                            ?>
                             @foreach($main_sales as $main_sale)
-                                <?php
-                                  if ($main_sale->sale->sum('amount') == 0) {
-                                      App\MainSale::destroy($main_sale->id);
-                                  }else{
-                                     $sum = $sum + $main_sale->sale->sum('amount');
-                                  }
-                                ?>
                               <tr>
                                   <td>{{$main_sale->id}}</td>
                                   <td>{{$main_sale->created_at}}</td>
-                                  <td>{{$main_sale->sales_number}}</td>
-                                  <td>{{number_format($main_sale->sale->sum('amount'))}}</td>
-                                  <td><a href="{{route('main_sale.edit',$main_sale->id)}}" class="btn btn-success">Details</a></td>
-                              </tr>                      
+                                  <td>{{$main_sale->client}}</td>
+                                  <td>
+                                      @php
+                                      $sum_sales = 0; 
+                                        foreach ($main_sale->sale as $sales_value) {
+                                           $sum_sales = $sum_sales + ( ($sales_value->amount * $sales_value->size) - $sales_value->discount); 
+                                        }
+                                           echo number_format($sum_sales);
+                                       @endphp
+                                  </td>
+                                  <td>
+
+                                    @php 
+                                     $payments_total = 0;
+                                    @endphp
+                                    @foreach($main_sale->salespayment as $details)
+                                    @php
+                                      $payments_total = $payments_total  + $details->amount;
+                                    @endphp                                    
+                                    @endforeach
+
+                                    {{number_format($payments_total)}}
+
+                                </td>
+
+                                <td>{{number_format($sum_sales - $payments_total)}}</td>
+                                 
+                                <td><a href="{{route('main_sale.edit',$main_sale->id)}}" class="btn btn-success">Details</a></td>
+                                    
+                              </tr>
+
+                              <?php
+                                 $sum = $sum + $sum_sales;
+                                 $total_balance = $total_balance + ($sum_sales - $payments_total);
+                               ?>
                             @endforeach
 
                             <tr>
                                 <th>Total</th>
                                 <th></th>
-                                <th></th>                               
+                                <th></th>
                                 <th>{{number_format($sum)}}</th>
+                                <th>{{number_format($sum - $total_balance)}}</th>
+                                <th>{{number_format($total_balance)}}</th>
                                 <th></th>
                                
                             </tr>

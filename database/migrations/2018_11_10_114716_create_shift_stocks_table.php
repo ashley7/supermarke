@@ -17,13 +17,14 @@ class CreateShiftStocksTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('old_stock')->nullable();
-            $table->string('number');
+            $table->integer('stock_id')->unsigned();
             $table->string('new_stock')->nullable();
             $table->string('stock_left')->nullable();
             $table->integer('workshift_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->foreign('workshift_id')->references('id')->on('work_shifts')->onUpdate('cascade');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');
+            $table->foreign('stock_id')->references('id')->on('stocks')->onUpdate('cascade');
         });
     }
 

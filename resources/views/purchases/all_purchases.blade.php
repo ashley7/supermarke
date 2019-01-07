@@ -24,9 +24,12 @@
                 		</thead>
 
                 		<tbody>
+                            <?php
+                               $total_amount = $total_amount_paid = 0;
+                             ?>
                 			
                 			@foreach($purchase as $purchases)
-                            <?php $total = 0; ?>
+                            <?php $total  = 0; ?>
                 			  <tr>
                 			  	<td>{{$purchases->created_at}}</td>
                 			  	<td>{{$purchases->supplier->name ?? ''}} </td>
@@ -34,7 +37,7 @@
                                     @foreach($purchases->parchasedetails as $details)
                                     <?php
                                       $total = $total  + ($details->unit_price * $details->quantity);
-                                     ?>
+                                    ?>
                                     @endforeach
 
                                     {{number_format($total)}}
@@ -56,8 +59,16 @@
                                 <td>
                                     <a href="{{route('purchases.edit',$purchases->id)}}" class="btn btn-primary">Details</a>
                                 </td>
-                			  </tr>                			 
+                			  </tr> 
+                              <?php
+                                $total_amount = $total_amount + $total;
+                                $total_amount_paid = $total_amount_paid + $payments_total;
+                               ?>            			 
                 			@endforeach
+
+                            <tr>
+                                <th>Total</th> <th></th> <th>{{number_format($total_amount)}}</th> <th>{{number_format($total_amount_paid)}}</th> <th>{{number_format($total_amount - $total_amount_paid)}}</th> <th></th>
+                            </tr>
 
                  		</tbody>
                 	</table>

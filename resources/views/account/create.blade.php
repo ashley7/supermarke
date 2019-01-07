@@ -2,8 +2,10 @@
 
 @section('content')
 <div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
+    <a href="{{route('account.index')}}" class="btn btn-primary">View account</a>
+    <br><br>
+    <div class="row">
+        <div class="col-md-6">
             <div class="card">              
                 <div class="card-body">
                     <h4>Add Expense account</h4>

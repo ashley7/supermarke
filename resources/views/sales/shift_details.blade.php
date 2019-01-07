@@ -8,11 +8,13 @@
             <div class="card">
                 <div class="card-body">
                     <h3 style="text-transform: uppercase;">{{$work_shifts->name}}, by {{$work_shifts->description}}, on {{date("d-m-Y",$work_shifts->date)}}</h3>
+
+                    <a href="" style="float: right;">Refresh</a>
  
                     <ul class="nav nav-tabs">
                       <li><a data-toggle="tab" class="btn btn-success" href="#sales">Sales</a></li>
-                      <li class="active"><a data-toggle="tab" class="btn btn-info" href="#stock">Stock</a></li>
-                      <li><a data-toggle="tab" href="#bottles" class="btn btn-primary">Spoilt bottles</a></li>
+                      <li class="active"><a data-toggle="tab" class="btn btn-info" href="#stock">Current Stock</a></li>
+                      <!-- <li><a data-toggle="tab" href="#bottles" class="btn btn-primary">Spoilt bottles</a></li> -->
                     </ul>
 
                 <div class="tab-content">
@@ -20,38 +22,48 @@
                       <br>
                         <table class="table table-hover table-striped" id="sales_table">
                             <thead>
-                                <th>#</th>
+                                
                                 <th>Date</th>
                                 <th>Name</th>
                                 <th>Quantity</th>
+                                <th>Discount</th>
                                 <th>Amount</th>
+                                <th>Gross Profit</th>
                                 <th>Sold By</th>
                             </thead>
 
                             <tbody>
-                                <?php $sum = 0; ?>
+                                <?php $sum = $sum_profit =  $sum_discount = 0; ?>
                                 @foreach($sales as $sale)
+                                <?php
+                                  $main_sale = ($sale->amount * $sale->size)-$sale->discount;
+                                  $profit = $main_sale - ($sale->buying_price * $sale->size);
+
+                                  $sum_profit = $sum_profit + $profit;
+                                  $sum = $sum + $main_sale;
+                                  $sum_discount = $sum_discount + $sale->discount;
+                                 ?>
                                   <tr>
-                                      <td>{{$sale->id}}</td>
                                       <td>{{$sale->created_at}}</td>
-                                      <td>{{$sale->name}}</td>
-                                      <td>{{$sale->size}}</td>
-                                      <td>{{number_format($sale->amount)}}</td>
+                                      <td>{{$sale->stock->category->name}} ({{$sale->stock->name}})</td>
+                                      <td>{{$sale->size}} @ {{number_format($sale->amount)}}</td>
+                                      <td>{{number_format($sale->discount)}}</td>
+                                      <td>{{number_format($main_sale)}}</td>
+                                      <td>{{number_format($profit)}}</td>
                                       <td>{{$sale->user->name}}</td>
                                   </tr>
-
-                                  <?php
-                                     $sum = $sum + $sale->amount;
-                                   ?>
+ 
                                 @endforeach
 
-                                <tr>
-                                    <th>Total</th>
-                                    <th></th>
-                                    <th></th>
-                                    <th></th>
-                                    <th>{{number_format($sum)}}</th>
-                                    <th></th>
+                                <tr>                                   
+
+                                <th>Total</th>
+                                <th></th>
+                                <th></th>
+                                <th>{{number_format($sum_discount)}}</th>
+                                <th>{{number_format($sum)}}</th>
+                                <th>{{number_format($sum_profit)}}</th>
+                                <th>Sold By</th>
                                 </tr>
                             </tbody>
                         </table>
@@ -69,10 +81,10 @@
                                      @foreach($brands as $brand)
                                      <?php
                                         $initial_stock = 0;
-                                        $record_check = App\ShiftStock::all()->where('number',$brand->barcode)->where('workshift_id',$work_shifts->id)->last(); 
+                                        $record_check = App\ShiftStock::all()->where('stock_id',$brand->stock_id)->where('workshift_id',$work_shifts->id)->last(); 
 
                                         if (!empty($record_check)) {
-                                          $sum_sold = App\Sale::all()->where('workshift_id',$work_shifts->id)->where('number',$brand->barcode)->sum('size');
+                                          $sum_sold = App\Sale::all()->where('workshift_id',$work_shifts->id)->where('stock_id',$brand->stock_id)->sum('size');
 
                                            $initial_stock = $record_check->old_stock + $record_check->new_stock;
                                         }
@@ -83,9 +95,9 @@
                                      <tr>
                                        <td>{{$brand->stock->category->name}} ({{$brand->stock->name}})</td>
 
-                                       <td contenteditable="true" id="{{$brand->barcode}}*old_stock">{{$record_check->old_stock}}</td>
+                                       <td contenteditable="true" id="{{$brand->stock_id}}*old_stock">{{$record_check->old_stock}}</td>
 
-                                       <td contenteditable="true" id="{{$brand->barcode}}*new_stock">{{$record_check->new_stock}}</td>
+                                       <td contenteditable="true" id="{{$brand->stock_id}}*new_stock">{{$record_check->new_stock}}</td>
                                        <td>{{$initial_stock}}</td>
                                        <td>{{$sum_sold}}</td>
                                        <td>{{$initial_stock - $sum_sold}}</td>
@@ -96,9 +108,9 @@
                                     <tr>
                                         <td>{{$brand->stock->category->name}} ({{$brand->stock->name}})</td>
 
-                                       <td contenteditable="true" id="{{$brand->barcode}}*old_stock"></td>
+                                       <td contenteditable="true" id="{{$brand->stock_id}}*old_stock"></td>
 
-                                       <td contenteditable="true" id="{{$brand->barcode}}*new_stock"></td>
+                                       <td contenteditable="true" id="{{$brand->stock_id}}*new_stock"></td>
 
                                        <td></td>
                                        <td></td>

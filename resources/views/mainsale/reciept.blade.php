@@ -1,70 +1,152 @@
 @extends('layouts.app')
+
 @section('content')
 <div class="container">
-    <div class="justify-content-center">
-            <div class="row">
-                		<div class="col-md-4 col-sm-4 col-lg-4 col-xs-4 exclude">
-                			<a href="#" onclick="myFunction()" ><i class="material-icons">print</i></a>
-                		</div>
-                		<div class="col-md-5 col-sm-5 col-lg-5 col-xs-5 include">
-                			<center>
-	                			<p style="text-transform: uppercase;">{{ config('app.name') }}</p>
-	                			<p>Dealers in Building Materials, Plumbing and Electrical materials</p>
-	                			<p>Phone: +256 701 626 689 | +256 772 526 689</p>
-                                <h3><u>RECIEPT</u></h3>
-                			</center>
-                			
-                			<p style="float: left;">Date.{{date('d-M-Y',$update_sales_shift->period_recorded)}}</p>
-                            <span style="float: right;">No.{{$update_sales_shift->sales_number}}</span>
-                			<?php $total = $items = 0; ?>
-                			<br>
-                            <table class="table">
-                				<thead>
-                					<th>Item</th> <th>Amount</th>
-                				</thead>
-                				<tbody>
-                					@foreach($update_sales_shift->sale as $sales)
-                					<?php
-                					 $unit_price = App\PriceTag::all()->where('barcode',$sales->number)->last();
-                					 $total = $total + $sales->amount;
-                					 $items = $items + $sales->size;
-                					 ?>
-                					  <tr>
-                					  	<td>{{$sales->size}} {{$sales->name}}(s) (@ {{number_format($unit_price->price)}})</td> <td>{{number_format($sales->amount)}}</td>
-                					  </tr>
-                					@endforeach
-                					<tr>
-                						<th>Total</th> <th>{{number_format($total)}}</th>
-                					</tr>
-                				</tbody>
-                			</table>
-                            <p>Total items: {{$items}}</p>
-                			<p>You were served by: {{$update_sales_shift->user->name}}</p>
-                			<p>Thank you, Please come again next time ...</p>
-                			<p style="float: left;"><i>Point of Sale Software: +256 787 444 081</i></p>
-                		</div>
-                		<div class="col-md-3 col-sm-3 col-lg-3 col-xs-3 exclude">
-                            <a href="#" onclick="myFunction()" ><i class="material-icons">print</i></a>      
+    <div class="row">        
+        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+             <a href="#" onclick="myFunction()" style="float: right;" class="btn btn-primary">Print</a>
+            <br><br>
+            <div class="card">
+                <div class="card-body">
+                    <div class="row">        
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                            <p style="text-transform: uppercase;">{{ config('app.name') }} (Saller)</p>
+                            <p>Phone: +256 701 626 689 | +256 772 526 689</p>
+                            <p>Mukono - Uganda</p>
+                            <p>Transaction date: {{$main_sale->created_at}}</p>
                         </div>
-                	</div>
 
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                            <p style="text-transform: uppercase;">{{$main_sale->client}} (Buyer)</p>
+                        </div>
+                    </div>
+
+                    <p style="float: right; font-size: 20px; color: red;">No. {{$main_sale->id}}</p>
+
+                    <center><h1><u>SALES RECIEPT</u></h1></center>
+
+                    <div class="row">        
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                            <p style="text-transform: uppercase;">Particular</p>
+
+                            <table class="table">
+                                <thead>
+                                  <th>Item</th> <th>Quantity</th> <th>Discount</th> <th>Amount</th>
+                                </thead>
+
+                                <tbody>
+                                    <?php 
+                                     $total = $sum_discount = 0;
+                                     ?>
+                                    @foreach($main_sale->sale as $details)
+                                    <?php
+                                      $calculated_amount = ( ($details->amount * $details->size) - $details->discount);
+                                      $total = $total  + $calculated_amount;
+                                      $sum_discount = $sum_discount + $details->discount;
+                                     ?>
+                                     <tr>
+                                       
+                                        <td>{{$details->stock->category->name}} ({{$details->stock->name}})</td>
+                                        <td>{{$details->size}} @ {{number_format($details->amount)}}</td>
+                                        <td>{{number_format($details->discount)}}</td>
+                                        <td>{{number_format($calculated_amount)}}</td>                                        
+                                     </tr>
+                                    @endforeach
+
+                                    <tr>
+                                        <th>Total</th>  <th></th> <th> {{number_format($sum_discount)}} </th> <th>{{number_format($total)}}</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            
+
+                            
+                        </div>
+
+                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                            <p style="text-transform: uppercase;">Payments</p>
+
+                             <table class="table">
+                                <thead>
+                                   <th>Date</th> <th>Amount</th>
+                                </thead>
+
+                                <tbody>
+                                    <?php 
+                                     $payments_total = 0;
+                                     ?>
+                                    @foreach($main_sale->salespayment as $details)
+                                    <?php
+                                      $payments_total = $payments_total  + ($details->amount);
+
+                                     ?>
+                                    <tr>
+                                         <td>{{$details->created_at}}</td>                                        
+                                        <td>{{number_format($details->amount)}}</td>
+                                    </tr>
+                                    @endforeach
+
+                                    <tr>
+                                        <th>Total</th> <th>{{number_format($payments_total)}}</th>
+                                    </tr>
+                                </tbody>
+                            </table>
+
+                            <p style="float: right; color: red; font-size: 20px;">Balance UGX: {{number_format($total - $payments_total)}}</p>
+
+                          <span class="exclude">
+                            <label>Add Payment</label>
+                            <input type="text" id="amount_paid" class="form-control number">
+                            <input type="hidden" id="mainsales_id" value="{{$main_sale->id}}">
+                            <br>
+                            <button id="save_payment">Save</button>
+                          </span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
-  
+    </div>
+</div>                   
 @endsection
 
 @section('style')
- <style type="text/css">
+  <style>
     @media print{
-      .exclude,nav{
+      .exclude,a,nav{
         display: none;      
-	    }
-	}
- 	.include{
-      border-style: solid;
-      border-color: red;
-      border-width: 5px 5px 5px 5px;
-      border-radius: 7px;
-   }
- </style>
+     }
+    }
+
+    .p{
+      font-weight:  bold;
+    }
+ 
+  </style>
 @endsection
+
+@push('scripts')
+  <script>
+      $("#save_payment").click(function() {
+            $("#save_payment").text("Processing ...");
+            $.ajax({
+                type: "POST",
+                url: "{{ route('sales_payment.store') }}",
+            data: {
+                amount: $("#amount_paid").val(),
+                mainsales_id: $("#mainsales_id").val(),
+                _token: "{{Session::token()}}"
+            },
+            success: function(result){
+                $('#amount_paid').val(0);
+                $("#save_payment").text(result);
+                location.reload();
+              }
+          })           
+        });
+  </script>
+
+
+@endpush
+ 

@@ -15,4 +15,9 @@ class MainSale extends Model
     {
     	return $this->belongsTo('App\User');
     }
+
+    public function salespayment()
+    {
+    	return $this->hasMany("App\SalesPayment","mainsales_id");
+    }
 }

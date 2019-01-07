@@ -25,7 +25,7 @@
 
                     <p style="float: right; font-size: 20px; color: red;">No. {{$purchase->id}}</p>
 
-                    <center><h1><u>RECIEPT</u></h1></center>
+                    <center><h1><u>PURCHASE RECIEPT</u></h1></center>
 
                     <div class="row">        
                         <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
@@ -97,7 +97,7 @@
 
                           <span class="exclude">
                             <label>Add Payment</label>
-                            <input type="text" id="amount_paid" class="form-control">
+                            <input type="text" id="amount_paid" class="form-control number">
                             <input type="hidden" id="parchase_id" value="{{$purchase->id}}">
                             <br>
                             <button id="save_payments">Save</button>

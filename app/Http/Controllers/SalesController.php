@@ -4,10 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Sale;
+use Carbon\Carbon;
+use App\Stock;
 use App\PriceTag;
 use App\WorkShift;
 use App\ShiftStock;
+use App\SalesPayment;
 use App\MainSale;
+use App\Parchase;
+use App\Http\Controllers\ParchaseController;
 
 class SalesController extends Controller
 {
@@ -19,7 +24,16 @@ class SalesController extends Controller
     public function index()
     {
         $title = "All Sales";
-        $sales = MainSale::all();          
+        $sales = MainSale::all();
+        foreach ($sales as $main_value) {
+            if ($main_value->sale->count() == 0) {
+                try {
+                  MainSale::destroy($main_value->id);  
+                } catch (\Exception $e) {}
+                 
+            }
+            
+        }         
         return view("sales.all_sales")->with(['main_sales'=>$sales,'title'=>$title]);
     }
 
@@ -30,21 +44,38 @@ class SalesController extends Controller
      */
     public function create()
     {
-        $last_shift = WorkShift::all()->where('user_id',\Auth::user()->id)->last();
+        $last_shift = WorkShift::all()->last();
         $title = "";
         $sum_sales = 0;
         $sum_tickets = 0;
-        $sales = array();
+        $main_sales = array();
         if (!empty($last_shift)) {
-            $sales = MainSale::all()->where('workshift_id',$last_shift->id);
+            $main_sales = MainSale::all()->where('workshift_id',$last_shift->id);
         }
-        foreach ($sales as  $sales_details) {
-            $sum_sales = $sum_sales + $sales_details->sale->sum('amount');
-            $sum_tickets = $sum_tickets + 1;
 
+        foreach ($main_sales as  $sales_details) {
+            if ($sales_details->sale->count() == 0) {
+                try {
+                   MainSale::destroy($sales_details->id); 
+                } catch (\Exception $e) {}
+               
+            }
+            foreach ($sales_details->sale as $sales_value) {
+               $sum_sales = $sum_sales + ( ($sales_value->amount * $sales_value->size) - $sales_value->discount); 
+            }         
+            $sum_tickets = $sum_tickets + 1;
         }
-        $data = ['sum_sales'=>$sum_sales,'sum_tickets'=>$sum_tickets,'main_sales'=>$sales];
-        return view("sales.add_sales")->with($data);
+
+        
+           // debit sales
+            $debit_sales = $this->total_debit_sales();
+            // credit purchase
+            $credit_purchase = ParchaseController::total_credit_purchase();
+
+            $total_sales_today = $this->total_sales();
+            
+            $data = ['sum_sales'=>$sum_sales,'sum_tickets'=>$sum_tickets,'main_sales'=>$main_sales,'debit_sales'=>$debit_sales,'credit_purchase'=>$credit_purchase,'total_sales_today'=>$total_sales_today];
+            return view("sales.add_sales")->with($data);
     }
 
     /**
@@ -55,45 +86,49 @@ class SalesController extends Controller
      */
     public function store(Request $request)
     {       
-        $pricetag = PriceTag::all()->where('barcode',$request->data)->last();
+        $pricetag = PriceTag::all()->where('stock_id',$request->data)->last();
         if (empty($pricetag)) {
             echo "The barcode does not exist in the system";
             return;
         }else{
-            $this->save_sale($pricetag->name,$request->class_price,$request->data,$request->size,$pricetag,$request->workshift_id);    
+            // $this->save_sale($pricetag->stock_id,$request->data,$request->size,$pricetag,$request->workshift_id,$request->discount);
+
         }
     }
 
 
-public static function save_sale($name,$class_price,$data,$size,$pricetag,$workshift_id,$mainsales_id)
+public static function save_sale($stock_id,$size,$pricetag,$workshift_id,$mainsales_id,$discount)
 {
     $save_sale = new Sale();
-    $save_sale->name = $name;
+    $save_sale->stock_id = $stock_id;
     $price = 0;
     $save_sale->date_sold = strtotime(date("Y-m-d"));
     $save_sale->size = $size;
-    $save_sale->amount = $pricetag->price*$size; 
+    $save_sale->amount = $pricetag->salling_price;
+    $save_sale->buying_price = $pricetag->buying_price;
+    $save_sale->discount = str_replace(",", "", $discount);
     $save_sale->user_id = \Auth::user()->id;
-    $save_sale->number = $data;
     $save_sale->workshift_id = $workshift_id;
     $save_sale->mainsales_id = $mainsales_id;
     try {
         $save_sale->save();
 
         // reduce stock
-
-        $record_check = ShiftStock::all()->where('number',$data)->where('workshift_id',$workshift_id)->last();
-
+        $record_check = ShiftStock::all()->where('stock_id',$stock_id)->where('workshift_id',$workshift_id)->last();
         if (!empty($record_check)) {
-
-            $total_sold = Sale::all()->where('workshift_id',$workshift_id)->where('number',$data)->sum('size');
-
+            $total_sold = Sale::all()->where('workshift_id',$workshift_id)->where('stock_id',$stock_id)->sum('size');
             $record_check->stock_left = ($record_check->old_stock + $record_check->new_stock) - $total_sold;
             $record_check->save();
         }
 
-        echo "Saved ".$save_sale->size." ".$save_sale->name."(s) = UGX: ".number_format($save_sale->amount)." <br>".$record_check->stock_left." bottles left";
+        // check stock limit
+        $stock_check = Stock::find($stock_id);
 
+        if ($record_check->stock_left <= $stock_check->keeping_limit) {
+            echo "<span style='color:red'>".$stock_check->category->name." (".$stock_check->name.") is running out of stock, you have ".$record_check->stock_left." left</span>";
+        }else{
+            echo "Saved. ".$record_check->stock_left." left";
+        }
     } catch (\Exception $e) {}
 }
 
@@ -140,5 +175,41 @@ public static function save_sale($name,$class_price,$data,$size,$pricetag,$works
     public function destroy($id)
     {
         //
+    }
+
+    public static function total_debit_sales()
+    {
+        $all_sales = MainSale::all();
+        $debit_sales = array();
+
+        $total_balance = $payments_total = $total_sales = 0;
+        
+      
+        foreach ($all_sales as $main_sale_value) {
+            foreach ($main_sale_value->sale as $sales_value) {
+               $total_sales = $total_sales + ( ($sales_value->amount * $sales_value->size) - $sales_value->discount); 
+            }            
+            $payments_total = $payments_total + $main_sale_value->salespayment->sum('amount');
+        }
+          
+            $total_balance = ($total_sales - $payments_total);
+
+            return $total_balance;
+    }
+
+
+    public static function total_sales()
+    {
+        $last_shift = WorkShift::all()->last();
+        $main_sales = array();
+        $total_sales = 0;
+        if (!empty($last_shift)) {
+            $main_sales = MainSale::all()->where('workshift_id',$last_shift->id);
+        }
+        foreach ($main_sales as  $sales_details) {
+            $total_sales = $total_sales + $sales_details->salespayment->sum('amount');
+        }
+
+        return $total_sales;
     }
 }

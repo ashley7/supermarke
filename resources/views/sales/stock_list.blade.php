@@ -5,7 +5,6 @@
     <div class="row justify-content-center">
         <div class="col-md-12">
             <div class="card">
-               
 
                 <div class="card-body">
                     <h1>All Stock Item Names</h1>
@@ -18,29 +17,20 @@
                             <th>Category</th>
                             <th>Name</th>
                             <th>Re-order level</th>                       
-                            <th>Stock left</th>                       
                             <th>Action</th>                           
                         </thead>
 
-                        <tbody>
-                         
+                        <tbody>                         
                             @foreach($stock as $stock_details)
                               <tr>
                                  <td style="text-transform: uppercase;">{{$stock_details->category->name}}</td>
                                  <td style="text-transform: uppercase;">{{$stock_details->name}}</td>
                                  <td>{{$stock_details->keeping_limit}}</td>
-                                 <td></td>
                                  <td><a href="{{route('stock.edit',$stock_details->id)}}">Edit</a></td>
-                               </tr>
- 
-                            @endforeach
-
-                          
+                               </tr> 
+                            @endforeach                          
                         </tbody>
-                    </table>
-                                           
-                        
- 
+                    </table>                                        
                 </div>
             </div>
         </div>

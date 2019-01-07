@@ -41,6 +41,8 @@
                         <input type="date" name="date" id="date" class="form-control">
                         <br>
                         <button class="btn btn-primary" id="saveBtn" type="submit">Save</button>
+                        <br>
+                        <span id="display"></span>
                     <!-- </form>                   -->
                 </div>
             </div>
@@ -51,7 +53,10 @@
 
 @push('scripts')
 <script type="text/javascript">
+    $("#bank_id,#deposited_by").chosen();
     $("#saveBtn").click(function() {
+        $("#saveBtn").text("processing ...");
+        $("#saveBtn").attr("disabled","disabled");
         $.ajax({
                 type: "POST",
                 url: "{{ route('bank_deposite.store') }}",
@@ -64,7 +69,10 @@
                 _token: "{{Session::token()}}"
             },
             success: function(result){
-                alert(result)
+                // alert(result)
+                $("#display").text(result)
+                $("#saveBtn").removeAttr("disabled");
+                $("#saveBtn").text("Add new deposit");
                 $('#amount').val(" ")
               }
         })

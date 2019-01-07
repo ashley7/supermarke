@@ -13,43 +13,53 @@
                     <a href="{{route('sales.create')}}" style="float: right;" class="btn btn-primary">Create Sales</a>
                     <br><br>
 
-                    <table class="table table-hover table-striped" id="example">
-                        <thead>
-                      
-                            <th>Date</th>
-                            <th>Name</th>
-                            <th>Quantity</th>
-                            <th>Amount</th>
-                            <th>Sold by</th>
-                        </thead>
+                        <table class="table table-hover table-striped" id="example">
+                            <thead>
+                                
+                                <th>Date</th>
+                                <th>Name</th>
+                                <th>Quantity</th>
+                                <th>Discount</th>
+                                <th>Amount</th>
+                                <th>Gross Profit</th>
+                                <th>Sold By</th>
+                            </thead>
 
-                        <tbody>
-                            <?php $sum = 0; ?>
-                            @foreach($sales as $sale)
-                              <tr>                             
-                                  <td>{{$sale->created_at}}</td>
-                                  <td>{{$sale->name}}</td>
-                                  <td>{{$sale->size}}</td>
-                                  <td>{{number_format($sale->amount)}}</td>
-                                  <td>{{$sale->user->name}}</td>
-                              </tr>
+                            <tbody>
+                                <?php $sum = $sum_profit =  $sum_discount = 0; ?>
+                                @foreach($sales as $sale)
+                                <?php
+                                  $main_sale = ($sale->amount * $sale->size)-$sale->discount;
+                                  $profit = $main_sale - ($sale->buying_price * $sale->size);
 
-                              <?php
-                                 $sum = $sum + $sale->amount;
-                               ?>
-                            @endforeach
+                                  $sum_profit = $sum_profit + $profit;
+                                  $sum = $sum + $main_sale;
+                                  $sum_discount = $sum_discount + $sale->discount;
+                                 ?>
+                                  <tr>
+                                      <td>{{$sale->created_at}}</td>
+                                      <td>{{$sale->stock->category->name}} ({{$sale->stock->name}})</td>
+                                      <td>{{$sale->size}} @ {{number_format($sale->amount)}}</td>
+                                      <td>{{number_format($sale->discount)}}</td>
+                                      <td>{{number_format($main_sale)}}</td>
+                                      <td>{{number_format($profit)}}</td>
+                                      <td>{{$sale->user->name}}</td>
+                                  </tr>
+ 
+                                @endforeach
 
-                            <tr>
-                           
+                                <tr>                                   
+
                                 <th>Total</th>
                                 <th></th>
                                 <th></th>
+                                <th>{{number_format($sum_discount)}}</th>
                                 <th>{{number_format($sum)}}</th>
+                                <th>{{number_format($sum_profit)}}</th>
                                 <th></th>
-                            </tr>
-                        </tbody>
-                    </table>
-                                           
+                                </tr>
+                            </tbody>
+                        </table>        
                         
  
                 </div>
