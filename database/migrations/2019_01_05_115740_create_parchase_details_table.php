@@ -17,7 +17,7 @@ class CreateParchaseDetailsTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->double('quantity',10,2);
-            $table->double('unit_price',10,2);
+            $table->double('unit_price',20,2);
 
             $table->integer('parchase_id')->unsigned();
             $table->integer('stock_id')->unsigned();           

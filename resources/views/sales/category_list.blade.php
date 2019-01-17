@@ -15,6 +15,7 @@
                     <table class="table table-hover table-striped" id="example">
                         <thead>                          
                             <th>Name</th>                        
+                            <th>Unit</th>                        
                             <th>Action</th>
                         </thead>
 
@@ -22,6 +23,7 @@
                         @foreach($read_category as $categories)
                           <tr>
                             <td style="text-transform: uppercase;">{{$categories->name}}</td>                   
+                            <td style="text-transform: uppercase;">{{$categories->unit}}</td>                   
                             <td><a href="{{route('category.edit',$categories->id)}}">Edit</a></td>
                           </tr>
 

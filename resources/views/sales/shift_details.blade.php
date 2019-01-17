@@ -26,10 +26,11 @@
                                 <th>Date</th>
                                 <th>Name</th>
                                 <th>Quantity</th>
+                                <th>Buying price</th>
+                                <th>Selling price</th>
                                 <th>Discount</th>
                                 <th>Amount</th>
                                 <th>Gross Profit</th>
-                                <th>Sold By</th>
                             </thead>
 
                             <tbody>
@@ -46,11 +47,12 @@
                                   <tr>
                                       <td>{{$sale->created_at}}</td>
                                       <td>{{$sale->stock->category->name}} ({{$sale->stock->name}})</td>
-                                      <td>{{$sale->size}} @ {{number_format($sale->amount)}}</td>
+                                      <td>{{$sale->size}} {{$sale->stock->category->unit}}</td> 
+                                      <td>{{number_format($sale->buying_price)}}</td>
+                                      <td>{{number_format($sale->amount)}}</td>
                                       <td>{{number_format($sale->discount)}}</td>
                                       <td>{{number_format($main_sale)}}</td>
                                       <td>{{number_format($profit)}}</td>
-                                      <td>{{$sale->user->name}}</td>
                                   </tr>
  
                                 @endforeach
@@ -60,10 +62,11 @@
                                 <th>Total</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
+                                <th></th>
                                 <th>{{number_format($sum_discount)}}</th>
                                 <th>{{number_format($sum)}}</th>
                                 <th>{{number_format($sum_profit)}}</th>
-                                <th>Sold By</th>
                                 </tr>
                             </tbody>
                         </table>
@@ -74,13 +77,15 @@
                           <br>
                              <table class="table table-hover table-striped" id="stock_table">
                                  <thead>
-                                     <th>Name</th> <th>Old stock</th> <th>New stock</th> <th>Initial stock</th> <th>Total Sold</th> <th>Stock left</th>
+                                    <th>#</th> <th>Name</th> <th>Old stock</th> <th>New stock</th> <th>Initial stock</th> <th>Total Sold</th> <th>Stock left</th> <th>Value</th>
                                  </thead>
 
                                  <tbody>
+                                  <?php $sum_value = 0; ?>
                                      @foreach($brands as $brand)
                                      <?php
                                         $initial_stock = 0;
+                                        $sum_sold = 0;
                                         $record_check = App\ShiftStock::all()->where('stock_id',$brand->stock_id)->where('workshift_id',$work_shifts->id)->last(); 
 
                                         if (!empty($record_check)) {
@@ -89,10 +94,23 @@
                                            $initial_stock = $record_check->old_stock + $record_check->new_stock;
                                         }
 
+                                        $stock_price = App\PriceTag::all()->where('stock_id',$brand->stock->id)->last();
+                                        $buyingprice = 0;
+                                        if (!empty($stock_price)) {
+                                          $buyingprice = $stock_price->buying_price;
+                                        }
+
+                                        $stock_left = $initial_stock - $sum_sold;
+
+                                        $stock_value = $stock_left * $buyingprice;
+
+                                        $sum_value = $sum_value + $stock_value;
+
                                         
                                     ?>
                                     @if(!empty($record_check))
                                      <tr>
+                                       <td>{{$brand->stock->id}}</td>
                                        <td>{{$brand->stock->category->name}} ({{$brand->stock->name}})</td>
 
                                        <td contenteditable="true" id="{{$brand->stock_id}}*old_stock">{{$record_check->old_stock}}</td>
@@ -100,28 +118,30 @@
                                        <td contenteditable="true" id="{{$brand->stock_id}}*new_stock">{{$record_check->new_stock}}</td>
                                        <td>{{$initial_stock}}</td>
                                        <td>{{$sum_sold}}</td>
-                                       <td>{{$initial_stock - $sum_sold}}</td>
+                                       <td>{{$stock_left}}</td>
+                                       <td>{{number_format($stock_value)}}</td>
                                    </tr>
 
                                    @else
 
                                     <tr>
-                                        <td>{{$brand->stock->category->name}} ({{$brand->stock->name}})</td>
-
+                                       <td>{{$brand->stock->id}}</td>
+                                       <td>{{$brand->stock->category->name}} ({{$brand->stock->name}})</td>
                                        <td contenteditable="true" id="{{$brand->stock_id}}*old_stock"></td>
-
                                        <td contenteditable="true" id="{{$brand->stock_id}}*new_stock"></td>
-
+                                       <td></td>
                                        <td></td>
                                        <td></td>
                                        <td></td>
                                    </tr>
-
-
                                    @endif
-                                     @endforeach
-                                 </tbody>
-                             </table>
+                                @endforeach
+
+                                <tr>
+                                  <th>Total</th> <th></th> <th></th> <th></th> <th></th> <th></th> <th></th> <th>{{number_format($sum_value)}}</th>
+                                </tr>
+                              </tbody>
+                          </table>
 
                              <input type="hidden" id="shift" value="{{$work_shifts->id}}">
                         </div>

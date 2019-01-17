@@ -19,10 +19,11 @@
                                 <th>Date</th>
                                 <th>Name</th>
                                 <th>Quantity</th>
+                                <th>Buying price</th>
+                                <th>Selling price</th>                                
                                 <th>Discount</th>
                                 <th>Amount</th>
                                 <th>Gross Profit</th>
-                                <th>Sold By</th>
                             </thead>
 
                             <tbody>
@@ -39,11 +40,12 @@
                                   <tr>
                                       <td>{{$sale->created_at}}</td>
                                       <td>{{$sale->stock->category->name}} ({{$sale->stock->name}})</td>
-                                      <td>{{$sale->size}} @ {{number_format($sale->amount)}}</td>
+                                      <td>{{$sale->size}} {{$sale->stock->category->unit}} </td>
+                                      <td>{{number_format($sale->buying_price)}}</td>
+                                      <td>{{number_format($sale->amount)}}</td>
                                       <td>{{number_format($sale->discount)}}</td>
                                       <td>{{number_format($main_sale)}}</td>
                                       <td>{{number_format($profit)}}</td>
-                                      <td>{{$sale->user->name}}</td>
                                   </tr>
  
                                 @endforeach
@@ -53,10 +55,12 @@
                                 <th>Total</th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
+                                <th></th>
                                 <th>{{number_format($sum_discount)}}</th>
                                 <th>{{number_format($sum)}}</th>
                                 <th>{{number_format($sum_profit)}}</th>
-                                <th></th>
+                                 
                                 </tr>
                             </tbody>
                         </table>        

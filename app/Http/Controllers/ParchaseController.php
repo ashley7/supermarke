@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Supplier;
 use App\Stock;
+use App\WorkShift;
+use App\ShiftStock;
 use App\Parchase;
 use App\ParchaseDetails;
 class ParchaseController extends Controller
@@ -99,9 +101,25 @@ class ParchaseController extends Controller
             $purchase->supplier_id = $request->supplier_id;
             $purchase->save();
 
+            // update stock
+            $work_shift = WorkShift::all()->last();
+
+            $record_check = ShiftStock::all()->where('stock_id',$save_details->stock_id)->where('workshift_id',$work_shift->id);
+
+            $save_stock = new ShiftStock();
+
+            if ($record_check->count() == 0) {
+                $save_stock->old_stock = $save_details->quantity;
+                $save_stock->save();
+            }else{
+                $last_record = $record_check->last();
+                $last_record->new_stock = ($last_record->new_stock+$save_details->quantity);
+                $last_record->save();
+            }
+
             echo "Saved successfully";
         } catch (\Exception $e) {
-            
+            // echo $e->getMessage();
         }
     }
 

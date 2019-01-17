@@ -5,7 +5,7 @@
     <div class="justify-content-center">
                           
         <a  href="{{route('main_sale.create')}}"  class="btn btn-success">+ New Sale</a> 
-        <!-- <a  href="{{route('work_shifts.create')}}"  class="btn btn-primary">+ New shift</a> -->
+        <a  href="{{route('work_shifts.create')}}"  class="btn btn-primary">+ New shift</a>
         <!-- <a  href="{{route('price_tag.create')}}" class="btn btn-secondary">+ Price tags</a>  -->
         <a  href="{{route('sales.index')}}"  class="btn btn-warning" style="color: #FFF">View Sales</a>
         <a  href="{{route('stock_loss.create')}}"  class="btn btn-danger" style="color: #FFF">Record Stock loss</a>        

@@ -38,6 +38,7 @@ class CategoryController extends Controller
     {
         $save_cat = new Category();
         $save_cat->name = $request->name;
+        $save_cat->unit = $request->unit;
         try {
             $save_cat->save();
             echo "Saved successfully.";
@@ -78,6 +79,7 @@ class CategoryController extends Controller
     {
         $save_cat = Category::find($id);
         $save_cat->name = $request->name;
+        $save_cat->unit = $request->unit;
         try {
             $save_cat->save();      
         } catch (\Exception $e) {}

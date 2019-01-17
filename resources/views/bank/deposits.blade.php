@@ -32,7 +32,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                          <th>#</th>  <th>Date</th>  <th>Deposited by</th> <th>Bank</th><th>Voucher / Reciept Number</th> <th>Amount</th> <th>Recorded by</th><th>Action</th>
+                          <th>#</th>  <th>Date</th>  <th>Deposited by</th> <th>Bank</th><th>Reciept Number</th> <th>Amount</th> <th>Recorded by</th><th>Action</th>
                         </thead>
 
                         <tbody>
@@ -125,7 +125,6 @@
             var printCounter = 0;
          
             // Append a caption to the table before the DataTables initialisation
-            $('#example').append('<caption style="caption-side: bottom">Powered by Appcellon ltd.</caption>');
          
             $('#example,#expenses_table').DataTable( {
                 dom: 'Bfrtip',

@@ -23,7 +23,17 @@
                             <input type="text" id="item_name" class="form-control">
 
                             <label>Re-Order level</label>
-                            <input type="number" id="keeping_limit" class="form-control">
+                            <input type="number" id="keeping_limit" step="any" class="form-control">
+
+                            <label>Current stock size</label>
+                            <input type="number" id="stock_size" class="form-control">
+
+                            <label>Buying price</label>
+                            <input type="text" id="buying_price" class="form-control number">
+
+                            <label>Selling price</label>
+                            <input type="text" id="selling_price" class="form-control next_number">
+
                             <br>
                             <button class="btn btn-primary" id="saveBtn">Save</button>                      
                             <input type="hidden" class="number">
@@ -36,7 +46,11 @@
                 <div class="card-body">
                     <h1>Add category</h1>
                              <label>Name</label>
-                            <input type="text" id="name" autofocus="true" class="form-control">                          
+                            <input type="text" id="name" autofocus="true" class="form-control">
+
+                            <label>Selling Unit of measure</label>                          
+                            <input type="text" id="unit" class="form-control">
+
                             <br><br>
                             <button class="btn btn-primary" id="save_category">Save</button>
                             <a href="{{route('category.index')}}" class="btn btn-success">Show categories</a>
@@ -64,22 +78,25 @@
     });
 </script>
 
-
-  <script>
+<script>
        $("#saveBtn").click(function() {
-
          $("#saveBtn").text("Processing...");
          $("#display").text("");
-        $.ajax({
+         $("#saveBtn").attr("disabled","disabled");
+         $.ajax({
                 type: "POST",
                 url: "{{ route('stock.store') }}",
             data: {
                   item_name: $("#item_name").val(),
                   keeping_limit: $("#keeping_limit").val(),
-                  category_id: $("#category_id").val(),                             
+                  category_id: $("#category_id").val(),                           
+                  stock_size: $("#stock_size").val(),                           
+                  buying_price: $("#buying_price").val(),                           
+                  selling_price: $("#selling_price").val(),                           
                 _token: "{{Session::token()}}"
             },
                 success: function(result){
+                    $("#saveBtn").removeAttr("disabled");
                     $("#display").text(result);
                     $('#item_name').val(" ")
                     $("#saveBtn").text("Add new stock item");
@@ -98,6 +115,7 @@
                 url: "{{ route('category.store') }}",
             data: {
                 name: $("#name").val(),                              
+                unit: $("#unit").val(),                              
                 _token: "{{Session::token()}}"
             },
                 success: function(result){

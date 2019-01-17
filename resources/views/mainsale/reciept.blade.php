@@ -47,7 +47,7 @@
                                      <tr>
                                        
                                         <td>{{$details->stock->category->name}} ({{$details->stock->name}})</td>
-                                        <td>{{$details->size}} @ {{number_format($details->amount)}}</td>
+                                        <td>{{$details->size}} {{$details->stock->category->unit}} @ {{number_format($details->amount)}}</td>
                                         <td>{{number_format($details->discount)}}</td>
                                         <td>{{number_format($calculated_amount)}}</td>                                        
                                      </tr>
@@ -97,7 +97,7 @@
 
                           <span class="exclude">
                             <label>Add Payment</label>
-                            <input type="text" id="amount_paid" class="form-control number">
+                            <input type="text" id="amount_paid" class="form-control">
                             <input type="hidden" id="mainsales_id" value="{{$main_sale->id}}">
                             <br>
                             <button id="save_payment">Save</button>
@@ -130,6 +130,7 @@
   <script>
       $("#save_payment").click(function() {
             $("#save_payment").text("Processing ...");
+            $("#save_payment").attr("disabled","disabled")
             $.ajax({
                 type: "POST",
                 url: "{{ route('sales_payment.store') }}",
@@ -140,13 +141,12 @@
             },
             success: function(result){
                 $('#amount_paid').val(0);
+                $("#save_payment").removeAttr("disabled");
                 $("#save_payment").text(result);
                 location.reload();
               }
           })           
         });
   </script>
-
-
 @endpush
  

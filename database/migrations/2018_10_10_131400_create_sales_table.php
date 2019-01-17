@@ -16,10 +16,10 @@ class CreateSalesTable extends Migration
             $table->integer('mainsales_id')->unsigned();           
             $table->integer('stock_id')->unsigned();
             $table->integer('workshift_id')->unsigned();
-            $table->double('amount',10,2);//salling price
-            $table->double('buying_price',10,2);
-            $table->double('discount',10,2)->default(0.00);//money off amount given to buyer
-            $table->double('size',10,2);
+            $table->double('amount',20,2);//salling price
+            $table->double('buying_price',20,2);
+            $table->double('discount',20,2)->default(0.00);//money off amount given to buyer
+            $table->double('size',20,2);
             $table->string('date_sold');
             
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('cascade');

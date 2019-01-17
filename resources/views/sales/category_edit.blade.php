@@ -14,8 +14,12 @@
                         {{method_field("PATCH")}}
                         <div class="col-md-6">
                             <label>Name</label>
-                            <input type="text" name="name" value="{{$read_category->name}}" class="form-control">                          
-                            <br><br>
+                            <input type="text" name="name" value="{{$read_category->name}}" class="form-control">   
+
+                            <label>Selling Unit of measure</label>                          
+                            <input type="text" name="unit" value="{{$read_category->unit}}" class="form-control">
+
+                            <br>
                             <button class="btn btn-primary" type="submit">Update</button>
                         </div>                         
                  </div>

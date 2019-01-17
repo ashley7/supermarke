@@ -16,7 +16,8 @@
                         <thead>
                             <th>Category</th>
                             <th>Name</th>
-                            <th>Re-order level</th>                       
+                            <th>Re-order level</th>
+                            <th>No. of sales</th>                       
                             <th>Action</th>                           
                         </thead>
 
@@ -26,6 +27,7 @@
                                  <td style="text-transform: uppercase;">{{$stock_details->category->name}}</td>
                                  <td style="text-transform: uppercase;">{{$stock_details->name}}</td>
                                  <td>{{$stock_details->keeping_limit}}</td>
+                                 <td>{{$stock_details->sales->count()}}</td>
                                  <td><a href="{{route('stock.edit',$stock_details->id)}}">Edit</a></td>
                                </tr> 
                             @endforeach                          

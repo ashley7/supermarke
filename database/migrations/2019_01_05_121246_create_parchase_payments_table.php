@@ -16,7 +16,7 @@ class CreateParchasePaymentsTable extends Migration
         Schema::create('parchase_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->double('amount')->default(0.00);
+            $table->double('amount',20,2)->default(0.00);
             $table->integer('parchase_id')->unsigned();
             $table->foreign('parchase_id')->references('id')->on('parchases')->onUpdate('cascade');
         });

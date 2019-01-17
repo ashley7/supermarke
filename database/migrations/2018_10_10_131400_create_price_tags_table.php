@@ -18,8 +18,8 @@ class CreatePriceTagsTable extends Migration
             $table->timestamps();
             $table->string('barcode')->unique();
 
-            $table->double('buying_price',10,2)->default(0);
-            $table->double('salling_price',10,2)->default(0);
+            $table->double('buying_price',20,2)->default(0.00);
+            $table->double('salling_price',20,2)->default(0.00);
 
             $table->integer('stock_id')->unsigned();
             $table->foreign('stock_id')->references('id')->on('stocks')->onUpdate('cascade');

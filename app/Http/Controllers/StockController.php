@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Stock;
 use App\Category;
+use App\WorkShift;
+use App\ShiftStock;
+use App\PriceTag;
 
 class StockController extends Controller
 {
@@ -43,10 +46,33 @@ class StockController extends Controller
         $save_stock->keeping_limit = $request->keeping_limit;
         try {
             $save_stock->save();
+            // update stock
+            $work_shift = WorkShift::all()->last();
+
+            $record_check = ShiftStock::all()->where('stock_id',$save_stock->id)->where('workshift_id',$work_shift->id);
+
+            $savestock = new ShiftStock();
+            $savestock->stock_id = $save_stock->id;
+            $savestock->workshift_id = $work_shift->id;
+            $savestock->user_id = \Auth::user()->id;
+
+            if ($record_check->count() == 0) {
+                $savestock->old_stock = $request->stock_size;
+                $savestock->save();
+            }else{
+                $last_record = $record_check->last();
+                $last_record->new_stock = ($last_record->new_stock + $request->stock_size);
+                $last_record->save();
+            }
+
+            $save_tags = new PriceTag();
+            $save_tags->barcode = time();
+            $save_tags->stock_id = $save_stock->id;
+            $save_tags->buying_price = str_replace(",","",$request->buying_price);
+            $save_tags->salling_price = str_replace(",","",$request->selling_price);
+            $save_tags->save();
             echo "Saved Successfully";
-        } catch (\Exception $e) {
-            echo $e->getMessage();
-        }
+        } catch (\Exception $e) {}
     }
 
     /**

@@ -16,7 +16,7 @@ class CreateSalesPaymentsTable extends Migration
         Schema::create('sales_payments', function (Blueprint $table) {
             $table->increments('id');
             $table->timestamps();
-            $table->double('amount',10,2)->default(0.00);
+            $table->double('amount',20,2)->default(0.00);
             $table->integer('mainsales_id')->unsigned();
             $table->foreign('mainsales_id')->references('id')->on('main_sales')->onUpdate('cascade'); 
         });   

@@ -18,7 +18,7 @@ class CreateChequesTable extends Migration
             $table->increments('id');
             $table->timestamps();
             $table->string('cheque_number');
-            $table->double('amount',10,2);
+            $table->double('amount',20,2);
             $table->text('particular')->nullable();
             $table->string('date');
 

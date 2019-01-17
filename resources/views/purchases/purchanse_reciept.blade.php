@@ -48,7 +48,7 @@
                                      <tr>
                                         <td>{{$details->id}}</td>
                                         <td>{{$details->stock->category->name}} ({{$details->stock->name}})</td>
-                                        <td>{{$details->quantity}} @ {{number_format($details->unit_price)}}</td>
+                                        <td>{{$details->quantity}} {{$details->stock->category->unit}} @ {{number_format($details->unit_price)}}</td>
                                         <td>{{number_format($details->unit_price * $details->quantity)}}</td>                                        
                                      </tr>
                                     @endforeach
@@ -97,7 +97,7 @@
 
                           <span class="exclude">
                             <label>Add Payment</label>
-                            <input type="text" id="amount_paid" class="form-control number">
+                            <input type="text" id="amount_paid" class="form-control">
                             <input type="hidden" id="parchase_id" value="{{$purchase->id}}">
                             <br>
                             <button id="save_payments">Save</button>
@@ -137,6 +137,7 @@
   <script>
       $("#save_payments").click(function() {
             $("#save_payments").text("Processing ...");
+            $("#save_payments").attr("disabled","disabled");
              $.ajax({
                     type: "POST",
                     url: "{{ route('purchase_payment.store') }}",
@@ -147,6 +148,7 @@
                 },
                     success: function(result){
                         $("#amount_paid").val(" ")
+                        $("#save_payments").removeAttr("disabled");
                         $("#save_payments").text(result);
                         location.reload();
                 }

@@ -38,13 +38,8 @@ class SalesReportController extends Controller
         $from = $request->from;
         $to = $request->to;
         $title="Sales From: ".$from." To: ".$to;
-
         $sales = Sale::whereBetween('created_at', [$from,$to])->get();
-
-        $sales_count = Sale::whereBetween('created_at', [$from,$to])->get();  
-
-        $data = ['sales'=>$sales,'counts'=>$sales_count,'title'=>$title];
-
+        $data = ['sales'=>$sales,'title'=>$title];
         return view("sales.sales_report")->with($data);
     }
 

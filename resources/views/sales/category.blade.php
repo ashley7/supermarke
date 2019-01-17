@@ -10,7 +10,10 @@
                     <a href="{{route('stock.create')}}">Add stock</a>
                         <div class="col-md-6">
                             <label>Name</label>
-                            <input type="text" id="name" autofocus="true" class="form-control">                          
+                            <input type="text" id="name" autofocus="true" class="form-control">
+
+                            <label>Selling Unit of measure</label>                          
+                            <input type="text" id="unit" class="form-control">
                             <br><br>
                             <button class="btn btn-primary" id="saveBtn">Save</button>
                         </div>
@@ -31,11 +34,12 @@
                 url: "{{ route('category.store') }}",
             data: {
                 name: $("#name").val(),                              
+                unit: $("unit").val(),                              
                 _token: "{{Session::token()}}"
             },
                 success: function(result){
-                    // alert(result)
                     $('#name').val(" ")
+                    $('#unit').val(" ")
                   }
         })
     });
