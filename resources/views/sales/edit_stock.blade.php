@@ -16,7 +16,7 @@
                         <input type="text" name="item_name" value="{{$read_stock->name}}" class="form-control">
 
                         <label>Re-Order level</label>
-                        <input type="number" name="keeping_limit" class="form-control">
+                        <input type="number" name="keeping_limit" value="{{$read_stock->keeping_limit}}" class="form-control">
 
                         <br>
                         <button class="btn btn-primary" id="saveBtn">Update</button>                      

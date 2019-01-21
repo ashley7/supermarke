@@ -23,16 +23,16 @@
                             <input type="text" id="item_name" class="form-control">
 
                             <label>Re-Order level</label>
-                            <input type="number" id="keeping_limit" step="any" class="form-control">
+                            <input type="number" id="keeping_limit" value="0" step="any" class="form-control">
 
                             <label>Current stock size</label>
-                            <input type="number" id="stock_size" class="form-control">
+                            <input type="number" id="stock_size" value="0" class="form-control">
 
                             <label>Buying price</label>
-                            <input type="text" id="buying_price" class="form-control number">
+                            <input type="text" id="buying_price" value="0" class="form-control number">
 
                             <label>Selling price</label>
-                            <input type="text" id="selling_price" class="form-control next_number">
+                            <input type="text" id="selling_price" value="0" class="form-control next_number">
 
                             <br>
                             <button class="btn btn-primary" id="saveBtn">Save</button>                      

@@ -20,7 +20,7 @@
                         <thead>
                             <th>Name</th>
                             <th>Buying Price</th> 
-                            <th>Salling Price</th> 
+                            <th>Selling Price</th> 
                             <th>Action</th>                            
                         </thead>
 
