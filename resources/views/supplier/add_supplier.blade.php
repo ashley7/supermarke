@@ -1,12 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
+   <h1>Add Supplier</h1>
+ 
+            <div class="card-box">
                 <div class="card-body">
-                    <h1>Add Supplier</h1>
+                  
                         <div class="col-md-6">
                             <label>Name *</label>
                             <input type="text" id="name"  class="form-control">
@@ -47,9 +46,8 @@
                         </table>
                     </div>
                 </div>
-            </div>
-        </div>
-    </div>
+                
+           
 @endsection
 
 @push('scripts')
@@ -75,37 +73,6 @@
                 }
             })
     });
-  </script>
-
-    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('js/jszip.min.js') }}"></script>
-    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('js/buttons.print.min.js') }}"></script>
-     <script>
-       $(document).ready(function() {
-              $('#example').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy',
-                    {
-                        extend: 'excel',
-                        messageTop: ''
-                    },
-                    {
-                        extend: 'pdf',
-                        messageTop: ''
-                    },
-                    {
-                        extend: 'csv',
-                        messageTop: null
-                    }
-                ]
-            } );
-        } );
-    </script>
+  </script> 
 
 @endpush

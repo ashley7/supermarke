@@ -1,14 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-               
-
-                <div class="card-body">
-                    <h1>Edit Expense</h1>
+  <h1>Edit Expense</h1>
+ 
+            <div class="card-box">
+               <div class="card-body">
+                  
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -51,7 +48,6 @@
                     {{Form::close()}}                 
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            
+     
 @endsection

@@ -1,14 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
+            <h1>All price tags</h1>
+ 
+            <div class="card-box">
                
 
                 <div class="card-body">
-                    <h1>All price tags</h1>
+        
 
                 
                     <a href="{{route('price_tag.create')}}" style="float: right;" class="btn btn-primary">Add Tags</a>
@@ -44,42 +43,8 @@
  
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+
+   
 @endsection
 
-@push('scripts')
-     <!-- <script src="https://code.jquery.com/jquery-3.3.1.js"></script> -->
-    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('js/jszip.min.js') }}"></script>
-    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('js/buttons.print.min.js') }}"></script>
-     <script>
-       $(document).ready(function() {
-              $('#example').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy',
-                    {
-                        extend: 'excel',
-                        messageTop: '{{$title}}'
-                    },
-                    {
-                        extend: 'pdf',
-                        messageTop: '{{$title}}'
-                    },
-                    {
-                        extend: 'csv',
-                        messageTop: null
-                    }
-                ]
-            } );
-        } );
-    </script>
-
-@endpush
+ 

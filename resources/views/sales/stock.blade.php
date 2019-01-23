@@ -1,14 +1,15 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <a href="{{route('stock.index')}}" class="btn btn-primary">View Stock</a>
+  <h1>Add new stock</h1> 
+ 
+    <a href="{{route('stock.index')}}" style="float: right;" class="btn btn-primary">View Stock</a>
     <br><br>
-    <div class="row">
+    <div class="row col-md-12">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card-box">
                 <div class="card-body">
-                    <h1>Add new stock</h1>  
+                     
                     <a href="#" id="show_add_cat" style="float: right;">Add new category</a>               
                    
                             <label>Choose category name</label>
@@ -42,7 +43,7 @@
         </div>
 
         <div class="col-md-6 add_cat">
-            <div class="card">
+            <div class="card-box">
                 <div class="card-body">
                     <h1>Add category</h1>
                              <label>Name</label>

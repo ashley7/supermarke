@@ -1,33 +1,29 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <a href="{{route('account.index')}}" class="btn btn-primary">View account</a>
-    <br><br>
-    <div class="row">
-        <div class="col-md-6">
-            <div class="card">              
-                <div class="card-body">
-                    <h4>Add Expense account</h4>
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{route('account.store')}}">
-                        @csrf
-                        <label>Name</label>
-                        <input type="text" name="name" class="form-control">
-
-                        <label>Description</label>
-                        <textarea name="description" class="form-control"></textarea>
-                        <br>
-                        <button class="btn btn-primary" type="submit">Save</button>
-                    </form>                  
+    <h4>Add Expense account</h4> 
+    <div class="card-box">              
+        <div class="card-body">
+            <a href="{{route('account.index')}}" style="float: right;" class="btn btn-primary">View account</a>
+            <br><br>
+            
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
                 </div>
-            </div>
+            @endif
+
+            <form method="POST" action="{{route('account.store')}}">
+                @csrf
+                <label>Name</label>
+                <input type="text" name="name" class="form-control">
+
+                <label>Description</label>
+                <textarea name="description" class="form-control"></textarea>
+                <br>
+                <button class="btn btn-primary" type="submit">Save</button>
+            </form>                  
         </div>
     </div>
-</div>
+         
 @endsection

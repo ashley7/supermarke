@@ -1,14 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
+          <h1>Add User</h1>
+ 
+            <div class="card-box">
                
 
                 <div class="card-body">
-                    <h1>Add User</h1>
+          
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -28,7 +27,6 @@
                     </form>                  
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            
+   
 @endsection

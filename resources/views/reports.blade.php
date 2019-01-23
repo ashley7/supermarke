@@ -1,39 +1,30 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-           
-
-                <div class="card-body">
-
-                    <h1>Generate report</h1>
-
-                    @if (session('status'))
-                        <div class="alert alert-success">
-                            {{ session('status') }}
-                        </div>
-                    @endif
-
-                    <form method="POST" action="{{route('reports.store')}}">
-                          @csrf
-
-                          <label>Choose the range</label>
-                          <input type="text" name="reportrange" id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
-                            <i class="fa fa-calendar"></i>&nbsp;
-                            <span></span> <i class="fa fa-caret-down"></i>
-                            <br>
-                        <button class="btn btn-primary">Generate</button>
-                    </form>
-
-                    
+  <h1>Generate report</h1>
+ 
+    <div class="card-box">
+       <div class="card-body">
+            @if (session('status'))
+                <div class="alert alert-success">
+                    {{ session('status') }}
                 </div>
-            </div>
+            @endif
+
+            <form method="POST" action="{{route('reports.store')}}">
+                  @csrf
+
+                  <label>Choose the range</label>
+                  <input type="text" name="reportrange" id="reportrange" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                
+                    <br><br><br>
+                <button class="btn btn-primary">Generate</button>
+            </form>
         </div>
     </div>
-</div>
+
+                    
+                 
 @endsection
 
 @push('scripts')

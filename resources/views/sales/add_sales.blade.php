@@ -1,69 +1,75 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="justify-content-center">
+ 
                           
-        <a  href="{{route('main_sale.create')}}"  class="btn btn-success">+ New Sale</a> 
+        <a  href="{{route('main_sale.create')}}"  class="btn btn-success">Record Sales</a> 
         <a  href="{{route('work_shifts.create')}}"  class="btn btn-primary">+ New shift</a>
         <!-- <a  href="{{route('price_tag.create')}}" class="btn btn-secondary">+ Price tags</a>  -->
         <a  href="{{route('sales.index')}}"  class="btn btn-warning" style="color: #FFF">View Sales</a>
         <a  href="{{route('stock_loss.create')}}"  class="btn btn-danger" style="color: #FFF">Record Stock loss</a>        
         <a  href="{{route('sales_report.create')}}" class="btn btn-info">Generate sales report</a>
                                            
-        <br><br>          
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="card">
-                         <div class="card-body">
-                            <span style="font-size: 20px; color: red;">Today's Total Sales</span><br>
-                            <span style="font-size: 30px">UGX: {{number_format($sum_sales)}}</span>
-                        </div>
-                    </div>
-                </div>
+        <br><br>
 
-
-                <div class="col-md-6">
-                    <div class="card">
-                         <div class="card-body">
-                            <span style="font-size: 20px; color: red;">Today's Cash sales</span><br>
-                            <span style="font-size: 30px">{{number_format($total_sales_today)}}</span>
-                        </div>
-                    </div>
-                </div>                
-            </div>
-            <br>
-
-            <div class="row">
-                <div class="col-md-4">
-                    <div class="card">
-                         <div class="card-body">
-                            <span style="font-size: 20px; color: red;">Total Debit sales</span><br>
-                            <span style="font-size: 30px">{{number_format($debit_sales)}}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card">
-                         <div class="card-body">
-                            <span style="font-size: 20px; color: red;">Total Credit purchase</span><br>
-                            <span style="font-size: 30px">{{number_format($credit_purchase)}}</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="card">
-                         <div class="card-body">
-                            <span style="font-size: 20px; color: red;">Today's No. of sales</span><br>
-                            <span style="font-size: 30px">{{number_format($sum_tickets)}}</span>
-                        </div>
-                    </div>
+    <div class="row text-center">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="card-box widget-box-one">
+                <div class="wigdet-one-content">
+                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Today's Total Sales</p>
+                    <h2 class="text-danger"><span data-plugin="counterup">UGX: {{number_format($sum_sales)}}</span></h2>
+                     
                 </div>
             </div>
-            <br>
-            <div class="card">
+        </div><!-- end col -->  
+
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="card-box widget-box-one">
+                <div class="wigdet-one-content">
+                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Today's Cash sales</p>
+                    <h2 class="text-danger"><span data-plugin="counterup">{{number_format($total_sales_today)}}</span></h2>
+                     
+                </div>
+            </div>
+        </div><!-- end col -->
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="card-box widget-box-one">
+                <div class="wigdet-one-content">
+                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Total Debit sales</p>
+                    <h2 class="text-danger"><span data-plugin="counterup">{{number_format($debit_sales)}}</span></h2>
+                     
+                </div>
+            </div>
+        </div><!-- end col --> 
+    </div>
+
+
+    <div class="row text-center">
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="card-box widget-box-one">
+                <div class="wigdet-one-content">
+                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Total Credit purchase</p>
+                    <h2 class="text-danger"><span data-plugin="counterup">{{number_format($credit_purchase)}}</span></h2>
+                     
+                </div>
+            </div>
+        </div><!-- end col -->  
+
+        <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="card-box widget-box-one">
+                <div class="wigdet-one-content">
+                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Today's No. of sales</p>
+                    <h2 class="text-danger"><span data-plugin="counterup">{{number_format($sum_tickets)}}</span></h2>
+                     
+                </div>
+            </div>
+        </div><!-- end col --> 
+    </div> 
+
+ 
+            <div class="card-box">
                 <div class="card-body">
 
                     <table class="table table-hover table-striped" id="example">
@@ -135,44 +141,7 @@
 
                 </div>
             </div>
-        </div>
-    </div>
 
-   
 @endsection
-
-@push('scripts')
-    <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('js/jszip.min.js') }}"></script>
-    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('js/buttons.print.min.js') }}"></script>
-     <script>
-       $(document).ready(function() {
-              $('#example').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy',
-                    {
-                        extend: 'excel',
-                        messageTop: ''
-                    },
-                    {
-                        extend: 'pdf',
-                        messageTop: ''
-                    },
-                    {
-                        extend: 'csv',
-                        messageTop: null
-                    }
-                ]
-            } );
-        } );
-    </script>
-
-@endpush
-
+ 
  

@@ -1,12 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
+          <h1>Add category</h1>
+ 
+            <div class="card-main">
                 <div class="card-body">
-                    <h1>Add category</h1>
+          
                     <a href="{{route('stock.create')}}">Add stock</a>
                         <div class="col-md-6">
                             <label>Name</label>
@@ -20,10 +19,9 @@
                         <h3 id="display" style="color: green;"></h3>
                         <input type="hidden" class="number">
                  </div>
-            </div>
-        </div>
-    </div>
-</div>
+             </div>
+             
+       
 @endsection
 
 @push('scripts')

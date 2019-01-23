@@ -1,12 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <a href="{{route('stock.index')}}" class="btn btn-primary">View Stock</a>
+ 
+    <a href="{{route('stock.index')}}" style="float: right;" class="btn btn-primary">View Stock</a>
     <br><br>
     <div class="row">
         <div class="col-md-6">
-            <div class="card">
+            <div class="card-box">
                 <div class="card-body">
                     <form method="POST" action="{{route('stock.update',$read_stock->id)}}">
                         @csrf
@@ -24,6 +24,6 @@
                  </div>
             </div>
         </div>
-    </div>
+   
 </div>
 @endsection

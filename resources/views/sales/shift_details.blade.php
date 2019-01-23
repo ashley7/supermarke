@@ -1,21 +1,27 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<link rel="stylesheet" href="{{asset('css/bootstrap.min.css')}}">
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <h3 style="text-transform: uppercase;">{{$work_shifts->name}}, by {{$work_shifts->description}}, on {{date("d-m-Y",$work_shifts->date)}}</h3>
 
-                    <a href="" style="float: right;">Refresh</a>
+  <h3 style="text-transform: uppercase;">{{$work_shifts->name}}, by {{$work_shifts->description}}, on {{date("d-m-Y",$work_shifts->date)}}</h3>
  
-                    <ul class="nav nav-tabs">
-                      <li><a data-toggle="tab" class="btn btn-success" href="#sales">Sales</a></li>
-                      <li class="active"><a data-toggle="tab" class="btn btn-info" href="#stock">Current Stock</a></li>
-                      <!-- <li><a data-toggle="tab" href="#bottles" class="btn btn-primary">Spoilt bottles</a></li> -->
-                    </ul>
+     
+        <div class="card-box">
+            <div class="card-body">
+                
+
+                <a href="" style="float: right;">Refresh</a>
+
+                <ul class="nav nav-tabs m-b-10" id="myTab" role="tablist">
+                  <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#sales" role="tab" aria-controls="profile">Sales</a>
+                  </li> 
+
+                  <li class="nav-item">
+                      <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#stock" role="tab" aria-controls="profile">Current Stock</a>
+                  </li>
+                </ul>
+ 
+                     
 
                 <div class="tab-content">
                     <div id="sales" class="tab-pane fade in">
@@ -166,9 +172,7 @@
 
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+     
 @endsection
 
 @push('scripts')
@@ -195,33 +199,5 @@
     });
   </script>
 
-
-     <script src="{{ asset('js/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('js/dataTables.buttons.min.js') }}"></script>
-    <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
-    <script src="{{ asset('js/jszip.min.js') }}"></script>
-    <script src="{{ asset('js/pdfmake.min.js') }}"></script>
-    <script src="{{ asset('js/vfs_fonts.js') }}"></script>
-    <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
-    <script src="{{ asset('js/buttons.print.min.js') }}"></script>
-     <script>
-       $(document).ready(function() {
-              $('#sales_table,#stock_table,#loss').DataTable( {
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy',
-                    {
-                        extend: 'excel',
-                     },
-                    {
-                        extend: 'pdf',
-                     },
-                    {
-                        extend: 'csv',
-                        messageTop: null
-                    }
-                ]
-            } );
-        } );
-    </script>
+ 
 @endpush

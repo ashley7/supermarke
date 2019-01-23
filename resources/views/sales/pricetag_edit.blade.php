@@ -1,12 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
+     <h1>Edit price for {{$read_tags->stock->category->name}} ({{$read_tags->stock->name}})</h1>
+ 
+            <div class="card-box">
                 <div class="card-body">
-                    <h1>Edit price for {{$read_tags->stock->category->name}} ({{$read_tags->stock->name}})</h1>
+               
  
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -30,9 +29,8 @@
                     </form>
                 </div>
             </div>
-        </div>
-    </div>
-</div>                      
+        
+                       
 @endsection
 
 

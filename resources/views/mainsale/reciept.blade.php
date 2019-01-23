@@ -1,114 +1,112 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row">        
-        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
-             <a href="#" onclick="myFunction()" style="float: right;" class="btn btn-primary">Print</a>
-            <br><br>
-            <div class="card">
-                <div class="card-body">
-                    <div class="row">        
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                            <p style="text-transform: uppercase;">{{ config('app.name') }} (Saller)</p>
-                            <p>Phone: +256 701 626 689 | +256 772 526 689</p>
-                            <p>Mukono - Uganda</p>
-                            <p>Transaction date: {{$main_sale->created_at}}</p>
-                        </div>
+ 
+   <a href="#" onclick="myFunction()" style="float: right;" class="btn btn-primary">Print</a>
+   <br><br>
 
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                            <p style="text-transform: uppercase;">{{$main_sale->client}} (Buyer)</p>
-                        </div>
-                    </div>
+  <div class="card-box">
+      <div class="card-body">
+          <div class="row">        
+              <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                  <p style="text-transform: uppercase;">{{ config('app.name') }} (Saller)</p>
+                  <p>Phone: +256 701 626 689 | +256 772 526 689</p>
+                  <p>Mukono - Uganda</p>
+                  <p>Transaction date: {{$main_sale->created_at}}</p>
+              </div>
 
-                    <p style="float: right; font-size: 20px; color: red;">No. {{$main_sale->id}}</p>
+              <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                  <p style="text-transform: uppercase;">{{$main_sale->client}} (Buyer)</p>
+              </div>
+          </div>
 
-                    <center><h1><u>SALES RECIEPT</u></h1></center>
+          <p style="float: right; font-size: 20px; color: red;">No. {{$main_sale->id}}</p>
 
-                    <div class="row">        
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                            <p style="text-transform: uppercase;">Particular</p>
+          <center><h1><u>SALES RECIEPT</u></h1></center>
 
-                            <table class="table">
-                                <thead>
-                                  <th>Item</th> <th>Quantity</th> <th>Discount</th> <th>Amount</th>
-                                </thead>
+          <div class="row">        
+              <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                  <p style="text-transform: uppercase;">Particular</p>
 
-                                <tbody>
-                                    <?php 
-                                     $total = $sum_discount = 0;
-                                     ?>
-                                    @foreach($main_sale->sale as $details)
-                                    <?php
-                                      $calculated_amount = ( ($details->amount * $details->size) - $details->discount);
-                                      $total = $total  + $calculated_amount;
-                                      $sum_discount = $sum_discount + $details->discount;
-                                     ?>
-                                     <tr>
-                                       
-                                        <td>{{$details->stock->category->name}} ({{$details->stock->name}})</td>
-                                        <td>{{$details->size}} {{$details->stock->category->unit}} @ {{number_format($details->amount)}}</td>
-                                        <td>{{number_format($details->discount)}}</td>
-                                        <td>{{number_format($calculated_amount)}}</td>                                        
-                                     </tr>
-                                    @endforeach
+                  <table class="table">
+                      <thead>
+                        <th>Item</th> <th>Quantity</th> <th>Discount</th> <th>Amount</th>
+                      </thead>
 
-                                    <tr>
-                                        <th>Total</th>  <th></th> <th> {{number_format($sum_discount)}} </th> <th>{{number_format($total)}}</th>
-                                    </tr>
-                                </tbody>
-                            </table>
+                      <tbody>
+                          <?php 
+                           $total = $sum_discount = 0;
+                           ?>
+                          @foreach($main_sale->sale as $details)
+                          <?php
+                            $calculated_amount = ( ($details->amount * $details->size) - $details->discount);
+                            $total = $total  + $calculated_amount;
+                            $sum_discount = $sum_discount + $details->discount;
+                           ?>
+                           <tr>
+                             
+                              <td>{{$details->stock->category->name}} ({{$details->stock->name}})</td>
+                              <td>{{$details->size}} {{$details->stock->category->unit}} @ {{number_format($details->amount)}}</td>
+                              <td>{{number_format($details->discount)}}</td>
+                              <td>{{number_format($calculated_amount)}}</td>                                        
+                           </tr>
+                          @endforeach
 
-                            
+                          <tr>
+                              <th>Total</th>  <th></th> <th> {{number_format($sum_discount)}} </th> <th>{{number_format($total)}}</th>
+                          </tr>
+                      </tbody>
+                  </table>
 
-                            
-                        </div>
+                  
 
-                        <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                            <p style="text-transform: uppercase;">Payments</p>
+                  
+              </div>
 
-                             <table class="table">
-                                <thead>
-                                   <th>Date</th> <th>Amount</th>
-                                </thead>
+              <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+                  <p style="text-transform: uppercase;">Payments</p>
 
-                                <tbody>
-                                    <?php 
-                                     $payments_total = 0;
-                                     ?>
-                                    @foreach($main_sale->salespayment as $details)
-                                    <?php
-                                      $payments_total = $payments_total  + ($details->amount);
+                   <table class="table">
+                      <thead>
+                         <th>Date</th> <th>Amount</th>
+                      </thead>
 
-                                     ?>
-                                    <tr>
-                                         <td>{{$details->created_at}}</td>                                        
-                                        <td>{{number_format($details->amount)}}</td>
-                                    </tr>
-                                    @endforeach
+                      <tbody>
+                          <?php 
+                           $payments_total = 0;
+                           ?>
+                          @foreach($main_sale->salespayment as $details)
+                          <?php
+                            $payments_total = $payments_total  + ($details->amount);
 
-                                    <tr>
-                                        <th>Total</th> <th>{{number_format($payments_total)}}</th>
-                                    </tr>
-                                </tbody>
-                            </table>
+                           ?>
+                          <tr>
+                               <td>{{$details->created_at}}</td>                                        
+                              <td>{{number_format($details->amount)}}</td>
+                          </tr>
+                          @endforeach
 
-                            <p style="float: right; color: red; font-size: 20px;">Balance UGX: {{number_format($total - $payments_total)}}</p>
+                          <tr>
+                              <th>Total</th> <th>{{number_format($payments_total)}}</th>
+                          </tr>
+                      </tbody>
+                  </table>
 
-                          <span class="exclude">
-                            <label>Add Payment</label>
-                            <input type="text" id="amount_paid" class="form-control">
-                            <input type="hidden" id="mainsales_id" value="{{$main_sale->id}}">
-                            <br>
-                            <button id="save_payment">Save</button>
-                          </span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+                  <p style="float: right; color: red; font-size: 20px;">Balance UGX: {{number_format($total - $payments_total)}}</p>
+
+                <span class="exclude">
+                  <label>Add Payment</label>
+                  <input type="text" id="amount_paid" class="form-control">
+                  <input type="hidden" id="mainsales_id" value="{{$main_sale->id}}">
+                  <br>
+                  <button id="save_payment">Save</button>
+                </span>
+              </div>
+          </div>
+      </div>
     </div>
-</div>                   
+
+                     
 @endsection
 
 @section('style')

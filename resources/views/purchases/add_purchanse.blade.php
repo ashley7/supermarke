@@ -1,15 +1,12 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row">        
-        <div class="col-md-12">            
+<h1>Add Purchase</h1>           
             <a href="{{route('purchases.edit',$purchase->id)}}" style="float: right;" class="btn btn-primary">Details</a>
             <br><br>
-            <div class="card">
-                <div class="card-body">
-                    <h1>Add Purchase</h1>
-                    <div class="row">
+            <div class="card-box">
+                <div class="card-body">                    
+                    <div class="row col-md-6">
                         <div class="col-md-6">
 
                             <input type="hidden" id="parchase_id" value="{{$purchase->id}}">
@@ -65,9 +62,7 @@
 
                         </table>
                     </div>
-                </div>
-            </div>
-        </div>
+                </div>              
  
 @endsection
 

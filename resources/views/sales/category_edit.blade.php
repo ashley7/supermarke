@@ -1,12 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
+            <h1>Update category</h1>
+ 
+            <div class="card-box">
                 <div class="card-body">
-                    <h1>Update category</h1>
+        
                     <a href="{{route('stock.create')}}">Add stock</a>
 
                     <form method="POST" action="{{route('category.update',$read_category->id)}}">
@@ -21,11 +20,13 @@
 
                             <br>
                             <button class="btn btn-primary" type="submit">Update</button>
-                        </div>                         
+                        </div> 
+                    </form>                        
                  </div>
             </div>
-        </div>
-    </div>
-</div>
+        
+ 
+
+    
 @endsection
  

@@ -1,15 +1,14 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">
+        <h1>Add price tags</h1>
+ 
+            <div class="card-box">
                 <div class="card-body">
                     <a href="{{route('price_tag.index')}}" style="float: right;" class="btn btn-primary">View Tags</a>
                     <br>
 
-                    <h1>Add price tags</h1>
+            
                     
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -36,12 +35,11 @@
                             <button class="btn btn-primary" type="submit">Save</button>
                         </div>
                     </form>
-                         
-                 </div>
+                </div>
             </div>
-        </div>
-    </div>
-</div>
+            
+                         
+      
 @endsection
 @push('scripts')
   <script>

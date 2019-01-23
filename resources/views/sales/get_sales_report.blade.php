@@ -1,36 +1,24 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-12">
-            <div class="card">              
-
-                <div class="card-body">
-
-                    <form method="POST" action="{{route('sales_report.store')}}">
-                        @csrf
-
-                        <label>From</label>
-                        <input type="date" name="from" class="form-control">
-
-                        <label>To</label>
-                        <input type="date" name="to" class="form-control">
-                        <br>
-                        <button class="btn btn-primary" type="submit">Generate</button>
-                    </form>
-                    
-                     
-                   
  
-                </div>
-            </div>
-        </div>
+<div class="card-box">              
+    <div class="card-body">
+        <form method="POST" action="{{route('sales_report.store')}}">
+            @csrf
+
+            <label>From</label>
+            <input type="date" name="from" class="form-control">
+
+            <label>To</label>
+            <input type="date" name="to" class="form-control">
+            <br>
+            <button class="btn btn-primary" type="submit">Generate</button>
+        </form>
     </div>
-</div>
+</div>    
+ 
 @endsection
-
-
 @push('scripts')
 
 <script type="text/javascript" src="{{asset('js/jquery.min.js')}}"></script>

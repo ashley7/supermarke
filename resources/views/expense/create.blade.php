@@ -1,14 +1,13 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
+    <h1>Add Expense</h1>
+ 
+            <div class="card-box">
                
 
                 <div class="card-body">
-                    <h1>Add Expense</h1>
+                    
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
@@ -56,9 +55,8 @@
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-</div>
+            
+        
 
                
 @endsection

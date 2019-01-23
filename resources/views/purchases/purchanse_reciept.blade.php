@@ -1,12 +1,11 @@
-@extends('layouts.app')
+@extends('layouts.main')
 
 @section('content')
-<div class="container">
-    <div class="row">        
-        <div class="col-md-12 col-sm-12 col-lg-12 col-xs-12">
+    
+   
              <a href="#" onclick="myFunction()" style="float: right;" class="btn btn-primary">Print</a>
             <br><br>
-            <div class="card">
+            <div class="card-box">
                 <div class="card-body">
                     <div class="row">        
                         <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
@@ -31,7 +30,7 @@
                         <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
                             <p style="text-transform: uppercase;">Particular</p>
 
-                            <table class="table">
+                            <table class="table table-hover table-striped">
                                 <thead>
                                   <th>#</th>  <th>Item</th> <th>Quantity</th> <th>Amount</th>
                                 </thead>
@@ -67,7 +66,7 @@
                         <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
                             <p style="text-transform: uppercase;">Payments</p>
 
-                             <table class="table">
+                             <table class="table table-hover table-striped">
                                 <thead>
                                    <th>Date</th> <th>Amount</th>
                                 </thead>
@@ -102,20 +101,11 @@
                             <br>
                             <button id="save_payments">Save</button>
                           </span>  
-
-                            
-                            
-                            
                         </div>
                     </div>
-
-                     
-
+                  </div>
                 </div>
-            </div>
-        </div>
-    </div>
-</div>                   
+
 @endsection
 
 @section('style')
