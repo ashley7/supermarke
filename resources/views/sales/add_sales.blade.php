@@ -77,7 +77,7 @@
                             <th>Reciept Number</th>
                             <th>Date</th>
                             <th>Client</th>
-                            <th>Cost Paid</th>
+                            <th>Cost</th>
                             <th>Amount Paid</th>
                             <th>Balance</th>
                             <th>Action</th>
