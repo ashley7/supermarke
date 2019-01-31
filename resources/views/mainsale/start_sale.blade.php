@@ -13,7 +13,7 @@
                     <select id="data" class="form-control datavalue">
                         <option></option>
                         @foreach($price_tags as $pricetags)
-                          <option value="{{$pricetags->id}}" style="text-transform: uppercase;">{{$pricetags->stock->category->name}} ({{$pricetags->stock->name}})</option>
+                          <option value="{{$pricetags->id}}" style="text-transform: uppercase;">{{$pricetags->stock->category->name}}  ( {{$pricetags->stock->name}} )</option>
                         @endforeach
                     </select>
                     
@@ -54,7 +54,7 @@
 
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table">
+                    <table class="table table-hover table-striped">
                         <thead>
                             <th>Item</th> <th>Quantity</th> <th>Discount</th> <th>Amount</th>
                         </thead>

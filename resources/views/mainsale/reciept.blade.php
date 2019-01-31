@@ -28,7 +28,7 @@
               <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
                   <p style="text-transform: uppercase;">Particular</p>
 
-                  <table class="table">
+                  <table class="table table-hover table-striped">
                       <thead>
                         <th>Item</th> <th>Quantity</th> <th>Discount</th> <th>Amount</th>
                       </thead>
@@ -66,7 +66,7 @@
               <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
                   <p style="text-transform: uppercase;">Payments</p>
 
-                   <table class="table">
+                   <table class="table table-hover table-striped">
                       <thead>
                          <th>Date</th> <th>Amount</th>
                       </thead>

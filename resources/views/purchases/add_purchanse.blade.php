@@ -20,7 +20,7 @@
                             <label>Choose Stock *</label>
                             <select id="stock_id" class="form-control">
                                 @foreach($stocks as $stock)
-                                  <option value="{{$stock->id}}" style="text-transform: uppercase;"> {{$stock->category->name}} ({{$stock->name}})</option>
+                                  <option value="{{$stock->id}}" style="text-transform: uppercase;"> {{$stock->category->name}}  ( {{$stock->name}} )</option>
                                 @endforeach
                             </select>   
 
