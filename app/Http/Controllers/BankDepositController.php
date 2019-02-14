@@ -25,7 +25,7 @@ class BankDepositController extends Controller
      */
     public function create()
     {
-        return view("bank.add_deposite");
+        return view("bank.add_deposite")->with(['title'=>'Add Bank Deposit']);
     }
 
 

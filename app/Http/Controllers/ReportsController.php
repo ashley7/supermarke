@@ -24,7 +24,7 @@ class ReportsController extends Controller
 
     public function create()
     {
-        return view("reports");
+        return view("reports")->with(['title'=>'Generate expense report']);
     }
 
     public function store(Request $request)
@@ -126,11 +126,11 @@ class ReportsController extends Controller
 
     public function bankreport()
     {
-          return view("bank.deposits_report");
+          return view("bank.deposits_report")->with(['title'=>'Generate Bank deposits report']);
     }
 
     public function cheque_report($value='')
     {
-        return view("cheque.show_reports");
+        return view("cheque.show_reports")->with(['title'=>'Generate Cheque deposits report']);
     }
 }

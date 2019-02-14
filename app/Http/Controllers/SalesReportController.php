@@ -24,7 +24,7 @@ class SalesReportController extends Controller
      */
     public function create()
     {
-        return view("sales.get_sales_report");
+        return view("sales.get_sales_report")->with(['title'=>'Generate Sales report']);
     }
 
     /**

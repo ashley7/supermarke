@@ -19,10 +19,12 @@
                   <li class="nav-item">
                       <a class="nav-link active" id="profile-tab" data-toggle="tab" href="#stock" role="tab" aria-controls="profile">Current Stock</a>
                   </li>
+
+                  <li class="nav-item">
+                      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#bottles" role="tab" aria-controls="profile">Damaged items</a>
+                  </li>
                 </ul>
  
-                     
-
                 <div class="tab-content">
                     <div id="sales" class="tab-pane fade in">
                       <br>
@@ -81,6 +83,7 @@
 
                         <div id="stock" class="tab-pane fade in active">
                           <br>
+                          <p class="text-success" id="display" style="font-size: 20px"></p>
                              <table class="table table-hover table-striped" id="stock_table">
                                  <thead>
                                     <th>#</th> <th>Name</th> <th>Old stock</th> <th>New stock</th> <th>Initial stock</th> <th>Total Sold</th> <th>Stock left</th> <th>Value</th>
@@ -178,8 +181,8 @@
 @push('scripts')
     <script type="text/javascript">      
       $("td[contenteditable=true]").blur(function() {
-         $.ajax({
-          
+        $("#display").text(" ");
+         $.ajax({          
                 type: "POST",
                 url: "{{ route('shift_stock.store') }}",
             data: {
@@ -189,15 +192,12 @@
                 _token: "{{Session::token()}}"
             },
           success: function(result){
-            if (result) {
-              console.log(result);
-            }           
-                
+            $("#display").text(result)
+            alert(result) 
+
           },
           
         })
     });
-  </script>
-
- 
+  </script> 
 @endpush

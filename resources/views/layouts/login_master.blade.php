@@ -9,6 +9,8 @@
 
         <!-- App Favicon -->
 
+        <link rel="icon" href="{{asset('images/logo.png')}}">
+
         <!-- App title -->
          <title>{{ config('app.name', '') }}</title>
 
@@ -48,15 +50,21 @@
         <!-- jQuery  -->
         <!-- jQuery  -->
         <script src="{{asset('back_end/assets/js/jquery.min.js')}}"></script>
-        <script src="{{asset('back_end/assets/js/tether.min.js')}}"></script><!-- Tether for Bootstrap -->
-        <script src="{{asset('back_end/assets/js/bootstrap.min.js')}}"></script>
-        <script src="{{asset('back_end/assets/js/waves.js')}}"></script>
-        <script src="{{asset('back_end/assets/js/jquery.nicescroll.js')}}"></script>
-        <script src="{{asset('back_end/assets/plugins/switchery/switchery.min.js')}}"></script>
+
+        <script>
+
+              $("#refresh").hide();
+
+              $("#login_btn").click(function() {
+                $("#login_btn").text("loging in ...");          
+                $("#login_btn").attr("disabled","disabled");
+                $("#refresh").show();
+            });
+        </script>
 
         <!-- App js -->
-        <script src="{{asset('back_end/assets/js/jquery.core.js')}}"></script>
-        <script src="{{asset('back_end/assets/js/jquery.app.js')}}"></script>
+
+
 
     </body>
 </html>

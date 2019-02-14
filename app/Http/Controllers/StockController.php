@@ -19,7 +19,9 @@ class StockController extends Controller
     public function index()
     {
         $stock = Stock::all();
-        return view('sales.stock_list')->with(['stock'=>$stock,'title'=>'All the stock']);
+
+       
+        return view('sales.stock_list')->with(['stock'=>$stock,'title'=>'Current stock status']);
     }
 
     /**
@@ -29,7 +31,7 @@ class StockController extends Controller
      */
     public function create()
     {
-        return view('sales.stock')->with(['category'=>Category::orderBy('name','ASC')->get()]);
+        return view('sales.stock')->with(['category'=>Category::orderBy('name','ASC')->get(),'title'=>'Add new stock']);
     }
 
     /**
@@ -66,6 +68,13 @@ class StockController extends Controller
             }
 
             $save_tags = new PriceTag();
+
+            if (!isset($request->barcode)) {
+               $save_tags->barcode = time();
+               }else{
+                 $save_tags->barcode = $request->barcode;
+            }
+
             $save_tags->barcode = time();
             $save_tags->stock_id = $save_stock->id;
             $save_tags->buying_price = str_replace(",","",$request->buying_price);
@@ -94,7 +103,7 @@ class StockController extends Controller
      */
     public function edit($id)
     {
-        $data = ['read_stock'=>Stock::find($id)];
+        $data = ['read_stock'=>Stock::find($id),'title'=>'Edit stock'];
         return view('sales.edit_stock')->with($data);
     }
 

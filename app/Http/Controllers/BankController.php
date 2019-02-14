@@ -11,13 +11,13 @@ class BankController extends Controller
     
     public function index()
     {
-          return view("bank.list")->with(["bank"=>Bank::all()]);
+          return view("bank.list")->with(["bank"=>Bank::all(),'title'=>'List of banks']);
     }
 
  
     public function create()
     {
-        return view("bank.create");
+        return view("bank.create")->with(['title'=>'Create bank']);
     }
 
    

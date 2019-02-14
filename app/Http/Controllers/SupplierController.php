@@ -24,7 +24,7 @@ class SupplierController extends Controller
      */
     public function create()
     {
-        $data = ['suppliers'=>Supplier::all()];
+        $data = ['suppliers'=>Supplier::all(),'title'=>'Add new supplier'];
         return view('supplier.add_supplier')->with($data);
     }
 

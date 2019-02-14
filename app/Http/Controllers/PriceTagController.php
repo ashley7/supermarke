@@ -34,7 +34,7 @@ class PriceTagController extends Controller
                 $stock[] = Stock::find($stock_value->id);
             }
         }
-        return view('sales.price_tags')->with(['stock'=>$stock]);
+        return view('sales.price_tags')->with(['stock'=>$stock,'title'=>'create Prices']);
     }
 
     /**
@@ -46,7 +46,10 @@ class PriceTagController extends Controller
     public function store(Request $request)
     {
         $save_tags = new PriceTag($request->all());
-        $save_tags->barcode = time();
+        if (!isset($request->barcode)) {
+           $save_tags->barcode = time();
+        }
+        
         $save_tags->buying_price = str_replace(",","",$request->buying_price);
         $save_tags->salling_price = str_replace(",","",$request->salling_price);
 

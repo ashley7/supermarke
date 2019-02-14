@@ -18,12 +18,12 @@ class ExpenseaccountController extends Controller
     {
         $expense_title="List of all account expenses";
         $item_title="Account summery";
-        return view("account.list")->with(["accounts"=>ExpenseAccount::all(),"expense_title"=>$expense_title,"item_title"=>$item_title]);
+        return view("account.list")->with(["accounts"=>ExpenseAccount::all(),"title"=>$expense_title,"item_title"=>$item_title]);
     }
 
     public function create()
     {
-        return view("account.create");
+        return view("account.create")->with(['title'=>'Add Expense account']);
     }
 
     public function store(Request $request)
@@ -43,7 +43,7 @@ class ExpenseaccountController extends Controller
     }
  
     public function edit($id){
-        return view("account.edit_account")->with(['expense_account'=>ExpenseAccount::find($id)]);
+        return view("account.edit_account")->with(['expense_account'=>ExpenseAccount::find($id),'title'=>'Edit Expense']);
     }
   
     public function update(Request $request, $id){

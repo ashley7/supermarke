@@ -74,7 +74,7 @@ class SalesController extends Controller
 
             $total_sales_today = $this->total_sales();
             
-            $data = ['sum_sales'=>$sum_sales,'sum_tickets'=>$sum_tickets,'main_sales'=>$main_sales,'debit_sales'=>$debit_sales,'credit_purchase'=>$credit_purchase,'total_sales_today'=>$total_sales_today];
+            $data = ['sum_sales'=>$sum_sales,'sum_tickets'=>$sum_tickets,'main_sales'=>$main_sales,'debit_sales'=>$debit_sales,'credit_purchase'=>$credit_purchase,'total_sales_today'=>$total_sales_today,'title'=>"Dashboard"];
             return view("sales.add_sales")->with($data);
     }
 

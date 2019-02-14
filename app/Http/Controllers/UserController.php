@@ -15,7 +15,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view("users.list")->with(["user"=>User::all()]);
+        return view("users.list")->with(["user"=>User::all(),'title'=>'List of Users']);
     }
 
     /**
@@ -25,7 +25,7 @@ class UserController extends Controller
      */
     public function create()
     {
-       return view("users.create");
+       return view("users.create")->with(['title'=>'Add new User']);
     }
 
     /**

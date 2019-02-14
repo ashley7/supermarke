@@ -18,8 +18,16 @@ class WorkShiftController extends Controller
      */
     public function index()
     {
+
+        // \DB::table('work_shifts')->orderBy('id')->chunk(1, function ($users) {
+        // foreach ($users as $user) {
+        //     echo $user->id;
+        //     }
+        // });
+
+
         $work_shift = WorkShift::all();
-        return view("sales.shift_list")->with(['work_shift'=>$work_shift]);
+        return view("sales.shift_list")->with(['work_shift'=>$work_shift,'title'=>"Work Shifts"]);
 
     }
 
@@ -30,7 +38,7 @@ class WorkShiftController extends Controller
      */
     public function create()
     {
-        return view("sales.shifts");
+        return view("sales.shifts")->with(['title'=>"Create a Work Shift"]);
     }
 
     /**
@@ -97,7 +105,7 @@ class WorkShiftController extends Controller
         $sales = Sale::all()->where('workshift_id',$id);
         $brands = PriceTag::all();
         $stock_loss = StockLoss::all()->where('workshift_id',$id);
-        $data = ['work_shifts'=>$work_shifts,'sales'=>$sales,'brands'=>$brands,'stock_loss'=>$stock_loss];
+        $data = ['work_shifts'=>$work_shifts,'sales'=>$sales,'brands'=>$brands,'stock_loss'=>$stock_loss,'title'=>$work_shifts->name.' Details'];
         return view('sales.shift_details')->with($data);
     }
 

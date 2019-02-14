@@ -75,9 +75,9 @@ class ShiftStockController extends Controller
 
             try {
               $last_record->save();
-              echo "Saved";  
+              echo "Stock updated successfully.";  
             } catch (\Exception $e) {
-               echo $e->getMessage(); 
+               // echo $e->getMessage(); 
             }
 
             

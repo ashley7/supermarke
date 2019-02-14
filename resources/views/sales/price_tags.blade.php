@@ -6,9 +6,7 @@
             <div class="card-box">
                 <div class="card-body">
                     <a href="{{route('price_tag.index')}}" style="float: right;" class="btn btn-primary">View Tags</a>
-                    <br>
-
-            
+                    <br>            
                     
                     @if (session('status'))
                         <div class="alert alert-success">
@@ -18,6 +16,7 @@
 
                     <form method="POST" action="{{route('price_tag.store')}}">
                         @csrf
+                      <div class="row"> 
                         <div class="col-md-6">
                             <label>Item name</label>
                             <select name="stock_id" id="stock_id" class="form-control">
@@ -30,13 +29,17 @@
 
                             <label>salling Price</label>
                             <input type="text" name="salling_price" class="form-control number">
+
+                            <label>Scan barcode (optional)</label>
+                            <input type="text" name="barcode" class="form-control">
                                                      
                             <br>
                             <button class="btn btn-primary" type="submit">Save</button>
                         </div>
-                    </form>
-                </div>
+                    </div>
+                </form>
             </div>
+        </div>
             
                          
       

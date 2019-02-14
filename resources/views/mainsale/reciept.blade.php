@@ -2,7 +2,7 @@
 
 @section('content')
  
-   <a href="#" onclick="myFunction()" style="float: right;" class="btn btn-primary">Print</a>
+   <a href="#" id="hide_form"  style="float: right;" class="btn btn-primary">Print</a>
    <br><br>
 
   <div class="card-box">
@@ -145,6 +145,13 @@
               }
           })           
         });
+  </script>
+
+  <script>
+    $("#hide_form").click(function(){
+         $(".exclude,#hide_form").hide();
+         myFunction();
+    });
   </script>
 @endpush
  

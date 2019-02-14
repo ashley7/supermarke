@@ -21,25 +21,26 @@ class ExpenseController extends Controller
   
     public function create()
     {
-        return view("expense.create")->with(['account'=>ExpenseAccount::orderBy('name','ASC')->get()]);
+        return view("expense.create")->with(['account'=>ExpenseAccount::orderBy('name','ASC')->get(),'title'=>'Add expense']);
     }
 
  
     public function store(Request $request)
     {
  
-        $this->validate($request,["date"=>"required","voucher_number"=>"required","amount"=>"required","expense_account_id"=>"required"]);
+        $this->validate($request,["date"=>"required","amount"=>"required","expense_account_id"=>"required"]);
         
         $save_expense = new Expense($request->all());
+        if (!isset($request->voucher_number)) {
+           $save_expense->voucher_number = time();
+        }
         $to_date = date_create(str_replace("/", "-", $request->date));
         $save_expense->date=date_timestamp_get($to_date);
         $save_expense->amount=(double)str_replace(",", "", $request->amount);
         try {
              $save_expense->save();
              echo "Saved";
-        } catch (\Exception $e) {
-             echo $e->getMessage();
-        }
+        } catch (\Exception $e) {}
         // return redirect("expense");
     }
 
@@ -52,7 +53,7 @@ class ExpenseController extends Controller
   
     public function edit($id)
     {
-      return view("expense.edit")->with(["expense"=>Expense::find($id),"account"=>ExpenseAccount::orderBy('name','ASC')->get()]);
+      return view("expense.edit")->with(["expense"=>Expense::find($id),"account"=>ExpenseAccount::orderBy('name','ASC')->get(),'title'=>'Edit Expense']);
     }
 
   

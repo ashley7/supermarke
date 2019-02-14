@@ -26,8 +26,13 @@
 
                         <tbody>  
 
-                        <?php $total_value = 0; ?>                       
-                            @foreach($stock as $stock_details)
+                        @php 
+
+                          $total_value = 0; 
+
+
+                        @endphp
+                        @foreach($stock as $stock_details)
                             <?php 
                              $price_tags = App\PriceTag::all()->where('stock_id',$stock_details->id)->last();
 
@@ -74,6 +79,7 @@
                                  <td><a class="btn btn-primary" href="{{route('stock.edit',$stock_details->id)}}">Edit</a></td>
                                </tr> 
                             @endforeach
+ 
                             <th>Total</th>
                             <th></th>
                             <th></th>
@@ -84,7 +90,8 @@
                             <th>{{number_format($total_value)}}</th>
                             <th></th>                       
                         </tbody>
-                    </table>                                        
+                    </table>  
+
                 </div>
             </div>
         </div>

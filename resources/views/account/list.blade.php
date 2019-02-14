@@ -1,8 +1,7 @@
 @extends('layouts.main')
 
 @section('content')
-<h1>{{$expense_title}}</h1>
- 
+<h2>Account expenses</h2> 
             <div class="card-box">
                <div class="card-body">                   
                   <a class="btn btn-primary right" style="float: right;" href="{{route('account.create')}}">Add account</a>

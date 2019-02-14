@@ -35,7 +35,7 @@ class MainSaleController extends Controller
         $initiate_sale->period_recorded = time();
         $initiate_sale->save();
         $shift = WorkShift::where('user_id',\Auth::user()->id)->orderBy('id','DESC')->get();
-        $data = ["initiate_sale"=>$initiate_sale,"shift"=>$shift,"price_tags"=>$price_tags];
+        $data = ["initiate_sale"=>$initiate_sale,"shift"=>$shift,"price_tags"=>$price_tags,'title'=>"Record Sales"];
         return view("mainsale.start_sale")->with($data);
     }
 
@@ -89,7 +89,7 @@ class MainSaleController extends Controller
     public function edit($id)
     {
         $update_sales_shift = MainSale::find($id);
-        $data = ['main_sale'=>$update_sales_shift];
+        $data = ['main_sale'=>$update_sales_shift,'title'=>"Sales Details"];
         return view("mainsale.reciept")->with($data);
      }
 

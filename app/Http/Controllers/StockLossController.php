@@ -16,7 +16,7 @@ class StockLossController extends Controller
     public function index()
     {
         $stock_loss = StockLoss::all();
-        return view("sales.stockloss_list")->with(['stock_loss'=>$stock_loss]);
+        return view("sales.stockloss_list")->with(['stock_loss'=>$stock_loss,'title'=>'View Stock loss']);
     }
 
     /**
@@ -27,7 +27,7 @@ class StockLossController extends Controller
     public function create()
     {
         $record_check = WorkShift::where('user_id',\Auth::user()->id)->orderBy('id','DESC')->get();
-        return view("sales.stock_loss")->with(['record_check'=>$record_check]);
+        return view("sales.stock_loss")->with(['record_check'=>$record_check,'title'=>'Create Stock loss']);
     }
 
     /**

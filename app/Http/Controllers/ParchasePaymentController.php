@@ -29,7 +29,7 @@ class ParchasePaymentController extends Controller
             }
         }
 
-        return view("purchases.all_purchases")->with(['purchase'=>$purchase]);
+        return view("purchases.all_purchases")->with(['purchase'=>$purchase,'title'=>'Purchases']);
     }
 
     /**

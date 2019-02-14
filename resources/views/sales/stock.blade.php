@@ -35,6 +35,9 @@
                             <label>Selling price</label>
                             <input type="text" id="selling_price" value="0" class="form-control next_number">
 
+                            <label>Scan barcode (optional)</label>
+                            <input type="text" id="barcode" class="form-control">
+
                             <br>
                             <button class="btn btn-primary" id="saveBtn">Save</button>                      
                             <input type="hidden" class="number">
@@ -93,13 +96,15 @@
                   category_id: $("#category_id").val(),                           
                   stock_size: $("#stock_size").val(),                           
                   buying_price: $("#buying_price").val(),                           
-                  selling_price: $("#selling_price").val(),                           
+                  selling_price: $("#selling_price").val(),
+                  barcode: $("barcode").val(),                        
                 _token: "{{Session::token()}}"
             },
                 success: function(result){
                     $("#saveBtn").removeAttr("disabled");
                     $("#display").text(result);
-                    $('#item_name').val(" ")
+                    $('#item_name').val(" ");
+                    $("barcode").val(" ");
                     $("#saveBtn").text("Add new stock item");
                   }
         })

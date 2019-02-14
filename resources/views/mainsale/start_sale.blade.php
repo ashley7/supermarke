@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-    <h1>Record sales</h1>
+    <h1>Record a new sale</h1>
  
     <div class="card-box">
         <div class="card-body">                   
@@ -13,7 +13,7 @@
                     <select id="data" class="form-control datavalue">
                         <option></option>
                         @foreach($price_tags as $pricetags)
-                          <option value="{{$pricetags->id}}" style="text-transform: uppercase;">{{$pricetags->stock->category->name}}  ( {{$pricetags->stock->name}} )</option>
+                          <option value="{{$pricetags->id}}" style="text-transform: uppercase;">{{$pricetags->stock->category->name}}   {{$pricetags->stock->name}}  {{$pricetags->barcode}} </option>
                         @endforeach
                     </select>
                     
@@ -83,9 +83,12 @@
                 _token: "{{Session::token()}}"
             },
             success: function(result){
+                
                 $('#payment_data').val(0);
                 $("#save_payment").text(result);
-                }
+                location.reload();
+
+            }
           })
            
         });

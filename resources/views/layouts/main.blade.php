@@ -7,9 +7,9 @@
         <meta name="author" content="Thembo Charles Lwanga ()">
         <meta name="author_email" content="ashley7520charles@gmail.com">
 
-         <!-- <link rel="icon" href="{{asset('documents/favicon.PNG')}}"> -->
+         <link rel="icon" href="{{asset('images/logo.png')}}">
 
-         <title>{{ config('app.name', '') }}</title>
+         <title>{{$title}}</title>
 
         <link rel="stylesheet" type="text/css" href="{{ asset('css/jquery.dataTables.min.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/buttons.dataTables.min.css') }}">
@@ -172,7 +172,7 @@
         </script>
 
         <script src="{{ asset('js/jquery-1.12.4.js') }}"></script>
-        <script src="{{asset('back_end/assets/js/tether.min.js')}}"></script>
+        <!-- <script src="{{asset('back_end/assets/js/tether.min.js')}}"></script> -->
         <script src="{{asset('back_end/assets/js/bootstrap.min.js')}}"></script>
         <script type="text/javascript" src="{{asset('js/choosen.js')}}"></script>
 
@@ -181,10 +181,10 @@
         <script src="{{ asset('js/buttons.flash.min.js') }}"></script>
         <script src="{{ asset('js/jszip.min.js') }}"></script>
         <script src="{{ asset('js/pdfmake.min.js') }}"></script>
-        <script src="{{ asset('js/vfs_fonts.js') }}"></script>
+        <!-- <script src="{{ asset('js/vfs_fonts.js') }}"></script> -->
         <script src="{{ asset('js/buttons.html5.min.js') }}"></script>
-        <script src="{{ asset('js/buttons.print.min.js') }}"></script>
-
+<!--         <script src="{{ asset('js/buttons.print.min.js') }}"></script>
+ -->
         <script type="text/javascript">
 
              $(document).ready(function() {

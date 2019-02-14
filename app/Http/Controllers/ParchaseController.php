@@ -15,7 +15,7 @@ class ParchaseController extends Controller
 
     public function purchases_report()
     {
-         return view("purchases.purchases_report");
+         return view("purchases.purchases_report")->with(['title'=>"Purchases report"]);
     }
 
     public function purchasesreport(Request $request)
@@ -65,7 +65,7 @@ class ParchaseController extends Controller
 
         $purchase = ParchaseDetails::all();
 
-        $title = "App purchases";
+        $title = "All purchases";
 
         return view("purchases.purchases")->with(['purchase'=>$purchase,'title'=>$title]);
     }
@@ -80,7 +80,7 @@ class ParchaseController extends Controller
         $initiate_purchase = new Parchase();
         $initiate_purchase->save();
 
-        $data = ['suppliers'=>Supplier::all(),'stocks'=>Stock::all(),'purchase'=>$initiate_purchase];
+        $data = ['suppliers'=>Supplier::all(),'stocks'=>Stock::all(),'purchase'=>$initiate_purchase,'title'=>'Add new Purchase'];
         return view("purchases.add_purchanse")->with($data);
     }
 
@@ -146,7 +146,7 @@ class ParchaseController extends Controller
         if (empty($purchase->supplier_id)) {
             return redirect()->route('purchases.create');
         }
-        return view("purchases.purchanse_reciept")->with(['purchase'=>$purchase]);
+        return view("purchases.purchanse_reciept")->with(['purchase'=>$purchase,'title'=>'Parchase details']);
     }
 
     /**
