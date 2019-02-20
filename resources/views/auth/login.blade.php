@@ -4,10 +4,12 @@
     <div class="card-box m-b-0">
         <div class="text-xs-center m-t-20">
             <a href="/" class="logo">                
-                <span class="text-danger">Point of Sale system</span>
+                <span class="text-danger">RETAIL SHOP SYSTEM</span>
             </a>
 
-            <img src="{{asset('images/logo.png')}}" width="100px">
+        <center>
+           <img src="{{asset('images/logo.png')}}" width="100px">
+        </center>
         </div>
         
        

@@ -65,7 +65,7 @@ class SupplierController extends Controller
     public function edit($id)
     {
         $read_supplier = Supplier::find($id);
-        return view('supplier.edit_supplier')->with(['read_supplier'=>$read_supplier]);
+        return view('supplier.edit_supplier')->with(['read_supplier'=>$read_supplier,'title'=>'Edit supplier']);
     }
 
     /**

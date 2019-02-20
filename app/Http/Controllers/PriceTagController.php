@@ -82,7 +82,7 @@ class PriceTagController extends Controller
     public function edit($id)
     {
         $read_tags = PriceTag::find($id);
-        return view('sales.pricetag_edit')->with(['read_tags'=>$read_tags]);
+        return view('sales.pricetag_edit')->with(['read_tags'=>$read_tags,'title'=>'Edit price tags']);
     }
 
     /**

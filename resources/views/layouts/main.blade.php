@@ -37,7 +37,7 @@
                     <div class="topbar-left">
                         <a href="/home" class="logo">
                             <i class="zmdi zmdi-case icon-c-logo"></i>
-                            <span>{{ config('app.name', '') }} (POS)</span>                     
+                            <span>{{ config('app.name', '') }}</span>                     
                         </a>
                     </div>
                     <!-- End Logo container-->
