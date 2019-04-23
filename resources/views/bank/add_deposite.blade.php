@@ -5,52 +5,61 @@
             <div class="card-box">               
 
                 <div class="card-body">
-                    <h1>Add Bank Deposit</h1>
+                    <h1>Add Bank Transaction</h1>
                     @if (session('status'))
                         <div class="alert alert-success">
                             {{ session('status') }}
                         </div>
                     @endif
 
-                    <!-- <form method="POST" action="{{route('bank_deposite.store')}}"> -->
-                        @csrf           
-                        <label>Amount</label>
-                        <input type="text" name="amount" id="amount" step="any" class="form-control number">
+                    <div class="row">
+                        <div class="col-md-6">
+                                <label>Transaction type</label>
+                                <select id="transaction_type" class="form-control">
+                                    <option></option>
+                                    <option value="Deposit">Deposit</option>
+                                    <option value="Withdraw">Withdraw</option>
+                                </select>
 
-                        <label>Voucher/Reciept Number</label>
-                        <input type="text" id="voucher_number" class="form-control">
+                                <label>Amount</label>
+                                <input type="text" name="amount" id="amount" step="any" class="form-control number">
 
-                        <label>Choose Bank</label>
-                        <select class="form-control" id="bank_id" name="bank_id">
-                            <option></option>
-                            @foreach(App\Bank::all() as $banks)
-                              <option value="{{$banks->id}}">{{$banks->name}}</option>
-                            @endforeach
-                        </select>
+                                <label>Voucher/Reciept Number</label>
+                                <input type="text" id="voucher_number" class="form-control">
 
-                        <label>Deposited by</label>
-                        <select class="form-control" id="deposited_by" name="deposited_by">
-                            @foreach(App\User::all() as $users)
-                              <option value="{{$users->id}}">{{$users->name}}</option>
-                            @endforeach
-                        </select>
+                                <label>Choose Bank</label>
+                                <select class="form-control" id="bank_id" name="bank_id">
+                                    <option></option>
+                                    @foreach(App\Bank::all() as $banks)
+                                      <option value="{{$banks->id}}">{{$banks->name}}</option>
+                                    @endforeach
+                                </select>
 
-                        <label>Date of Deposit</label>
-                        <input type="date" name="date" id="date" class="form-control">
-                        <br>
-                        <button class="btn btn-primary" id="saveBtn" type="submit">Save</button>
-                        <br>
-                        <span id="display"></span>
-                    <!-- </form>                   -->
+                                <label>Transacted by</label>
+                                <select class="form-control" id="deposited_by" name="deposited_by">
+                                    @foreach(App\User::all() as $users)
+                                      <option value="{{$users->id}}">{{$users->name}}</option>
+                                    @endforeach
+                                </select>
+
+                                <label>Date of transaction</label>
+                                <input type="date" name="date" id="date" class="form-control">
+                                <br>
+                                <button class="btn btn-primary" id="saveBtn" type="submit">Save</button>
+                                <br>
+                                <span id="display"></span>
+                         </div>
+                    </div>
                 </div>
             </div>
+
             
        
 @endsection
 
 @push('scripts')
 <script type="text/javascript">
-    $("#bank_id,#deposited_by").chosen();
+    $("#bank_id,#deposited_by,#transaction_type").chosen();
     $("#saveBtn").click(function() {
         $("#saveBtn").text("processing ...");
         $("#saveBtn").attr("disabled","disabled");
@@ -62,7 +71,8 @@
                 deposited_by: $("#deposited_by").val(),
                 amount: $('#amount').val(),
                 voucher_number: $('#voucher_number').val(),
-                bank_id: $('#bank_id').val(),                        
+                bank_id: $('#bank_id').val(),                     
+                transaction_type: $('#transaction_type').val(),                     
                 _token: "{{Session::token()}}"
             },
             success: function(result){

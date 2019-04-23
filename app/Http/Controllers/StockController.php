@@ -18,9 +18,7 @@ class StockController extends Controller
      */
     public function index()
     {
-        $stock = Stock::all();
-
-       
+        $stock = Stock::all();       
         return view('sales.stock_list')->with(['stock'=>$stock,'title'=>'Current stock status']);
     }
 
@@ -92,7 +90,12 @@ class StockController extends Controller
      */
     public function show($id)
     {
-        //
+        $data = [
+            'stock'=>Stock::all(),
+            'title'=>'All stock items'
+        ];
+
+        return view('sales.stock_list_only')->with($data);
     }
 
     /**
@@ -103,7 +106,24 @@ class StockController extends Controller
      */
     public function edit($id)
     {
-        $data = ['read_stock'=>Stock::find($id),'title'=>'Edit stock'];
+
+        $saling_price = $buying_price = 0;
+       
+
+        $price_tag = PriceTag::all()->where('stock_id',$id)->last();
+
+        if (!empty($price_tag)) {
+            $saling_price = $price_tag->salling_price;
+            $buying_price = $price_tag->buying_price;
+        }
+
+         $data = [
+            'read_stock'=>Stock::find($id),
+            'title'=>'Edit stock',
+            'buying_price'=>$buying_price,
+            'saling_price'=>$saling_price,
+        ];
+
         return view('sales.edit_stock')->with($data);
     }
 
@@ -121,10 +141,20 @@ class StockController extends Controller
         $save_stock->keeping_limit = $request->keeping_limit;
          try {
             $save_stock->save();
-            echo "Updated Successfully";
-        } catch (\Exception $e) {}
 
-        return redirect()->route("stock.index");
+            $price_tag = PriceTag::all()->where('stock_id',$id)->last();
+            $price_tag->salling_price = $request->saling_price;
+            $price_tag->buying_price = $request->buying_price;
+
+            $price_tag->save();
+
+            return redirect()->back()->with(['status'=>'Updated Successfully']);
+            
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
+
+       
     }
 
     /**

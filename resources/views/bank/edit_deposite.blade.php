@@ -13,7 +13,17 @@
                         </div>
                     @endif
 
-                  {{Form::model($read_bankdeposit,['files' => true,'method'=>'PATCH', 'action'=>['BankDepositController@update', $read_bankdeposit->id]])}}        
+                  {{Form::model($read_bankdeposit,['files' => true,'method'=>'PATCH', 'action'=>['BankDepositController@update', $read_bankdeposit->id]])}} 
+
+                  <div class="row">
+                        <div class="col-md-6">
+
+                        <label>Transaction type</label>
+                        <select name="transaction_type" class="form-control">
+                            <option></option>
+                            <option value="Deposit">Deposit</option>
+                            <option value="Withdraw">Withdraw</option>
+                        </select>       
                         <label>Amount</label>
                         <input type="text" name="amount" value="{{$read_bankdeposit->amount}}" step="any" class="form-control number">
 
@@ -40,9 +50,11 @@
                         <input type="date" value="{{$read_bankdeposit->date}}" name="date" class="form-control">
                         <br>
                         <button class="btn btn-primary" type="submit">Save</button>
-                   {{Form::close()}}                  
+                    </div>
                 </div>
+               {{Form::close()}}                  
             </div>
+        </div>
 
            
 @endsection

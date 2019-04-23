@@ -5,7 +5,7 @@
  
             <div class="card-box">  
                 <div class="card-body">
-                  <a class="btn btn-primary" href="{{route('bank_deposite.create')}}">Add Bank Deposit</a>
+                  <a class="btn btn-primary" href="{{route('bank_deposite.create')}}">Add Bank Transaction</a>
                   <a class="btn btn-primary" href="{{route('bank.index')}}">Bank</a>
                   <a class="btn btn-primary" href="{{route('bank.create')}}">Add Bank</a>
                   <a href="/bankreport" class="btn btn-primary">Generate Report</a>                
@@ -17,12 +17,21 @@
                         </div>
                     @endif
 
-                    <?php $total = 0; ?>
+                    <?php $total_deposit = $total_withdraw = 0; ?>
                  <div class="card-body">
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                          <th>#</th>  <th>Date</th>  <th>Deposited by</th> <th>Bank</th><th>Reciept Number</th> <th>Amount</th> <th>Recorded by</th><th>Action</th>
+                          <th>#</th> 
+                          <th>Date</th>
+                          <th>by</th>
+                          <th>Bank</th>
+                          <th>Reciept Number</th>
+                          <th>Type</th>
+                          <th>Deposit</th>
+                          <th>Withdraw</th>
+                          <th>Recorded by</th>
+                          <th>Action</th>
                         </thead>
 
                         <tbody>
@@ -33,11 +42,23 @@
                               <td>{{App\User::find($deposit->deposited_by)->name}}</td>
                               <td>{{$deposit->bank->name}}</td>
                               <td>{{$deposit->voucher_number}}</td>
-                              <td>{{number_format($deposit->amount)}}</td>
+                              <td>{{$deposit->transaction_type}}</td>
+                              <td>
+                                @if($deposit->transaction_type == "Deposit")
+                                  {{number_format($deposit->amount)}}
+                                  <?php $total_deposit = $total_deposit +  $deposit->amount;?>
+                                @endif
+                              </td>
+                              <td>
+                                @if($deposit->transaction_type == "Withdraw")
+                                  {{number_format($deposit->amount)}}
+                                  <?php $total_withdraw = $total_withdraw +  $deposit->amount;?>
+                                @endif
+                              </td>
                                <td>{{$deposit->user->name}}</td>
                                <td>
 
-                                 <form action="/bank_deposite/{{ $deposit->id }}" method="POST">
+                                 <form action="/bank_deposite/{{ $deposit->id }}" method="POST" onsubmit = 'return confirm("Are you sure you want to proceed?"); return false;'>
                                     {{method_field('DELETE')}}
 
                                     {{ csrf_field() }}
@@ -46,10 +67,10 @@
                                 </form>
                                </td>
                             </tr>
-                            <?php $total = $total +  $deposit->amount;?>
+                            
                           @endforeach
                           <tr>
-                             <th>Total</th> <th></th> <th></th> <th></th> <th></th> <th>{{number_format($total)}}</th> <th></th> <th></th>
+                             <th>Total</th> <th></th> <th></th><th></th><th></th> <th></th> <th>{{number_format($total_deposit)}}</th> <th>{{number_format($total_withdraw)}}</th> <th></th> <th></th>
                           </tr>                                                
                         </tbody>                      
                     </table>
@@ -59,7 +80,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="example">
                         <thead>
-                          <th>#</th>  <th>Bank name</th>  <th>Total</th> 
+                          <th>#</th>  <th>Bank name</th>  <th>Total Deposit</th> <th>Total withdraw</th>
                             @if(!empty($from))
                               <th></th>
                             @endif
@@ -72,9 +93,15 @@
                               <td>{{$bank->id}}</td>
                               <td>{{$bank->name}}</td>
                               @if(empty($from))
-                                  <td>{{number_format(App\BankDeposit::all()->where('bank_id',$bank->id)->sum('amount'))}}</td>
+                                  <td>{{number_format(  App\BankDeposit::all()->where('bank_id',$bank->id)->where('transaction_type','Deposit')->sum('amount'))}}
+                                  </td>
+
+                                  <td>{{number_format(  App\BankDeposit::all()->where('bank_id',$bank->id)->where('transaction_type','Withdraw')->sum('amount'))}}
+                                  </td>
                                 @else
-                                  <td>{{number_format(App\BankDeposit::where('bank_id',$bank->id)->whereBetween('date', [$from,$to])->sum('amount'))}}</td>
+                                  <td>{{number_format(App\BankDeposit::where('bank_id',$bank->id)->where('transaction_type','Deposit')->whereBetween('date', [$from,$to])->sum('amount'))}}</td>
+
+                                  <td>{{number_format(App\BankDeposit::where('bank_id',$bank->id)->where('transaction_type','Withdraw')->whereBetween('date', [$from,$to])->sum('amount'))}}</td>
 
                                   <?php $id=$bank->id."_".$from."_".$to?>
 

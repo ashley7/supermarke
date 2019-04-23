@@ -15,7 +15,7 @@ class BankDepositController extends Controller
      */
     public function index()
     {
-        return view("bank.deposits")->with(["deposits"=>BankDeposit::all(),'banks'=>Bank::all(),'title'=>'List of All Banks Deposits']);
+        return view("bank.deposits")->with(["deposits"=>BankDeposit::all(),'banks'=>Bank::all(),'title'=>'List of All Banks Transactions']);
     }
 
     /**
@@ -25,14 +25,14 @@ class BankDepositController extends Controller
      */
     public function create()
     {
-        return view("bank.add_deposite")->with(['title'=>'Add Bank Deposit']);
+        return view("bank.add_deposite")->with(['title'=>'Add Bank Transaction']);
     }
 
 
     public function store(Request $request)
     {
 
-        $this->validate($request,["bank_id"=>"required","amount"=>"required","date"=>"required","deposited_by"=>"required"]);
+        $this->validate($request,["bank_id"=>"required","amount"=>"required","date"=>"required","deposited_by"=>"required",'transaction_type'=>'required']);
 
         $save_bankdeposit = new BankDeposit($request->all());
         $save_bankdeposit->user_id=\Auth::user()->id;
@@ -73,7 +73,12 @@ class BankDepositController extends Controller
     public function edit($id)
     {
         $read_bankdeposit=BankDeposit::find($id);
-        return view("bank.edit_deposite")->with(['read_bankdeposit'=>$read_bankdeposit]);
+        $data = [
+            'read_bankdeposit'=>$read_bankdeposit,
+            'title'=>'Edit transaction'
+        ];
+        
+        return view("bank.edit_deposite")->with($data);
     }
 
     /**
@@ -99,15 +104,18 @@ class BankDepositController extends Controller
            $read_bankdeposit->voucher_number=$request->voucher_number;
         }
 
+        if (!empty($request->transaction_type)) {
+           $read_bankdeposit->transaction_type=$request->transaction_type;
+        }
+
         if (!empty($request->amount)) {
             $read_bankdeposit->amount = (double)str_replace(",", "", $request->amount);
         }
-
               
         try {
             $read_bankdeposit->save();
         } catch (\Exception $e) {
-            echo $e->getMessage();exit();
+            //echo $e->getMessage();exit();
         }
 
         return back();

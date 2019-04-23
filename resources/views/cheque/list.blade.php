@@ -47,7 +47,7 @@
                               <td>{{$cheque->bank->name}}</td>
                               <td>{{$cheque->user->name}}</td>
                               <td>
-                                  <form action="/cheque/{{ $cheque->id }}" method="POST">
+                                  <form action="/cheque/{{ $cheque->id }}" method="POST" onsubmit = 'return confirm("Are you sure you want to proceed?"); return false;'>
                                     {{method_field('DELETE')}}
 
                                     {{ csrf_field() }}

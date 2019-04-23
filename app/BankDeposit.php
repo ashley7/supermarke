@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class BankDeposit extends Model
 {
-    protected $fillable=["bank_id","amount","deposited_by"];
+    protected $fillable=["bank_id","amount","deposited_by","transaction_type"];
 
     public function user($value='')
     {

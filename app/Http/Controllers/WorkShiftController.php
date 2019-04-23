@@ -103,9 +103,15 @@ class WorkShiftController extends Controller
     {
         $work_shifts = WorkShift::find($id);
         $sales = Sale::all()->where('workshift_id',$id);
-        $brands = PriceTag::all();
         $stock_loss = StockLoss::all()->where('workshift_id',$id);
-        $data = ['work_shifts'=>$work_shifts,'sales'=>$sales,'brands'=>$brands,'stock_loss'=>$stock_loss,'title'=>$work_shifts->name.' Details'];
+        
+        $data = [
+            'work_shifts'=>$work_shifts,
+            'sales'=>$sales,
+            'stock_loss'=>$stock_loss,
+            'title'=>$work_shifts->name.' Details'
+        ];
+
         return view('sales.shift_details')->with($data);
     }
 

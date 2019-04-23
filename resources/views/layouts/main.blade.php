@@ -115,7 +115,7 @@
                             </li>
 
                             <li class="has-submenu">
-                                <a href="{{route('bank_deposite.index')}}"><i class="zmdi zmdi-store-24"></i> Bank Deposit</a>
+                                <a href="{{route('bank_deposite.index')}}"><i class="zmdi zmdi-store-24"></i> Bank Transaction</a>
                             </li>
 
                             <li class="has-submenu">

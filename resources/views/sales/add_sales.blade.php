@@ -9,6 +9,9 @@
         <a  href="{{route('sales.index')}}"  class="btn btn-warning" style="color: #FFF">View Sales</a>
         <a  href="{{route('stock_loss.create')}}"  class="btn btn-danger" style="color: #FFF">Record Stock loss</a>        
         <a  href="{{route('sales_report.create')}}" class="btn btn-info">Generate sales report</a>
+
+        <a  href="{{route('stock.show','edit_stock')}}" class="btn btn-info">Edit Stock</a>
+
                                            
         <br><br>
 
@@ -37,8 +40,8 @@
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class="card-box widget-box-one">
                 <div class="wigdet-one-content">
-                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Total Debit sales</p>
-                    <h2 class="text-danger"><span data-plugin="counterup">{{number_format($debit_sales)}}</span></h2>
+                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Total Credit sales</p>
+                    <h2 class="text-danger"><span data-plugin="counterup">UGX:  {{number_format($debit_sales)}}</span></h2>
                      
                 </div>
             </div>
@@ -50,8 +53,8 @@
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
             <div class="card-box widget-box-one">
                 <div class="wigdet-one-content">
-                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Total Credit purchase</p>
-                    <h2 class="text-danger"><span data-plugin="counterup">{{number_format($credit_purchase)}}</span></h2>
+                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Total Credit purchases</p>
+                    <h2 class="text-danger"><span data-plugin="counterup">UGX: {{number_format($credit_purchase)}}</span></h2>
                      
                 </div>
             </div>

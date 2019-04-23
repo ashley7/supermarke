@@ -45,7 +45,7 @@
                               <td>{{number_format($account->amount)}}</td>
                               <?php $total=$total+$account->amount; ?>
                               <td>
-                                 <form action="/expense/{{ $account->id }}" method="POST">
+                                 <form action="/expense/{{ $account->id }}" method="POST" onsubmit = 'return confirm("Are you sure you want to proceed?"); return false;'>
                                     {{method_field('DELETE')}}
                                     {{ csrf_field() }}
                                     <a href="{{route('expense.edit',$account->id)}}" class="btn btn-info">Edit</a>
