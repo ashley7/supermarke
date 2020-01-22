@@ -1,18 +1,16 @@
 FROM php:7.2.7-apache
 
-ARG uid=1000
+ARG uid
 RUN useradd -G www-data,root -u $uid -d /home/testuser testuser
 RUN mkdir -p /home/testuser/.composer && \
     chown -R testuser:testuser /home/testuser
 
 RUN apt-get update --fix-missing -q
-RUN apt-get install -y libpng-dev curl mcrypt gnupg build-essential software-properties-common wget vim zip unzip
+RUN apt-get install -y curl mcrypt gnupg build-essential software-properties-common wget vim zip unzip
 
-RUN docker-php-ext-install gd mbstring pdo pdo_mysql
+RUN docker-php-ext-install bcmath ctype json gd mbstring pdo pdo_mysql tokenizer xml
 
 RUN curl -sSL https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
-
-COPY . /var/www/html/
 
 # Run composer to build dependencies in vendor folder
 RUN composer install --no-scripts --no-suggest --no-interaction --prefer-dist --optimize-autoloader 
@@ -29,7 +27,7 @@ RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-av
 RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 RUN a2enmod rewrite
 
-RUN echo "ServerName localhost" >> /etc/apache2/apache2.conf 
+COPY . /var/www/html/
 
 # Set container's working dir
 WORKDIR /var/www/html/
