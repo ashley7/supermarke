@@ -1,0 +1,53 @@
+version: '3'
+
+services:
+  db:
+    image: mariadb
+    restart: always
+    ports:
+      - "3308:3306"
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      MYSQL_USER: docker
+      MYSQL_PASSWORD: docker
+      MYSQL_DATABASE: docker
+      MYSQL_ROOT_PASSWORD: docker
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment: 
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: docker
+      PMA_PASSWORD: docker
+    ports:
+      - "81:80"
+    depends_on:
+      - db
+
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        uid: ${UID:-1000}
+    working_dir: /var/www/html
+    environment:
+      SERVICE_NAME: app
+      SERVICE_TAGS: dev
+      DB_HOST: db
+      DB_DATABASE: docker
+      DB_USERNAME: docker
+      DB_PASSWORD: docker
+      APACHE_RUN_USER: ${UID:-testuser}
+      APACHE_RUN_GROUP: ${UID:-www-data}
+    ports:
+      - "8011:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+volumes: 
+  db:
