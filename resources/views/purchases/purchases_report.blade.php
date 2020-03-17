@@ -15,7 +15,7 @@
 	        	<label>To</label>
 	        	<input type="date" name="to" class="form-control">
 	        	<br>
-	        	<button type="submit" class="btn btn-primary">Generate</button>
+	        	<button type="submit" class="btn btn-success">Generate</button>
 
 	        </form>
 	    </div>

@@ -5,7 +5,7 @@
     <div class="card-box">
         <div class="card-body">                   
             
-            <a class="btn btn-danger" style="float: right;" href="{{route('main_sale.edit',$initiate_sale->id)}}">Details</a>
+            <a class="btn btn-success" style="float: right;" href="{{route('main_sale.edit',$initiate_sale->id)}}">Details</a>
             <br><br>                 
             <div class="row col-md-12 "> 
                 <div class="col-md-6 ">
@@ -37,7 +37,7 @@
 
                    
                     <br>
-                    <button class="btn btn-primary" id="btnsave">Save sale record</button>                           
+                    <button class="btn btn-success" id="btnsave">Save sale record</button>                           
                 </div>
                <div class="col-md-6">
                     <h5 id="prices" style="color: green;"></h5> 
@@ -47,7 +47,7 @@
                     <label>Add payment</label>
                     <input type="text" id="payment_data" class="form-control next_number">
                     <br>
-                    <button class="btn btn-primary" id="save_payment" style="float: right;">Save payment</button>               
+                    <button class="btn btn-success" id="save_payment" style="float: right;">Save payment</button>               
                 </div>
             </div>
             <h3 id="display" style="color: green;"></h3>
@@ -85,6 +85,7 @@
             success: function(result){
                 
                 $('#payment_data').val(0);
+               
                 $("#save_payment").text(result);
                 location.reload();
 
@@ -156,8 +157,8 @@
                 },
                 success: function(result){
                     $('#display').html(result);
-                    size: $("#size").val(1);
-                    // $("#data").show().focus();
+                    $("#size").val(1);
+                    $('#discount').val(0);
                     typingTimer = setTimeout(donedisplaying,5000);
                     $("#emp > tr").remove();
                     load_table();

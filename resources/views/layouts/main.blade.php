@@ -17,7 +17,7 @@
          <link href="{{ asset('css/style.css') }}" rel="stylesheet">
         <style type="text/css">
             #topnav .topbar-main {
-                background-color: #990E2C;
+                background-color: #035f48;
             }
             a{
                 text-transform: uppercase;
@@ -36,7 +36,8 @@
                     <!-- LOGO -->
                     <div class="topbar-left">
                         <a href="/home" class="logo">
-                            <i class="zmdi zmdi-case icon-c-logo"></i>
+                            <!-- <i class="zmdi zmdi-case icon-c-logo"></i> -->
+                            <img src="{{asset('images/logo.png')}}" width="20px">
                             <span>{{ config('app.name', '') }}</span>                     
                         </a>
                     </div>
@@ -127,13 +128,12 @@
                             </li>
 
                           
-
-                                             
+                                           
 
                             <li class="has-submenu">
                                 <a href="#"><i class="zmdi zmdi-settings"></i>Settings</a>
                                 <ul class="submenu">
-                                   <li> <a href="{{route('stock.index')}}">View Stock</a></li>
+                                   <li> <a href="{{route('stock.create')}}" target="_blank">Create Stock</a></li>
                                    <li> <a href="{{route('supplier.create')}}">Add Supplier</a></li>
                                    <li> <a href="{{route('stock.create')}}">Add Stock names</a></li>
                                    <li> <a href="{{route('price_tag.create')}}">Add Price tags</a>  </li>          
@@ -147,10 +147,8 @@
                     </div>  
                 </div>  
             </div>  
-        </header>   
-
-
-      
+        </header>
+     
  
         <div class="wrapper">
             <div class="container">
@@ -159,7 +157,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-xs-12">
-                              © <?php echo date("Y") ?> Smart Software developers. All rights reserved
+                              © <?php echo date("Y") ?> Agrosupply (U) ltd. All rights reserved
                             </div>
                         </div>
                     </div>

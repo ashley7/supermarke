@@ -15,7 +15,7 @@ class CategoryController extends Controller
     public function index()
     {
         $read_category = Category::all();
-        return view("sales.category_list")->with(['read_category'=>$read_category]);
+        return view("sales.category_list")->with(['read_category'=>$read_category,'title'=>'Category']);
     }
 
     /**
@@ -65,7 +65,7 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $read_category = Category::find($id);
-        return view("sales.category_edit")->with(['read_category'=>$read_category]);
+        return view("sales.category_edit")->with(['read_category'=>$read_category,'title'=>'Edit category']);
     }
 
     /**

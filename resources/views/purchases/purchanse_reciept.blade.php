@@ -3,7 +3,7 @@
 @section('content')
     
    
-             <a href="#" onclick="myFunction()" style="float: right;" class="btn btn-primary">Print</a>
+             <a href="#" onclick="myFunction()" style="float: right;" class="btn btn-success">Print</a>
             <br><br>
             <div class="card-box">
                 <div class="card-body">
@@ -95,11 +95,11 @@
                             <p style="float: right; color: red; font-size: 20px;">Balance UGX: {{number_format($total - $payments_total)}}</p>
 
                           <span class="exclude">
-                            <label>Add Payment</label>
+                            <h3>Add Payment</h3>
                             <input type="text" id="amount_paid" class="form-control">
                             <input type="hidden" id="parchase_id" value="{{$purchase->id}}">
                             <br>
-                            <button id="save_payments">Save</button>
+                            <button id="save_payments" class="btn btn-success">Save</button>
                           </span>  
                         </div>
                     </div>

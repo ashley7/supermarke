@@ -20,7 +20,7 @@
                 <input type="text" value="{{$expense_account->description}}" name="description" class="form-control">
                
                 <br>
-                <button class="btn btn-primary" type="submit">Save</button>
+                <button class="btn btn-success" type="submit">Save</button>
             {{Form::close() }}                  
         </div>
     </div>

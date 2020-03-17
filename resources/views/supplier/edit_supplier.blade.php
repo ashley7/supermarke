@@ -19,7 +19,7 @@
                             <label>Address</label>
                             <input type="text" name="address" value="{{$read_supplier->address}}" class="form-control">   
                             <br>
-                            <button type="submit" class="btn btn-primary" >Update</button>
+                            <button type="submit" class="btn btn-success" >Update</button>
                         </form>                           
                     </div>
                 </div>

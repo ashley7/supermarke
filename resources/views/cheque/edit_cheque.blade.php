@@ -35,7 +35,7 @@
                             @endforeach
                         </select>
                         <br>
-                        <button class="btn btn-primary" type="submit">Save</button>
+                        <button class="btn btn-success" type="submit">Save</button>
                      {{Form::close()}}                
                 </div>
             </div>

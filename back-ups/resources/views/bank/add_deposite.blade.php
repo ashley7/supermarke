@@ -1,0 +1,78 @@
+@extends('layouts.main')
+
+@section('content')
+ 
+            <div class="card-box">               
+
+                <div class="card-body">
+                    <h1>Add Bank Deposit</h1>
+                    @if (session('status'))
+                        <div class="alert alert-success">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    <!-- <form method="POST" action="{{route('bank_deposite.store')}}"> -->
+                        @csrf           
+                        <label>Amount</label>
+                        <input type="text" name="amount" id="amount" step="any" class="form-control number">
+
+                        <label>Voucher/Reciept Number</label>
+                        <input type="text" id="voucher_number" class="form-control">
+
+                        <label>Choose Bank</label>
+                        <select class="form-control" id="bank_id" name="bank_id">
+                            <option></option>
+                            @foreach(App\Bank::all() as $banks)
+                              <option value="{{$banks->id}}">{{$banks->name}}</option>
+                            @endforeach
+                        </select>
+
+                        <label>Deposited by</label>
+                        <select class="form-control" id="deposited_by" name="deposited_by">
+                            @foreach(App\User::all() as $users)
+                              <option value="{{$users->id}}">{{$users->name}}</option>
+                            @endforeach
+                        </select>
+
+                        <label>Date of Deposit</label>
+                        <input type="date" name="date" id="date" class="form-control">
+                        <br>
+                        <button class="btn btn-primary" id="saveBtn" type="submit">Save</button>
+                        <br>
+                        <span id="display"></span>
+                    <!-- </form>                   -->
+                </div>
+            </div>
+            
+       
+@endsection
+
+@push('scripts')
+<script type="text/javascript">
+    $("#bank_id,#deposited_by").chosen();
+    $("#saveBtn").click(function() {
+        $("#saveBtn").text("processing ...");
+        $("#saveBtn").attr("disabled","disabled");
+        $.ajax({
+                type: "POST",
+                url: "{{ route('bank_deposite.store') }}",
+            data: {
+                date: $("#date").val(),
+                deposited_by: $("#deposited_by").val(),
+                amount: $('#amount').val(),
+                voucher_number: $('#voucher_number').val(),
+                bank_id: $('#bank_id').val(),                        
+                _token: "{{Session::token()}}"
+            },
+            success: function(result){
+                // alert(result)
+                $("#display").text(result)
+                $("#saveBtn").removeAttr("disabled");
+                $("#saveBtn").text("Add new deposit");
+                $('#amount').val(" ")
+              }
+        })
+    });
+</script>
+@endpush

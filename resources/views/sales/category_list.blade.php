@@ -7,7 +7,7 @@
                 <div class="card-body">
              
 
-                    <a href="{{route('sales.create')}}" style="float: right;" class="btn btn-primary">Create Sales</a>
+                    <a href="{{route('sales.create')}}" style="float: right;" class="btn btn-success">Create Sales</a>
                     <br><br>
 
                     <table class="table table-hover table-striped" id="example">

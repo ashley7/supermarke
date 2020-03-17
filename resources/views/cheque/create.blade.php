@@ -36,7 +36,7 @@
                             @endforeach
                         </select>
                         <br>
-                        <button class="btn btn-primary" id="saveBtn" type="submit">Save</button>
+                        <button class="btn btn-success" id="saveBtn" type="submit">Save</button>
                     <!-- </form>                   -->
                 </div>
             </div>

@@ -102,20 +102,20 @@ class ParchaseController extends Controller
             $purchase->save();
 
             // update stock
-            $work_shift = WorkShift::all()->last();
+            // $work_shift = WorkShift::all()->last();
 
-            $record_check = ShiftStock::all()->where('stock_id',$save_details->stock_id)->where('workshift_id',$work_shift->id);
+            // $record_check = ShiftStock::all()->where('stock_id',$save_details->stock_id)->where('workshift_id',$work_shift->id);
 
-            $save_stock = new ShiftStock();
+            // $save_stock = new ShiftStock();
 
-            if ($record_check->count() == 0) {
-                $save_stock->old_stock = $save_details->quantity;
-                $save_stock->save();
-            }else{
-                $last_record = $record_check->last();
-                $last_record->new_stock = ($last_record->new_stock+$save_details->quantity);
-                $last_record->save();
-            }
+            // if ($record_check->count() == 0) {
+            //     $save_stock->old_stock = $save_details->quantity;
+            //     $save_stock->save();
+            // }else{
+            //     $last_record = $record_check->last();
+            //     $last_record->new_stock = ($last_record->new_stock+$save_details->quantity);
+            //     $last_record->save();
+            // }
 
             echo "Saved successfully";
         } catch (\Exception $e) {

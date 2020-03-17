@@ -4,7 +4,7 @@
     <h4>Add Expense account</h4> 
     <div class="card-box">              
         <div class="card-body">
-            <a href="{{route('account.index')}}" style="float: right;" class="btn btn-primary">View account</a>
+            <a href="{{route('account.index')}}" style="float: right;" class="btn btn-success">View account</a>
             <br><br>
             
             @if (session('status'))

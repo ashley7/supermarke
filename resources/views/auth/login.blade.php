@@ -4,7 +4,7 @@
     <div class="card-box m-b-0">
         <div class="text-xs-center m-t-20">
             <a href="/" class="logo">                
-                <span class="text-danger">RETAIL SHOP SYSTEM</span>
+                <span class="text-success">AGROSUPPLY (U) LIMITED STORES</span>
             </a>
 
         <center>
@@ -23,8 +23,8 @@
 
                 <div class="form-group ">
                     <div class="col-xs-12">
-                       <label>Username</label>
-                       <input id="email" type="text" class="form-control" name="phone_number" value="{{ old('email') }}" required autofocus>
+                       <label>Email address</label>
+                       <input id="email" type="text" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
 
                         @if ($errors->has('email'))
                             <span class="text-danger">
@@ -51,7 +51,7 @@
 
                 <div class="form-group text-center m-t-30">
                     <div class="col-xs-12">
-                        <button class="btn btn-danger btn-block waves-effect waves-light" id="login_btn" type="submit">Log In</button>
+                        <button class="btn btn-success btn-block waves-effect waves-light" id="login_btn" type="submit">Log In</button>
                     </div>
 
                     <a id="refresh" style="text-align: center;"  href="">Refresh</a>

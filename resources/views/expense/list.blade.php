@@ -4,7 +4,7 @@
    <h1>{{$title}}</h1>
 
       <a class="btn btn-success" href="{{route('expense.create')}}">Add Expense</a>
-      <a class="btn btn-primary" href="{{route('reports.create')}}">Generate Report</a>
+      <a class="btn btn-success" href="{{route('reports.create')}}">Generate Report</a>
 
       <br><br>
  

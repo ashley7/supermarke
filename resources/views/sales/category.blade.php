@@ -14,7 +14,7 @@
                             <label>Selling Unit of measure</label>                          
                             <input type="text" id="unit" class="form-control">
                             <br><br>
-                            <button class="btn btn-primary" id="saveBtn">Save</button>
+                            <button class="btn btn-success" id="saveBtn">Save</button>
                         </div>
                         <h3 id="display" style="color: green;"></h3>
                         <input type="hidden" class="number">

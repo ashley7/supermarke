@@ -30,15 +30,17 @@
         <div class="account-pages"></div>
         <div class="clearfix"></div>
         <div class="wrapper-page">
-
-               <!-- ============================================================== -->
-               <!--  Blade template -->
-                <!-- ============================================================== -->
-                        @yield('content')
-                <!-- ============================================================== -->
-                <!-- End Blade template -->
-                <!-- ============================================================== -->          
-
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif  
+            @yield('content')
+                
         </div>
         <!-- end wrapper page -->
 
@@ -46,9 +48,7 @@
         <script>
             var resizefunc = [];
         </script>
-
-        <!-- jQuery  -->
-        <!-- jQuery  -->
+ 
         <script src="{{asset('back_end/assets/js/jquery.min.js')}}"></script>
 
         <script>
@@ -57,7 +57,6 @@
 
               $("#login_btn").click(function() {
                 $("#login_btn").text("loging in ...");          
-                $("#login_btn").attr("disabled","disabled");
                 $("#refresh").show();
             });
         </script>

@@ -4,7 +4,7 @@
 <h1>Add Bank</h1>
     <div class="card-box">           
         <div class="card-body">
-             <a href="{{route('bank.index')}}" style="float: right;" class="btn btn-primary">View Banks</a>
+             <a href="{{route('bank.index')}}" style="float: right;" class="btn btn-success">View Banks</a>
              <br><br>
             
             @if (session('status'))

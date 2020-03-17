@@ -5,7 +5,7 @@
  
   <div class="card-box">               
       <div class="card-body">
-         <a class="btn btn-primary" style="float: right;" href="{{route('work_shifts.create')}}">Add new shift</a>
+         <a class="btn btn-success" style="float: right;" href="{{route('work_shifts.create')}}">Add new shift</a>
           <br><br>
           
           <table class="table table-hover table-striped" id="example">

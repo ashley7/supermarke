@@ -112,23 +112,25 @@ public static function save_sale($stock_id,$size,$pricetag,$workshift_id,$mainsa
     $save_sale->mainsales_id = $mainsales_id;
     try {
         $save_sale->save();
+        echo "Saved sucessfully";
 
         // reduce stock
-        $record_check = ShiftStock::all()->where('stock_id',$stock_id)->where('workshift_id',$workshift_id)->last();
-        if (!empty($record_check)) {
-            $total_sold = Sale::all()->where('workshift_id',$workshift_id)->where('stock_id',$stock_id)->sum('size');
-            $record_check->stock_left = ($record_check->old_stock + $record_check->new_stock) - $total_sold;
-            $record_check->save();
-        }
+        // $record_check = ShiftStock::all()->where('stock_id',$stock_id)->where('workshift_id',$workshift_id)->last();
+        // if (!empty($record_check)) {
+        //     $total_sold = Sale::all()->where('workshift_id',$workshift_id)->where('stock_id',$stock_id)->sum('size');
+        //     $record_check->stock_left = ($record_check->old_stock + $record_check->new_stock) - $total_sold;
+        //     $record_check->save();
+        // }
 
         // check stock limit
-        $stock_check = Stock::find($stock_id);
+        // $stock_check = Stock::find($stock_id);
 
-        if ($record_check->stock_left <= $stock_check->keeping_limit) {
-            echo "<span style='color:red'>".$stock_check->category->name." (".$stock_check->name.") is running out of stock, you have ".$record_check->stock_left." left</span>";
-        }else{
-            echo "Saved. ".$record_check->stock_left." left";
-        }
+        // if ($record_check->stock_left <= $stock_check->keeping_limit) {
+            // echo "<span style='color:red'>".$stock_check->category->name." (".$stock_check->name.") is running out of stock, you have ".$record_check->stock_left." left</span>";
+
+        // }else{
+        //     echo "Saved. ".$record_check->stock_left." left";
+        // }
     } catch (\Exception $e) {}
 }
 

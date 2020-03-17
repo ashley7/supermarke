@@ -44,7 +44,7 @@
                         <label>Phone Number</label>
                         <input type="text" name="phone_number" value="{{$expense->phone_number}}" step="any" class="form-control">
                         <br>
-                        <button class="btn btn-primary" type="submit">Save</button>
+                        <button class="btn btn-success" type="submit">Save</button>
                     {{Form::close()}}                 
                 </div>
             </div>

@@ -8,14 +8,14 @@
                 <div class="card-body">
                     
 
-                    <a href="{{route('sales.create')}}" style="float: right;" class="btn btn-primary">Create Sales</a>
+                    <a href="{{route('sales.create')}}" style="float: right;" class="btn btn-success">Create Sales</a>
                     <br><br>
 
                     <table class="table table-hover table-striped" id="example">
                         <thead>
                             <th>Reciept Number</th>
                             <th>Date</th>
-                            <th>Client</th>
+                            <th>Client Name</th>
                             <th>Cost to Pay</th>
                             <th>Amount Paid</th>
                             <th>Balance</th>

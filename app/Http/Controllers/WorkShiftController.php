@@ -56,31 +56,31 @@ class WorkShiftController extends Controller
         try {
             $save_shift->save();
 
-            // update the old stock
-            $price_tags = PriceTag::all();
-            foreach ($price_tags as $price_tag) {
-                if (!empty($previous_shift)) {
-                    $record_check = ShiftStock::all()->where('stock_id',$price_tag->stock_id)->where('workshift_id',$previous_shift->id)->last();
-                    if (!empty($record_check)) {
+            // // update the old stock
+            // $price_tags = PriceTag::all();
+            // foreach ($price_tags as $price_tag) {
+            //     if (!empty($previous_shift)) {
+            //         $record_check = ShiftStock::all()->where('stock_id',$price_tag->stock_id)->where('workshift_id',$previous_shift->id)->last();
+            //         if (!empty($record_check)) {
 
-                        $total_sold = Sale::all()->where('workshift_id',$previous_shift->id)->where('stock_id',$price_tag->stock_id)->sum('size');
-                        $old_stock = ($record_check->old_stock + $record_check->new_stock) - $total_sold;
-                        $save_stock = new ShiftStock();
-                        $save_stock->old_stock = $old_stock;
-                        $save_stock->workshift_id = $save_shift->id;
-                        $save_stock->stock_id = $price_tag->stock_id;
-                        $save_stock->user_id = \Auth::user()->id;
-                        try {
-                            $save_stock->save();
-                        } catch (\Exception $e) {
-                            // echo $e->getMessage();
-                            // exit();
-                        }
+            //             $total_sold = Sale::all()->where('workshift_id',$previous_shift->id)->where('stock_id',$price_tag->stock_id)->sum('size');
+            //             $old_stock = ($record_check->old_stock + $record_check->new_stock) - $total_sold;
+            //             $save_stock = new ShiftStock();
+            //             $save_stock->old_stock = $old_stock;
+            //             $save_stock->workshift_id = $save_shift->id;
+            //             $save_stock->stock_id = $price_tag->stock_id;
+            //             $save_stock->user_id = \Auth::user()->id;
+            //             try {
+            //                 $save_stock->save();
+            //             } catch (\Exception $e) {
+            //                 // echo $e->getMessage();
+            //                 // exit();
+            //             }
 
-                    }
-                }
+            //         }
+            //     }
                 
-            }
+            // }
 
 
             $status = "Work shift created successfully";

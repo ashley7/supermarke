@@ -5,19 +5,16 @@
  
    
 
-            <a href="{{route('purchases.create')}}" class="btn btn-primary">+ Purchase</a>
-            <a href="{{route('supplier.create')}}" class="btn btn-primary">Supplier</a>
-            <a href="{{route('purchases.index')}}" class="btn btn-primary">View Purchases</a>
-            <a href="/purchases_report" class="btn btn-primary">Purchase report</a>   
+            <a href="{{route('purchases.create')}}" class="btn btn-success">+ Purchase</a>
+            <a href="{{route('supplier.create')}}" class="btn btn-success">Supplier</a>
+            <a href="{{route('purchases.index')}}" class="btn btn-success">View Purchases</a>
+            <a href="/purchases_report" class="btn btn-success">Purchase report</a>   
 
             <br><br>  
        
         
             <div class="card-box">
-                <div class="card-body">
-
-                	
-
+                <div class="card-body">                	
                 	<table class="table table-hover table-striped" id="example">
                 		<thead>
                 			<th>Date</th> <th>Supplier</th> <th>Amount</th> <th>Amount paid</th> <th>Balance</th> <th>Action</th>
@@ -57,7 +54,7 @@
                                     {{number_format($total - $payments_total)}}
                                 </td>
                                 <td>
-                                    <a href="{{route('purchases.edit',$purchases->id)}}" class="btn btn-primary">Details</a>
+                                    <a href="{{route('purchases.edit',$purchases->id)}}" class="btn btn-success">Details</a>
                                 </td>
                 			  </tr> 
                               <?php

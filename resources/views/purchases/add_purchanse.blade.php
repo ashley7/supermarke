@@ -2,7 +2,7 @@
 
 @section('content')
 <h1>Add Purchase</h1>           
-            <a href="{{route('purchases.edit',$purchase->id)}}" style="float: right;" class="btn btn-primary">Details</a>
+            <a href="{{route('purchases.edit',$purchase->id)}}" style="float: right;" class="btn btn-success">Details</a>
             <br><br>
             <div class="card-box">
                 <div class="card-body">                    
@@ -31,7 +31,7 @@
                             <input type="text" id="unit_price"  class="form-control number">
 
                             <br>
-                            <button class="btn btn-primary" id="saveBtn">Save</button>
+                            <button class="btn btn-success" id="saveBtn">Save</button>
                             <a href="" style="float: right;">Refresh</a>
                         </div>
 
@@ -41,7 +41,7 @@
                            <label>Amount Paid</label>
                            <input type="text" id="amount_paid" class="form-control next_number">
                            <br>
-                           <button id="save_payments" class="btn btn-primary">Save</button>
+                           <button id="save_payments" class="btn btn-success">Save</button>
                         </div>
                     </div>
 
@@ -110,6 +110,7 @@
                     success: function(result){
                         $("#amount_paid").val(" ")
                         $("#save_payments").text(result);
+                         location.reload();
                 }
             })
         });

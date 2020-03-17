@@ -48,7 +48,7 @@
                             <label>Phone Number</label>
                             <input type="text" name="phone_number" id="phone_number" step="any" class="form-control">
                             <br>
-                            <button class="btn btn-primary" id="saveBtn" type="submit">Save</button>
+                            <button class="btn btn-success" id="saveBtn" type="submit">Save</button>
                             <br>
                             <span id="display"></span>
                         </div>

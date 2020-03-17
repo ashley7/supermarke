@@ -13,8 +13,8 @@
 
                 <div class="card-body">
                   <span class="right">
-                    <a class="btn btn-primary" href="{{URL('/cheque_report')}}">Report</a>
-                    <a class="btn btn-primary" href="{{route('cheque.create')}}">Add Cheque</a>
+                    <a class="btn btn-success" href="{{URL('/cheque_report')}}">Report</a>
+                    <a class="btn btn-success" href="{{route('cheque.create')}}">Add Cheque</a>
                   </span>
                  
 
@@ -52,7 +52,7 @@
 
                                     {{ csrf_field() }}
                                     <a href="{{route('cheque.edit',$cheque->id)}}" class="btn btn-info">Edit</a>
-                                    <input type="submit" class="btn btn-danger" value="Delete"/>
+                                    <input type="submit" class="btn btn-success" value="Delete"/>
                                 </form>
                               </td>
 

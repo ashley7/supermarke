@@ -5,7 +5,7 @@
  
   <div class="card-box">    
     <div class="card-body">
-        <a class="btn btn-primary" style="float: right;" href="{{route('expense.create')}}">Add Expense</a>
+        <a class="btn btn-success" style="float: right;" href="{{route('expense.create')}}">Add Expense</a>
         
           @if (session('status'))
               <div class="alert alert-success">
@@ -40,8 +40,6 @@
           </table> 
         </div>
       </div>
-
-             
-        @endsection
+@endsection
 
  

@@ -4,13 +4,13 @@
  
                           
         <a  href="{{route('main_sale.create')}}"  class="btn btn-success">Record Sales</a> 
-        <a  href="{{route('work_shifts.create')}}"  class="btn btn-primary">+ New shift</a>
-        <!-- <a  href="{{route('price_tag.create')}}" class="btn btn-secondary">+ Price tags</a>  -->
-        <a  href="{{route('sales.index')}}"  class="btn btn-warning" style="color: #FFF">View Sales</a>
-        <a  href="{{route('stock_loss.create')}}"  class="btn btn-danger" style="color: #FFF">Record Stock loss</a>        
-        <a  href="{{route('sales_report.create')}}" class="btn btn-info">Generate sales report</a>
+        <a  href="{{route('work_shifts.create')}}"  class="btn btn-success">+ New shift</a>
+        <a  href="{{route('price_tag.create')}}" class="btn btn-success">+ Price tags</a> 
+        <a  href="{{route('sales.index')}}"  class="btn btn-success" style="color: #FFF">View Sales</a>
+        <a  href="{{route('stock_loss.create')}}"  class="btn btn-success" style="color: #FFF">Record Stock loss</a>        
+        <a  href="{{route('sales_report.create')}}" class="btn btn-success">Generate sales report</a>
 
-        <a  href="{{route('stock.show','edit_stock')}}" class="btn btn-info">Edit Stock</a>
+        <a  href="{{route('stock.show','edit_stock')}}" class="btn btn-success">Edit Stock</a>
 
                                            
         <br><br>
@@ -20,7 +20,7 @@
             <div class="card-box widget-box-one">
                 <div class="wigdet-one-content">
                     <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Today's Total Sales</p>
-                    <h2 class="text-danger"><span data-plugin="counterup">UGX: {{number_format($sum_sales)}}</span></h2>
+                    <h2 class="text-success"><span data-plugin="counterup">UGX: {{number_format($sum_sales)}}</span></h2>
                      
                 </div>
             </div>
@@ -31,7 +31,7 @@
             <div class="card-box widget-box-one">
                 <div class="wigdet-one-content">
                     <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Today's Cash sales</p>
-                    <h2 class="text-danger"><span data-plugin="counterup">{{number_format($total_sales_today)}}</span></h2>
+                    <h2 class="text-success"><span data-plugin="counterup">{{number_format($total_sales_today)}}</span></h2>
                      
                 </div>
             </div>
@@ -41,7 +41,7 @@
             <div class="card-box widget-box-one">
                 <div class="wigdet-one-content">
                     <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Total Credit sales</p>
-                    <h2 class="text-danger"><span data-plugin="counterup">UGX:  {{number_format($debit_sales)}}</span></h2>
+                    <h2 class="text-success"><span data-plugin="counterup">UGX:  {{number_format($debit_sales)}}</span></h2>
                      
                 </div>
             </div>
@@ -54,7 +54,7 @@
             <div class="card-box widget-box-one">
                 <div class="wigdet-one-content">
                     <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Total Credit purchases</p>
-                    <h2 class="text-danger"><span data-plugin="counterup">UGX: {{number_format($credit_purchase)}}</span></h2>
+                    <h2 class="text-success"><span data-plugin="counterup">UGX: {{number_format($credit_purchase)}}</span></h2>
                      
                 </div>
             </div>
@@ -64,7 +64,7 @@
             <div class="card-box widget-box-one">
                 <div class="wigdet-one-content">
                     <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Today's No. of sales</p>
-                    <h2 class="text-danger"><span data-plugin="counterup">{{number_format($sum_tickets)}}</span></h2>
+                    <h2 class="text-success"><span data-plugin="counterup">{{number_format($sum_tickets)}}</span></h2>
                      
                 </div>
             </div>
@@ -79,7 +79,7 @@
                         <thead>
                             <th>Reciept Number</th>
                             <th>Date</th>
-                            <th>Client</th>
+                            <th>Client name</th>
                             <th>Cost</th>
                             <th>Amount Paid</th>
                             <th>Balance</th>

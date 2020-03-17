@@ -5,10 +5,10 @@
  
             <div class="card-box">  
                 <div class="card-body">
-                  <a class="btn btn-primary" href="{{route('bank_deposite.create')}}">Add Bank Transaction</a>
-                  <a class="btn btn-primary" href="{{route('bank.index')}}">Bank</a>
-                  <a class="btn btn-primary" href="{{route('bank.create')}}">Add Bank</a>
-                  <a href="/bankreport" class="btn btn-primary">Generate Report</a>                
+                  <a class="btn btn-success" href="{{route('bank_deposite.create')}}">Add Bank Transaction</a>
+                  <a class="btn btn-success" href="{{route('bank.index')}}">Bank</a>
+                  <a class="btn btn-success" href="{{route('bank.create')}}">Add Bank</a>
+                  <a href="/bankreport" class="btn btn-success">Generate Report</a>                
                               
                   
                     @if (session('status'))

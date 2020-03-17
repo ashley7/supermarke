@@ -36,13 +36,12 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
+
+        $this->validate($request,['name'=>'required','email'=>'required|unique:users','phone_number'=>'unique:users']);
         $save_user = new User();
         $save_user->name=$request->name;
-        if (empty($request->phone_number)) {
-             $save_user->phone_number=time();
-        }else{
-           $save_user->phone_number=$request->phone_number; 
-        }        
+        $save_user->email=$request->email;
+        $save_user->phone_number=$request->phone_number;               
         $save_user->password=bcrypt($request->phone_number);
         $save_user->save();
         return back()->with(['status'=>'User created']);

@@ -2,7 +2,7 @@
 
 @section('content')
  
-   <a href="#" id="hide_form"  style="float: right;" class="btn btn-primary">Print</a>
+   <a href="#" id="hide_form"  style="float: right;" class="btn btn-success">Print</a>
    <br><br>
 
   <div class="card-box">
@@ -95,11 +95,11 @@
                   <p style="float: right; color: red; font-size: 20px;">Balance UGX: {{number_format($total - $payments_total)}}</p>
 
                 <span class="exclude">
-                  <label>Add Payment</label>
+                  <h2>Add Payment</h2>
                   <input type="text" id="amount_paid" class="form-control">
                   <input type="hidden" id="mainsales_id" value="{{$main_sale->id}}">
                   <br>
-                  <button id="save_payment">Save</button>
+                  <button id="save_payment" class="btn btn-success">Save</button>
                 </span>
               </div>
           </div>

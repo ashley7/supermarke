@@ -21,7 +21,7 @@
                    <h1></h1>
                    <table class="table table-hover table-striped" id="expenses_table">
                         <thead>
-                            <th>#</th> <th>Name</th> <th>Phone</th>
+                            <th>#</th> <th>Name</th> <th>Phone</th> <th>Email</th>
                         </thead>
 
                         <tbody>
@@ -31,6 +31,7 @@
                               <td>{{$users->id}}</td>
                               <td>{{$users->name}}</td>
                               <td>{{$users->phone_number}}</td>
+                              <td>{{$users->email}}</td>
                               
                              </tr>
                           @endforeach

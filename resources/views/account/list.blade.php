@@ -4,7 +4,7 @@
 <h2>Account expenses</h2> 
             <div class="card-box">
                <div class="card-body">                   
-                  <a class="btn btn-primary right" style="float: right;" href="{{route('account.create')}}">Add account</a>
+                  <a class="btn btn-success right" style="float: right;" href="{{route('account.create')}}">Add account</a>
                   
                   @if (session('status'))
                       <div class="alert alert-success">

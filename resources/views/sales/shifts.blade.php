@@ -16,7 +16,7 @@
                 </div>
             @endif
 
-            <a href="{{route('work_shifts.index')}}" style="float: right;" class="btn btn-primary">View shifts</a>
+            <a href="{{route('work_shifts.index')}}" style="float: right;" class="btn btn-success">View shifts</a>
             <br><br>
 
             
@@ -33,7 +33,7 @@
 
                         <br>
                         
-                        <button class="btn btn-primary" type="submit">Save</button>
+                        <button class="btn btn-success" type="submit">Save</button>
                     </form>
                 </div>                       
         </div>

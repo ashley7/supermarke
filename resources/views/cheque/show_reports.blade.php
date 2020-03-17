@@ -25,7 +25,7 @@
                             <i class="fa fa-calendar"></i>&nbsp;
                             <span></span> <i class="fa fa-caret-down"></i>
                             <br>
-                        <button class="btn btn-primary">Generate</button>
+                        <button class="btn btn-success">Generate</button>
                     </form>
 
                     

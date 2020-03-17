@@ -6,7 +6,7 @@
               
 
   <div class="card-body">
-    <a class="btn btn-primary" style="float: right;" href="{{route('bank.create')}}">Add bank</a>
+    <a class="btn btn-success" style="float: right;" href="{{route('bank.create')}}">Add bank</a>
     
       @if (session('status'))
           <div class="alert alert-success">
@@ -25,7 +25,7 @@
             @foreach($bank as $banks)
               <tr>
                 <td>{{$banks->name}}</td>
-                <td><a class="btn btn-primary" href="{{route('bank.show',$banks->id)}}">Show Deposits</a></td>
+                <td><a class="btn btn-success" href="{{route('bank.show',$banks->id)}}">Show Deposits</a></td>
               </tr>
             @endforeach
                                   
