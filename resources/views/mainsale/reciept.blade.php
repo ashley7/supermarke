@@ -8,15 +8,22 @@
   <div class="card-box">
       <div class="card-body">
           <div class="row">        
-              <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
+              <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">                 
                   <p style="text-transform: uppercase;">{{ config('app.name') }} (Saller)</p>
-                  <p>Phone: +256 701 626 689 | +256 772 526 689</p>
-                  <p>Mukono - Uganda</p>
+                  <p>Phone: +256 783 064702</p>
+                  <p>Uganda</p>
                   <p>Transaction date: {{$main_sale->created_at}}</p>
               </div>
 
-              <div class="col-md-6 col-lg-6 col-sm-12 col-xs-12">
-                  <p style="text-transform: uppercase;">{{$main_sale->client}} (Buyer)</p>
+               <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+                  <center>
+                    <img src="{{asset('images/logo.png')}}" width="30%">
+                  </center>
+               </div>
+
+              <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+                  <p>Customer</p>
+                  <p style="text-transform: uppercase;">{{$main_sale->client}} </p>
               </div>
           </div>
 
@@ -94,7 +101,7 @@
 
                   <p style="float: right; color: red; font-size: 20px;">Balance UGX: {{number_format($total - $payments_total)}}</p>
 
-                <span class="exclude">
+                <span id="exclude">
                   <h2>Add Payment</h2>
                   <input type="text" id="amount_paid" class="form-control">
                   <input type="hidden" id="mainsales_id" value="{{$main_sale->id}}">
@@ -109,11 +116,15 @@
                      
 @endsection
 
-@section('style')
+@section('styles')
   <style>
     @media print{
-      .exclude,a,nav{
+      #exclude,a,nav{
         display: none;      
+     }
+
+     #hide_form{
+      display: none;
      }
     }
 
@@ -149,7 +160,7 @@
 
   <script>
     $("#hide_form").click(function(){
-         $(".exclude,#hide_form").hide();
+         $("#exclude,#hide_form").hide();
          myFunction();
     });
   </script>

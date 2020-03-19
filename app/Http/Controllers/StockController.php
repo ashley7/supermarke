@@ -79,7 +79,9 @@ class StockController extends Controller
             $save_tags->salling_price = str_replace(",","",$request->selling_price);
             $save_tags->save();
             echo "Saved Successfully";
-        } catch (\Exception $e) {}
+        } catch (\Exception $e) {
+            echo $e->getMessage();
+        }
     }
 
     /**

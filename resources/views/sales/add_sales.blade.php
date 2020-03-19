@@ -5,7 +5,7 @@
                           
         <a  href="{{route('main_sale.create')}}"  class="btn btn-success">Record Sales</a> 
         <a  href="{{route('work_shifts.create')}}"  class="btn btn-success">+ New shift</a>
-        <a  href="{{route('price_tag.create')}}" class="btn btn-success">+ Price tags</a> 
+        <!-- <a  href="{{route('price_tag.create')}}" class="btn btn-success">+ Price tags</a>  -->
         <a  href="{{route('sales.index')}}"  class="btn btn-success" style="color: #FFF">View Sales</a>
         <a  href="{{route('stock_loss.create')}}"  class="btn btn-success" style="color: #FFF">Record Stock loss</a>        
         <a  href="{{route('sales_report.create')}}" class="btn btn-success">Generate sales report</a>

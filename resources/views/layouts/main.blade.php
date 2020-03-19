@@ -125,15 +125,13 @@
 
                             <li class="has-submenu">
                                 <a href="{{route('purchase_payment.index')}}"><i class="zmdi zmdi-shopping-basket"></i>  Purchases</a>
-                            </li>
-
-                          
+                            </li>                         
                                            
 
                             <li class="has-submenu">
                                 <a href="#"><i class="zmdi zmdi-settings"></i>Settings</a>
                                 <ul class="submenu">
-                                   <li> <a href="{{route('stock.create')}}" target="_blank">Create Stock</a></li>
+                                   <li> <a href="{{route('stock.create')}}">Create Stock</a></li>
                                    <li> <a href="{{route('supplier.create')}}">Add Supplier</a></li>
                                    <li> <a href="{{route('stock.create')}}">Add Stock names</a></li>
                                    <li> <a href="{{route('price_tag.create')}}">Add Price tags</a>  </li>          
