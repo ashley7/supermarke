@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Customer;
+use App\MainSale;
 use Illuminate\Http\Request;
 
 class CustomerController extends Controller
@@ -14,7 +15,14 @@ class CustomerController extends Controller
      */
     public function index()
     {
-        //
+        $customer = Customer::get();
+
+        $data = [
+            'customers'=>$customer,
+            'title' => 'Customers'
+        ];
+
+        return view("customer.customers")->with($data);
     }
 
     /**
@@ -24,7 +32,11 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+
+        $data = [
+            'title' => 'Create customer'
+        ];
+        return view("customer.create_customer")->with($data);
     }
 
     /**
@@ -35,7 +47,20 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $checkCustomer = Customer::where('phone_number',$request->phone_number)->get();
+
+        $saveCustomer = new Customer();
+        $saveCustomer->name = $request->name;
+        $saveCustomer->address = $request->address;
+        $saveCustomer->phone_number = $request->phone_number;
+
+        if ($checkCustomer->count() == 0) {
+            try {            
+                $saveCustomer->save();
+                echo "Saved successfully";
+            } catch (\Exception $e) {}
+
+        } 
     }
 
     /**
@@ -44,9 +69,16 @@ class CustomerController extends Controller
      * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show(Customer $customer)
+    public function show($customer)
     {
-        //
+       
+        $mainSales = MainSale::where('customer_id',$customer)->get();   
+
+        $customer = Customer::find($customer);   
+
+        $title = "Transactions by ".$customer->name; 
+            
+        return view("sales.all_sales")->with(['main_sales'=>$mainSales,'title'=>$title]);
     }
 
     /**

@@ -112,8 +112,15 @@
                             </li>
 
                             <li class="has-submenu">
-                                <a href="{{route('work_shifts.index')}}"><i class="zmdi zmdi-filter-tilt-shift"></i>  Work Shifts</a>
-                            </li>
+                                <a href="#"><i class="zmdi zmdi-account"></i>Customer</a>
+                                <ul class="submenu">
+                                   <li> <a href="{{route('customer.index')}}">Customer</a></li>
+                                   <li> <a href="{{route('customer_request.index')}}">Customer Requests</a></li>
+                                                                   
+                                </ul>
+                            </li> 
+
+                         
 
                             <li class="has-submenu">
                                 <a href="{{route('bank_deposite.index')}}"><i class="zmdi zmdi-store-24"></i> Bank Transaction</a>
@@ -137,8 +144,7 @@
                                    <li> <a href="{{route('price_tag.create')}}">Add Price tags</a>  </li>          
                                    <li> <a href="{{route('account.create')}}">Add Expense account</a></li>
                                    <li> <a href="{{route('bank.create')}}">Add Bank</a></li>
-                                   <li> <a href="{{route('user.index')}}">Add new Users</a></li>
-                                
+                                   <li> <a href="{{route('user.index')}}">Add new Users</a></li>                                
                                 </ul>
                             </li>                        
                         </ul>

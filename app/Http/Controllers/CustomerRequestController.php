@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\CustomerRequest;
+use App\Customer;
 use Illuminate\Http\Request;
 
 class CustomerRequestController extends Controller
@@ -14,7 +15,14 @@ class CustomerRequestController extends Controller
      */
     public function index()
     {
-        //
+        $customer_request = CustomerRequest::get();
+
+        $data = [
+            'customer_request' => $customer_request,
+            'title' => 'Customer requests'
+        ];
+
+        return view('customer.customer_requests')->with($data);
     }
 
     /**
@@ -24,7 +32,14 @@ class CustomerRequestController extends Controller
      */
     public function create()
     {
-        //
+        $customers = Customer::get();
+
+        $data = [
+            'customers' => $customers,
+            'title' => 'Customer request'
+        ];
+
+        return view('customer.create_customer_requests')->with($data);
     }
 
     /**
@@ -35,7 +50,14 @@ class CustomerRequestController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $saveCustomerRequest = new CustomerRequest();
+        $saveCustomerRequest->customer_id = $request->customer_id;
+        $saveCustomerRequest->details = $request->details;
+        try {
+            $saveCustomerRequest->save();
+        } catch (\Exception $e) {}
+
+        return redirect()->route('customer_request.index');
     }
 
     /**
@@ -55,9 +77,20 @@ class CustomerRequestController extends Controller
      * @param  \App\CustomerRequest  $customerRequest
      * @return \Illuminate\Http\Response
      */
-    public function edit(CustomerRequest $customerRequest)
+    public function edit($customerRequest)
     {
-        //
+        $changeCustomerRequest = CustomerRequest::find($customerRequest);
+        if ($changeCustomerRequest->status == "Not resolved") {
+            $changeCustomerRequest->status = "Resolved";
+            $changeCustomerRequest->save();
+        }elseif ($changeCustomerRequest->status == "Resolved") {
+            $changeCustomerRequest->status = "Not resolved";
+            $changeCustomerRequest->save();
+        }
+
+        return redirect()->route('customer_request.index');
+        
+
     }
 
     /**

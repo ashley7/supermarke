@@ -1,19 +1,12 @@
 @extends('layouts.main')
 
 @section('content')
- 
                           
-        <a  href="{{route('main_sale.create')}}"  class="btn btn-success">Record Sales</a> 
-        <a  href="{{route('work_shifts.create')}}"  class="btn btn-success">+ New shift</a>
-        <!-- <a  href="{{route('price_tag.create')}}" class="btn btn-success">+ Price tags</a>  -->
-        <a  href="{{route('sales.index')}}"  class="btn btn-success" style="color: #FFF">View Sales</a>
-        <a  href="{{route('stock_loss.create')}}"  class="btn btn-success" style="color: #FFF">Record Stock loss</a>        
-        <a  href="{{route('sales_report.create')}}" class="btn btn-success">Generate sales report</a>
-
-        <a  href="{{route('stock.show','edit_stock')}}" class="btn btn-success">Edit Stock</a>
-
-                                           
-        <br><br>
+    <a  href="{{route('work_shifts.index')}}"  class="btn btn-success" style="color: #FFF">Work Shifts</a>
+    <a  href="{{route('sales.index')}}"  class="btn btn-success" style="color: #FFF">View Sales</a>
+    <a  href="{{route('stock_loss.create')}}"  class="btn btn-success" style="color: #FFF">Stock loss</a> <a  href="{{route('sales_report.create')}}" class="btn btn-success">Sales report</a>
+                                       
+    <br><br>
 
     <div class="row text-center">
         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
@@ -69,6 +62,17 @@
                 </div>
             </div>
         </div><!-- end col --> 
+
+         <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
+            <div class="card-box widget-box-one">
+                <div class="wigdet-one-content">
+                    <p class="m-0 text-uppercase font-600 font-secondary text-overflow">Customers</p>
+                    <h2 class="text-success"><span data-plugin="counterup">{{number_format($customers)}}</span></h2>
+                     
+                </div>
+            </div>
+        </div><!-- end col --> 
+
     </div> 
 
  

@@ -12,6 +12,7 @@ use App\ShiftStock;
 use App\SalesPayment;
 use App\MainSale;
 use App\Parchase;
+use App\Customer;
 use App\Http\Controllers\ParchaseController;
 
 class SalesController extends Controller
@@ -25,16 +26,19 @@ class SalesController extends Controller
     {
         $title = "All Sales";
         $sales = MainSale::all();
+        $mainSales = array();
         foreach ($sales as $main_value) {
             if ($main_value->sale->count() == 0) {
                 try {
                   MainSale::destroy($main_value->id);  
                 } catch (\Exception $e) {}
                  
+            }elseif ($main_value->sale->count() > 0) {
+               $mainSales[] = MainSale::find($main_value->id);
             }
             
         }         
-        return view("sales.all_sales")->with(['main_sales'=>$sales,'title'=>$title]);
+        return view("sales.all_sales")->with(['main_sales'=>$mainSales,'title'=>$title]);
     }
 
     /**
@@ -73,8 +77,10 @@ class SalesController extends Controller
             $credit_purchase = ParchaseController::total_credit_purchase();
 
             $total_sales_today = $this->total_sales();
+
+            $customers = Customer::count();
             
-            $data = ['sum_sales'=>$sum_sales,'sum_tickets'=>$sum_tickets,'main_sales'=>$main_sales,'debit_sales'=>$debit_sales,'credit_purchase'=>$credit_purchase,'total_sales_today'=>$total_sales_today,'title'=>"Dashboard"];
+            $data = ['sum_sales'=>$sum_sales,'sum_tickets'=>$sum_tickets,'main_sales'=>$main_sales,'debit_sales'=>$debit_sales,'credit_purchase'=>$credit_purchase,'total_sales_today'=>$total_sales_today,'title'=>"Dashboard",'customers'=>$customers];
             return view("sales.add_sales")->with($data);
     }
 
