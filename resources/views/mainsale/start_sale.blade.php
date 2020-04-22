@@ -1,70 +1,100 @@
 @extends('layouts.main')
 @section('content')
     <h1>Record a new sale</h1>
- 
-    <div class="card-box">
-        <div class="card-body">                   
+                      
             
             <a class="btn btn-success" style="float: right;" href="{{route('main_sale.edit',$initiate_sale->id)}}">Details</a>
             <br><br>                 
             <div class="row col-md-12 "> 
-                <div class="col-md-6 ">
-                    <label>Select Item</label>
-                    <select id="data" class="form-control datavalue">
-                        <option></option>
-                        @foreach($price_tags as $pricetags)
-                          <option value="{{$pricetags->id}}" style="text-transform: uppercase;">{{$pricetags->stock->category->name}}   {{$pricetags->stock->name}}  {{$pricetags->barcode}} </option>
-                        @endforeach
-                    </select>
+                <div class="col-md-8 col-lg-8 col-sm-8">
+                    <div class="card-box">
+                        <div class="card-body"> 
+                            <div class="row">                        
+                                <div class="col-md-6 col-lg-6 col-sm-6">
+                                    <label>Select Item</label>
+                                    <select id="data" class="form-control datavalue">
+                                        <option></option>
+                                        @foreach($price_tags as $pricetags)
+                                          <option value="{{$pricetags->id}}" style="text-transform: uppercase;">{{$pricetags->stock->category->name}}   {{$pricetags->stock->name}}  {{$pricetags->barcode}} </option>
+                                        @endforeach
+                                    </select>
+
+                                    <label>Quantity</label>
+                                    <input type="number" id="size" required="required" value="1" step="any" class="form-control">
+                                </div>
+
+                        <div class="col-md-6 col-lg-6 col-sm-6">
+
+                            <label>Discounted amount</label>
+                            <input type="text" id="discount" value="0" class="form-control number">
+
+                            <input type="hidden" id="mainsales_id" value="{{$initiate_sale->id}}">
+
+                            <label>Shift</label>
+                            <select id="workshift_id" class="form-control">
+                                @foreach($shift as $shifts)
+                                  <option value="{{$shifts->id}}">{{$shifts->name}} [{{$shifts->description}}-{{date('Y-m-d',$shifts->date)}}]  </option>
+                                @endforeach
+                            </select> 
+
+                        </div>
+                    </div>                  
                     
-                    <label>Quantity</label>
-                    <input type="number" id="size" required="required" value="1" step="any" class="form-control">
+                    
+                    <h2>Client details</h2>
+                    <div class="row">                        
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                            <label>Name</label>
+                            <input type="text" id="client_name" class="form-control">
+                        </div>
 
-                    <label>Discounted amount</label>
-                    <input type="text" id="discount" value="0" class="form-control number">
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                            <label>Phone number</label>
+                            <input type="text" id="client_phone" class="form-control">
+                        </div>
 
-                    <input type="hidden" id="mainsales_id" value="{{$initiate_sale->id}}">
-
-                    <label>Shift</label>
-                    <select id="workshift_id" class="form-control">
-                        @foreach($shift as $shifts)
-                          <option value="{{$shifts->id}}">{{$shifts->name}} [{{$shifts->description}}-{{date('Y-m-d',$shifts->date)}}]  </option>
-                        @endforeach
-                    </select> 
-
-                    <label>Client details</label>
-                    <input type="text" id="client" class="form-control">
-
-                   
+                        <div class="col-md-4 col-lg-4 col-sm-4">
+                            <label>Address</label>
+                            <input type="text" id="client_address" class="form-control">
+                        </div>
+                    </div>                                      
                     <br>
-                    <button class="btn btn-success" id="btnsave">Save sale record</button>                           
-                </div>
-               <div class="col-md-6">
-                    <h5 id="prices" style="color: green;"></h5> 
-                    <span style="color: red; font-size: 30px;" id="total_amount"></span>
+                    <button class="btn btn-success" id="btnsave">Save sale record</button>
+                    </div>
+                </div>                           
+               </div>
+               <div class="col-md-4 col-lg-4 col-sm-4"> 
+                  <div class="card-box">
+                    <div class="card-body">              
+                        <h5 id="prices" style="color: green;"></h5> 
+                        <span style="color: red; font-size: 30px;" id="total_amount"></span>
 
-                    <br>
-                    <label>Add payment</label>
-                    <input type="text" id="payment_data" class="form-control next_number">
-                    <br>
-                    <button class="btn btn-success" id="save_payment" style="float: right;">Save payment</button>               
+                        <br>
+                        <label>Add payment</label>
+                        <input type="text" id="payment_data" class="form-control next_number">
+                        <br>
+                        <button class="btn btn-danger" id="save_payment">Save payment</button> 
+                    </div>
+                  </div>              
                 </div>
             </div>
             <h3 id="display" style="color: green;"></h3>
 
             <div class="row">
                 <div class="col-md-12">
-                    <table class="table table-hover table-striped">
-                        <thead>
-                            <th>Item</th> <th>Quantity</th> <th>Discount</th> <th>Amount</th>
-                        </thead>
-                        <tbody id="emp">                                    
-                        </tbody>
-                    </table>
-                </div>
+                    <div class="card-box">
+                        <div class="card-body"> 
+                            <table class="table table-hover table-striped">
+                                <thead>
+                                    <th>Item</th> <th>Quantity</th> <th>Discount</th> <th>Amount</th>
+                                </thead>
+                                <tbody id="emp">                                    
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                 </div>
             </div>
-         </div>
-    </div>
       
 @endsection
 
@@ -153,6 +183,9 @@
                     discount: $("#discount").val(),                       
                     workshift_id: $("#workshift_id").val(),                        
                     mainsales_id: $("#mainsales_id").val(),
+                    name: $("#client_name").val(),
+                    phone_number: $("#client_phone").val(),
+                    address: $("#client_address").val(),
                     _token: "{{Session::token()}}"
                 },
                 success: function(result){
@@ -163,7 +196,7 @@
                     $("#emp > tr").remove();
                     load_table();
 
-                    $("#btnsave").html("Save");
+                    $("#btnsave").html("Save new item");
                     $("#btnsave").removeAttr('disabled');
 
                   }

@@ -7,6 +7,7 @@ use App\Http\Controllers\SalesController;
 use App\WorkShift;
 use App\MainSale;
 use App\PriceTag;
+use App\Customer;
 use App\Sale;
 
 class MainSaleController extends Controller
@@ -47,13 +48,35 @@ class MainSaleController extends Controller
      */
     public function store(Request $request)
     {
+
+        $checkCustomer = Customer::where('phone_number',$request->phone_number)->get();
+
+        $saveCustomer = new Customer();
+        $saveCustomer->name = $request->name;
+        $saveCustomer->address = $request->address;
+        $saveCustomer->phone_number = $request->phone_number;
+
+        if ($checkCustomer->count() == 0) {
+            try {            
+                $saveCustomer->save();
+            } catch (\Exception $e) {}
+
+        }elseif($checkCustomer->count() == 1){
+           $saveCustomer  =  $checkCustomer->last();
+        }
+        
+
         $update_sales_shift = MainSale::find($request->mainsales_id);
 
         if (empty($update_sales_shift->workshift_id)) {
+
             $update_sales_shift->workshift_id = $request->workshift_id;
-            if (isset($request->client)) {
-                $update_sales_shift->client = $request->client;
-            }            
+
+            if (!empty($saveCustomer)) {
+
+                $update_sales_shift->customer_id = $saveCustomer->id;
+            }
+
             $update_sales_shift->save();
         }
 
@@ -89,7 +112,8 @@ class MainSaleController extends Controller
     public function edit($id)
     {
         $update_sales_shift = MainSale::find($id);
-        $data = ['main_sale'=>$update_sales_shift,'title'=>"Sales Details"];
+        $customer = Customer::customerSale($id);
+        $data = ['main_sale'=>$update_sales_shift,'title'=>"Sales Details",'customer'=>$customer];
         return view("mainsale.reciept")->with($data);
      }
 

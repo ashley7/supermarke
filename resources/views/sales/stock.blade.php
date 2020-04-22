@@ -6,11 +6,13 @@
     <a href="{{route('stock.index')}}" style="float: right;" class="btn btn-primary">View Stock</a>
     <br><br>
     <div class="row col-md-12">
-        <div class="col-md-6">
+        <div class="col-md-8">
             <div class="card-box">
-                <div class="card-body">
-                     
-                    <a href="#" id="show_add_cat" style="float: right;">Add new category</a>               
+                <div class="card-body">                   
+                      
+                     <div class="row">
+                        <div class="col-md-6 col-lg-6 col-sm-6"> 
+                        <a href="#" id="show_add_cat" style="float: right;">Add new category</a>            
                    
                             <label>Choose category name</label>
                             <select id="category_id" autofocus="true" class="form-control">
@@ -29,6 +31,9 @@
                             <label>Current stock size</label>
                             <input type="number" id="stock_size" value="0" class="form-control">
 
+                          </div>
+                          <div class="col-md-6 col-lg-6 col-sm-6">
+
                             <label>Buying price</label>
                             <input type="text" id="buying_price" value="0" class="form-control number">
 
@@ -41,11 +46,13 @@
                             <br>
                             <button class="btn btn-primary" id="saveBtn">Save</button>                      
                             <input type="hidden" class="number">
+                          </div>
+                        </div>
                  </div>
             </div>
         </div>
 
-        <div class="col-md-6 add_cat">
+        <div class="col-md-4 add_cat">
             <div class="card-box">
                 <div class="card-body">
                     <h1>Add category</h1>

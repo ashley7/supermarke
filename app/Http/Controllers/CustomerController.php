@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Customer;
 use Illuminate\Http\Request;
-use App\User;
 
-class UserController extends Controller
+class CustomerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,6 @@ class UserController extends Controller
     public function index()
     {
         //
-        return view("users.list")->with(["user"=>User::all(),'title'=>'List of Users']);
     }
 
     /**
@@ -25,7 +24,7 @@ class UserController extends Controller
      */
     public function create()
     {
-       return view("users.create")->with(['title'=>'Add new User']);
+        //
     }
 
     /**
@@ -36,26 +35,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        $save_user = new User();
-        $save_user->name=$request->name;
-        if (empty($request->phone_number)) {
-             $save_user->phone_number=time();
-        }else{
-           $save_user->phone_number=$request->phone_number; 
-        }        
-        $save_user->password=bcrypt($request->phone_number);
-        $save_user->save();
-        return back()->with(['status'=>'User created']);
-
+        //
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Customer $customer)
     {
         //
     }
@@ -63,10 +52,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Customer $customer)
     {
         //
     }
@@ -75,10 +64,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Customer $customer)
     {
         //
     }
@@ -86,10 +75,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Customer  $customer
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Customer $customer)
     {
         //
     }

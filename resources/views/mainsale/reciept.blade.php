@@ -22,8 +22,12 @@
                </div>
 
               <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
-                  <p>Customer</p>
-                  <p style="text-transform: uppercase;">{{$main_sale->client}} </p>
+                @if(!empty($customer))                
+                  <p>Name: {{$customer->name}} (Buyer)</p>
+                  <p>Phone: {{$customer->phone_number}}</p>
+                  <p>Address: {{$customer->address}}</p>
+                @endif
+                   
               </div>
           </div>
 
