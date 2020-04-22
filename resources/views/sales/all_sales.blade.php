@@ -15,7 +15,7 @@
                         <thead>
                             <th>Reciept Number</th>
                             <th>Date</th>
-                            <th>Client Name</th>
+                            <th>Customer</th>
                             <th>Cost to Pay</th>
                             <th>Amount Paid</th>
                             <th>Balance</th>
@@ -27,10 +27,17 @@
                                $sum = 0; $total_balance = 0;
                             ?>
                             @foreach($main_sales as $main_sale)
+                            <?php 
+                                $customer = App\Customer::customerSale($main_sale->id);
+                             ?>
                               <tr>
                                   <td>{{$main_sale->id}}</td>
                                   <td>{{$main_sale->created_at}}</td>
-                                  <td>{{$main_sale->client}}</td>
+                                  <td>
+                                    @if(!empty($customer))
+                                        {{$customer->name}}<br>{{$customer->phone_number}}
+                                    @endif
+                                  </td>
                                   <td>
                                       @php
                                       $sum_sales = 0; 
