@@ -5,7 +5,7 @@
    <a href="#" id="hide_form"  style="float: right;" class="btn btn-success">Print</a>
    <br><br>
 
-  <div class="card-box">
+  <div class="card-box" style="color: #000">
       <div class="card-body">
           <div class="row">        
               <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">                 
