@@ -192,6 +192,9 @@
              $(document).ready(function() {
                 $('#example,#sales_table,#stock_table,#loss,#expenses_table').DataTable( {
                     dom: 'Bfrtip',
+                    ordering: false,
+                    aaSorting: [],
+                    pageLength: 500,
                     buttons: [
                         'excelHtml5',
                         'csvHtml5',
