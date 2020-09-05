@@ -8,20 +8,20 @@
   <div class="card-box">
       <div class="card-body">
           <div class="row">        
-              <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">                 
+              <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">                 
                   <p style="text-transform: uppercase;">{{ config('app.name') }} (Saller)</p>
                   <p>Phone: +256 783 064702</p>
                   <p>Uganda</p>
                   <p>Transaction date: {{$main_sale->created_at}}</p>
               </div>
 
-               <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+               <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
                   <center>
                     <img src="{{asset('images/logo.png')}}" width="30%">
                   </center>
                </div>
 
-              <div class="col-md-4 col-lg-4 col-sm-4 col-xs-4">
+              <div class="col-md-4 col-lg-4 col-sm-12 col-xs-12">
                 @if(!empty($customer))                
                   <p>Name: {{$customer->name}} (Buyer)</p>
                   <p>Phone: {{$customer->phone_number}}</p>
