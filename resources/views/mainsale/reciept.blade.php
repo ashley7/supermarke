@@ -27,11 +27,12 @@
                   <p>Phone: {{$customer->phone_number}}</p>
                   <p>Address: {{$customer->address}}</p>
                 @endif
+                <p><strong>No. {{$main_sale->id}}</strong></p>
                    
               </div>
           </div>
 
-          <p style="float: right; font-size: 20px; color: red;">No. {{$main_sale->id}}</p>
+         
 
           <center><h1><u>SALES RECIEPT</u></h1></center>
 
@@ -103,7 +104,7 @@
                       </tbody>
                   </table>
 
-                  <p style="float: right; color: red; font-size: 20px;">Balance UGX: {{number_format($total - $payments_total)}}</p>
+                  <p style="float: right; color: #000; font-size: 20px;">Balance UGX: {{number_format($total - $payments_total)}}</p>
 
                 <span id="exclude">
                   <h2>Add Payment</h2>
