@@ -15,4 +15,9 @@ class Sale extends Model
     {
     	return $this->belongsTo('App\Stock');
     }
+
+    public function mainsale()
+    {
+    	return $this->belongsTo('App\MainSale');
+    }
 }

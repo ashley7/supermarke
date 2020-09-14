@@ -32,7 +32,8 @@
                             <thead>
                                 
                                 <th>Date</th>
-                                <th>Name</th>
+                                <th>Customer</th>
+                                <th>Product</th>
                                 <th>Quantity</th>
                                 <th>Buying price</th>
                                 <th>Selling price</th>
@@ -51,9 +52,18 @@
                                   $sum_profit = $sum_profit + $profit;
                                   $sum = $sum + $main_sale;
                                   $sum_discount = $sum_discount + $sale->discount;
+
+
+                                $customer = App\Customer::customerSale($sale->mainsales_id);
+                             
                                  ?>
                                   <tr>
                                       <td>{{$sale->created_at}}</td>
+                                      <td>
+                                        @if(!empty($customer))
+                                          {{$customer->name}}<br>{{$customer->phone_number}}
+                                        @endif
+                                      </td>
                                       <td>{{$sale->stock->category->name}} ({{$sale->stock->name}})</td>
                                       <td>{{$sale->size}} {{$sale->stock->category->unit}}</td> 
                                       <td>{{number_format($sale->buying_price)}}</td>
