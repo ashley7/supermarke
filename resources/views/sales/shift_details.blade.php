@@ -82,6 +82,7 @@
                                 <th></th>
                                 <th></th>
                                 <th></th>
+                                <th></th>
                                 <th>{{number_format($sum_discount)}}</th>
                                 <th>{{number_format($sum)}}</th>
                                 <th>{{number_format($sum_profit)}}</th>
