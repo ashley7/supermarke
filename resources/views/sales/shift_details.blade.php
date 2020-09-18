@@ -65,7 +65,7 @@
                                         @endif
                                       </td>
                                       <td>{{$sale->stock->category->name}} ({{$sale->stock->name}})</td>
-                                      <td>{{$sale->size}} {{$sale->stock->category->unit}}</td> 
+                                      <td>{{$sale->size}}</td> 
                                       <td>{{number_format($sale->buying_price)}}</td>
                                       <td>{{number_format($sale->amount)}}</td>
                                       <td>{{number_format($sale->discount)}}</td>
