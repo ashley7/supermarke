@@ -4,13 +4,15 @@
     <div class="card-box m-b-0">
         <div class="text-xs-center m-t-20">
             <a href="/" class="logo">                
-                <span class="text-success">AGROSUPPLY (U) LIMITED STORES</span>
+                <!-- <span class="text-success">AGROSUPPLY (U) LIMITED STORES</span> -->
             </a>
 
         <center>
            <img src="{{asset('images/logo.png')}}" width="50%">
         </center>
         </div>
+
+        <hr>
         
        
         <div class="m-t-30 m-b-20">
