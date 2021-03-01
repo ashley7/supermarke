@@ -8,7 +8,7 @@
             </a>
 
         <center>
-           <img src="{{asset('images/logo.png')}}" width="100px">
+           <img src="{{asset('images/logo.png')}}" width="50%">
         </center>
         </div>
         
