@@ -37,7 +37,7 @@
                     <div class="topbar-left">
                         <a href="/home" class="logo">
                             <!-- <i class="zmdi zmdi-case icon-c-logo"></i> -->
-                            <img src="{{asset('images/logo.png')}}" width="20px">
+                            <img src="{{asset('images/logo.png')}}" width="30%">
                             <span>{{ config('app.name', '') }}</span>                     
                         </a>
                     </div>
