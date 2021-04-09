@@ -38,8 +38,11 @@
                               <td>{{$sale->created_at}}</td>
                               <td>{{$sale->stock->category->name}} ({{$sale->stock->name}})</td>
                               <td>
-                                {{$sale->mainsale->customer->name}}<br>
-                                {{$sale->mainsale->customer->phone_number}}                                 
+                                <?php 
+                                  try {
+                                    echo $sale->mainsale->customer->name."<br>".$sale->mainsale->customer->phone_number;
+                                  } catch (\Exception $e) {}
+                                 ?>                                                                  
                               </td>
                               <td>{{$sale->size}}</td>
                               <td>{{number_format($sale->buying_price)}}</td>

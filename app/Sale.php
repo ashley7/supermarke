@@ -18,7 +18,7 @@ class Sale extends Model
 
     public function mainsale()
     {
-    	return $this->belongsTo('App\MainSale');
+    	return $this->belongsTo('App\MainSale','mainsales_id');
     }
 
    
