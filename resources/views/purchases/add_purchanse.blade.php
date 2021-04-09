@@ -2,67 +2,67 @@
 
 @section('content')
 <h1>Add Purchase</h1>           
-            <a href="{{route('purchases.edit',$purchase->id)}}" style="float: right;" class="btn btn-success">Details</a>
+    <a href="{{route('purchases.edit',$purchase->id)}}" style="float: right;" class="btn btn-success">Details</a>
+    <br><br>
+    <div class="card-box">
+        <div class="card-body">                    
+            <div class="row col-md-6">
+                <div class="col-md-6">
+
+                    <input type="hidden" id="parchase_id" value="{{$purchase->id}}">
+                    <label>Choose Supplier *</label>
+                    <select id="supplier_id" class="form-control">
+                        @foreach($suppliers as $supplier)
+                          <option value="{{$supplier->id}}" style="text-transform: uppercase;">{{$supplier->name}}</option>
+                        @endforeach
+                    </select>
+
+                    <label>Choose Stock *</label>
+                    <select id="stock_id" class="form-control">
+                        @foreach($stocks as $stock)
+                          <option value="{{$stock->id}}" style="text-transform: uppercase;"> {{$stock->category->name}}  ( {{$stock->name}} )</option>
+                        @endforeach
+                    </select>   
+
+                    <label>Quantity</label>
+                    <input type="number" id="quantity"  class="form-control">
+
+                    <label>Unit Price</label>
+                    <input type="text" id="unit_price"  class="form-control number">
+
+                    <br>
+                    <button class="btn btn-success" id="saveBtn">Save</button>
+                    <a href="" style="float: right;">Refresh</a>
+                </div>
+
+                <div class="col-md-6">
+                   <h3 id="total_amount" style="color: green;"></h3>
+                   <br>
+                   <label>Amount Paid</label>
+                   <input type="text" id="amount_paid" class="form-control next_number">
+                   <br>
+                   <button id="save_payments" class="btn btn-success">Save</button>
+                </div>
+            </div>
+
             <br><br>
-            <div class="card-box">
-                <div class="card-body">                    
-                    <div class="row col-md-6">
-                        <div class="col-md-6">
+                
 
-                            <input type="hidden" id="parchase_id" value="{{$purchase->id}}">
-                            <label>Choose Supplier *</label>
-                            <select id="supplier_id" class="form-control">
-                                @foreach($suppliers as $supplier)
-                                  <option value="{{$supplier->id}}" style="text-transform: uppercase;">{{$supplier->name}}</option>
-                                @endforeach
-                            </select>
- 
-                            <label>Choose Stock *</label>
-                            <select id="stock_id" class="form-control">
-                                @foreach($stocks as $stock)
-                                  <option value="{{$stock->id}}" style="text-transform: uppercase;"> {{$stock->category->name}}  ( {{$stock->name}} )</option>
-                                @endforeach
-                            </select>   
+                <table class="table" id="example">
+                    <thead>
+                        <th>Items</th>
+                        <th>Quantity</th>
+                        <th>Unit price</th>
+                        <th>Amount</th>
+                    </thead>
 
-                            <label>Quantity</label>
-                            <input type="number" id="quantity"  class="form-control">
-
-                            <label>Unit Price</label>
-                            <input type="text" id="unit_price"  class="form-control number">
-
-                            <br>
-                            <button class="btn btn-success" id="saveBtn">Save</button>
-                            <a href="" style="float: right;">Refresh</a>
-                        </div>
-
-                        <div class="col-md-6">
-                           <h3 id="total_amount" style="color: green;"></h3>
-                           <br>
-                           <label>Amount Paid</label>
-                           <input type="text" id="amount_paid" class="form-control next_number">
-                           <br>
-                           <button id="save_payments" class="btn btn-success">Save</button>
-                        </div>
-                    </div>
-
-                    <br><br>
+                    <tbody id="emp">
                         
+                    </tbody>
 
-                        <table class="table" id="example">
-                            <thead>
-                                <th>Items</th>
-                                <th>Quantity</th>
-                                <th>Unit price</th>
-                                <th>Amount</th>
-                            </thead>
-
-                            <tbody id="emp">
-                                
-                            </tbody>
-
-                        </table>
-                    </div>
-                </div>              
+                </table>
+            </div>
+        </div>              
  
 @endsection
 
