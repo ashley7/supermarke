@@ -20,4 +20,6 @@ class Sale extends Model
     {
     	return $this->belongsTo('App\MainSale');
     }
+
+   
 }
