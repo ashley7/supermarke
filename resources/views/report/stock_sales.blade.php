@@ -17,13 +17,15 @@
           </thead>
 
           <tbody>
+
             @foreach($stocks as $stock)
+
             <?php
 
               $quantity = App\AdhocReport::quantitySold($from,$to,$stock->id);
 
               $discounts = App\AdhocReport::discounts($from,$to,$stock->id);
-              
+
               $discounts = App\AdhocReport::discounts($from,$to,$stock->id);
 
               $unit_price = $stock->priceTag->salling_price;
@@ -32,13 +34,15 @@
 
              ?>
               <tr>
-                <td>{{$stock->name}}</td>
+                <td> {{$stock->category->name}} {{$stock->name}}</td>
                 <td>{{$quantity}}</td>
                 <td>{{$discounts}}</td>
                 <td>{{number_format($unit_price)}}</td>
                 <td>{{number_format($amount)}}</td>
               </tr>
-            @endforeach            
+
+            @endforeach
+
           </tbody>
 
         </table>
