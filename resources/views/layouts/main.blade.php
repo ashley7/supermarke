@@ -136,10 +136,11 @@
                                            
 
                             <li class="has-submenu">
-                                <a href="#"><i class="zmdi zmdi-settings"></i>Settings</a>
+                                <a href="#"><i class="zmdi zmdi-settings"></i>Tools</a>
                                 <ul class="submenu">
                                    <li> <a href="{{route('stock.index')}}">Stock</a></li>
-                                   <!-- <li> <a href="{{route('stock.create')}}">Create</a></li> -->
+                                   <li> <a href="{{route('adhoc_report.create')}}">Period sales</a></li>
+                                    <!-- <li> <a href="{{route('stock.create')}}">Create</a></li> -->
                                    <!-- <li> <a href="{{route('supplier.create')}}">Add Supplier</a></li> -->
                                    <!-- <li> <a href="{{route('stock.create')}}">Add Stock names</a></li> -->
                                    <!-- <li> <a href="{{route('price_tag.create')}}">Add Price tags</a>  </li>           -->
@@ -147,7 +148,9 @@
                                    <!-- <li> <a href="{{route('bank.create')}}">Add Bank</a></li> -->
                                    <!-- <li> <a href="{{route('user.index')}}">Add new Users</a></li>                                 -->
                                 </ul>
-                            </li>                        
+                            </li>  
+
+                                                   
                         </ul>
                     </div>  
                 </div>  
