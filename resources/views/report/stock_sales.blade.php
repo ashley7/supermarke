@@ -34,7 +34,7 @@
 
              ?>
               <tr>
-                <td> {{$stock->category->name}} {{$stock->name}}</td>
+                <td> {{$stock->category->name}} ({{$stock->name}})</td>
                 <td>{{$quantity}}</td>
                 <td>{{$discounts}}</td>
                 <td>{{number_format($unit_price)}}</td>
