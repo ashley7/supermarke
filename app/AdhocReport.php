@@ -9,7 +9,11 @@ class AdhocReport extends Model
     public static function quantitySold($from,$to,$stock_id)
     {
 
-    	return Sale::where('stock_id',$stock_id)->whereBetween('created_at',[$from,$to])->sum('size');
+    	$sum_size = Sale::where('stock_id',$stock_id)->whereBetween('created_at',[$from,$to])->sum('size');
+
+    	$norhern = (80/100) * $sum_size;
+
+    	return (int)$norhern;
     	 
     }
 
@@ -29,7 +33,7 @@ class AdhocReport extends Model
 
     	foreach ($sales as $sale) {
 
-    		$amount = $amount + (($sale->amount * $sale->size) - $sale->discount );
+    		$amount = $amount + (($sale->amount *   (int) ( (80/100) * $sale->size)   ) - $sale->discount );
     		 
     	}
 
