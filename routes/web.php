@@ -4,8 +4,11 @@ Route::get('/', function () {
     return view('auth.login');
 });
 Auth::routes();
+
 Auth::routes(['register' => false]);
+
 Route::group(['middleware' => 'auth'], function () {
+
 	Route::get('/home', 'HomeController@index')->name('home');
 	Route::post('/price_tags', 'HomeController@price_tags');
 	Route::resource('account','ExpenseaccountController');
@@ -41,4 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
 	Route::get('/settings', function () {
 	    return view('settings');
 	});
+
+	Route::resource('adhoc_report','AdhocReportController');
+
+
  });

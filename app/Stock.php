@@ -15,4 +15,10 @@ class Stock extends Model
 	{
 		return $this->hasMany('App\Sale');
 	}
+
+	public function priceTag()
+	{
+		return $this->hasOne('App\PriceTag');
+	}
+
 }
