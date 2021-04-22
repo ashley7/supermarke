@@ -140,6 +140,7 @@
                                 <ul class="submenu">
                                    <li> <a href="{{route('stock.index')}}">Stock</a></li>
                                    <li> <a href="{{route('adhoc_report.create')}}">Period sales</a></li>
+                                   <li> <a href="{{route('stock_sales.create')}}">Period stock sales</a></li>
                                     <!-- <li> <a href="{{route('stock.create')}}">Create</a></li> -->
                                    <!-- <li> <a href="{{route('supplier.create')}}">Add Supplier</a></li> -->
                                    <!-- <li> <a href="{{route('stock.create')}}">Add Stock names</a></li> -->
