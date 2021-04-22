@@ -47,5 +47,7 @@ Route::group(['middleware' => 'auth'], function () {
 
 	Route::resource('adhoc_report','AdhocReportController');
 
+	Route::resource('stock_sales','SaleController');
+
 
  });

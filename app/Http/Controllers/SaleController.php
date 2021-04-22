@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Sale;
+use App\Stock;
 use Illuminate\Http\Request;
 
 class SaleController extends Controller
@@ -24,7 +25,18 @@ class SaleController extends Controller
      */
     public function create()
     {
-        //
+
+        $readStock = Stock::get();
+
+        $data = [
+
+            'title' => 'Stock sales report',
+
+            'stocks' => $readStock
+
+        ];
+
+        return view('report.stock_sales_report')->with($data);
     }
 
     /**
@@ -35,7 +47,33 @@ class SaleController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $rules = [
+
+            'from' => 'required',
+            'to' => 'required',
+            'stock_id' => 'required'
+
+        ];
+
+        $this->validate($request,$rules);
+
+        $stock = Stock::whereIn('id',$request->stock_id)->get();
+
+        $to = $request->to;
+
+        $from = $request->from;
+
+        $data = [
+            'stockItems' => $stock,
+            'from' => $from,
+            'to' => $to,
+            'title' => 'Stock sales from '.$from." to ".$to,
+        ];
+
+        return view('report.sales_report')->with($data);
+
+
+
     }
 
     /**
